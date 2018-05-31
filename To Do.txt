@@ -1,0 +1,92 @@
+**Dead lock - pize klientui
+
+Kad pradetu iskarto reguoti i tai, ka turi daryti - vos sukurus
+
+Kad normaliai begiotu po miestus - jokiu sienu
+
+Kad begiotu ne i tas pacias koordinates (ir kad atrodytu realistiskai)
+
+Fighter - po skillo leidimo, nebenori musti auto attack
+
+Surasti, kas neuzdaro mysql connectionu
+
+
+Kaip padaryti parcius
+Kaip padaryti klanus
+Kaip jie vaiskciosi kartu (kas ka seks)
+
+
+1)Pradinis atsiradimas
+	a)Atsiranda (random - Girane/Lvl zonoj/etc.)
+	b)Eina buffu, itemu (priklausomai kur atsirado)
+	c)Eina musti mobu, keltis leveli
+		1)Jeigu mirsta nepasikeles levelio 76, turi grysti atgal i levelio zona (eiti toliau keltis levelio)
+	d)Pasikeles leveli eina atgal i meista (Giran)
+
+2)Itemu farminimas
+	a)Random eina i viena is zonu (antharas lair, garden of eva)
+	b)Jeigu mirsta eina i miesta ir atgal i zona
+		1)Mirusysis gali buti prikeltas klano/party draugelio
+			a)Buffai(jei neturi), kad galetu toliau musti
+		
+	
+3)PvP
+	a)Kol farminasi zonose, gali eiti PvP
+		1)Prisipisineja prie zmoniu pats
+		2)Duoda i kaili atgal, jeigu kasnors ji skriaudzia (bet turi neatrodyti, kad iskarto automatiskai)
+			a)Arba neduoda, nes yra bailys
+		
+
+4)PvP kai turi Party
+	a)Partis turi padeti, bet priklausomai nuo gyvybiu, kad neatrodytu, kad visi yra botai
+	b)Bishopas partyje (prikelimas,gydymas)
+	c)Saviskiu nekapoti
+	
+5)Pvp kai turi Clana ir party
+	a)Partis turi padeti, bet priklausomai nuo gyvybiu, kad neatrodytu, kad visi yra botai
+	b)Bishopas partyje (prikelimas,gydymas)
+	c)Saviskiu nekapoti
+	
+6)Karminimas
+	a)Pisa visus
+	b)Valosi karma
+	c)Pameta itemus - praso kad atiduotu
+	
+7)Olympiada - Herojai (Jeigu
+	a)Registruojasi
+	b)Bufai olypiadoje
+	c)Kovoja
+	d)Registruojasi is naujo (jeigu nusprende kad nori toliau)
+	
+8)Serverio eventai: Tvt,etc.
+	a)Registruojasi jei nori
+	b)Zaidzia
+	
+9)Item enchantinimas
+	a)Pliusinasi itemus
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
