@@ -1,10 +1,10 @@
 package com.elfocrash.roboto;
 
-import com.elfocrash.roboto.task.AITask;
-import com.elfocrash.roboto.task.AITaskRunner;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.elfocrash.roboto.task.AITask;
+import com.elfocrash.roboto.task.AITaskRunner;
 
 import net.sf.l2j.commons.concurrent.ThreadPool;
 
@@ -17,7 +17,7 @@ public enum FakePlayerTaskManager
 	INSTANCE;
 	
 	private final int aiTaskRunnerInterval = 700;
-	private final int _playerCountPerTask = 100;
+	private final int _playerCountPerTask = 2000;
 	private List<AITask> _aiTasks;
 	
 	private FakePlayerTaskManager(){

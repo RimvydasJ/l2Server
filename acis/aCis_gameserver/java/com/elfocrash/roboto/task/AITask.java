@@ -1,9 +1,9 @@
 package com.elfocrash.roboto.task;
 
+import java.util.List;
+
 import com.elfocrash.roboto.FakePlayer;
 import com.elfocrash.roboto.FakePlayerManager;
-
-import java.util.List;
 
 /**
  * @author Elfocrash

@@ -9,8 +9,8 @@ public interface IConsumableSpender {
 	default void handleConsumable(FakePlayer fakePlayer, int consumableId) {
 		if(fakePlayer.getInventory().getItemByItemId(consumableId) != null) {
 			if(fakePlayer.getInventory().getItemByItemId(consumableId).getCount() <= 20) {
-				fakePlayer.getInventory().addItem("", consumableId, 500, fakePlayer, null);
-
+				fakePlayer.getInventory().addItem("", consumableId, 500, fakePlayer, null);			
+				
 			}
 		}else {
 			fakePlayer.getInventory().addItem("", consumableId, 500, fakePlayer, null);

@@ -18,6 +18,7 @@ import net.sf.l2j.gameserver.model.entity.Castle;
 import net.sf.l2j.gameserver.model.entity.Siege;
 import net.sf.l2j.gameserver.model.entity.Siege.SiegeSide;
 import net.sf.l2j.gameserver.model.zone.ZoneId;
+import net.sf.l2j.gameserver.network.L2GameClient;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.network.serverpackets.PledgeShowMemberListUpdate;
 import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
@@ -32,15 +33,16 @@ public enum FakePlayerManager {
 	private FakePlayerManager() {
 
 	}
+
 	public void initialise() {
 		FakePlayerNameManager.INSTANCE.initialise();
 		FakePlayerTaskManager.INSTANCE.initialise();
 	}
 
-	public FakePlayer spawnPlayer(int x, int y, int z, String clanName) {
-		FakePlayer activeChar = FakeHelpers.createRandomFakePlayer(clanName);
+	public FakePlayer spawnPlayer(int x, int y, int z) {
+		FakePlayer activeChar = FakeHelpers.createRandomFakePlayer();
 		World.getInstance().addPlayer(activeChar);
-		//handlePlayerClanOnSpawn(activeChar);
+		handlePlayerClanOnSpawn(activeChar);
 		
 		if (Config.PLAYER_SPAWN_PROTECTION > 0)
 			activeChar.setSpawnProtection(true);
@@ -48,44 +50,6 @@ public enum FakePlayerManager {
 		activeChar.spawnMe(x, y, z);
 		activeChar.onPlayerEnter();
 		
-		if (!activeChar.isGM() && (!activeChar.isInSiege() || activeChar.getSiegeState() < 2)
-				&& activeChar.isInsideZone(ZoneId.SIEGE))
-			activeChar.teleToLocation(TeleportType.TOWN);
-
-		activeChar.heal();
-		return activeChar;
-	}
-
-	public FakePlayer spawnLowPlayer(int x, int y, int z) {
-		FakePlayer activeChar = FakeHelpers.createRandomLowFakePlayer();
-		World.getInstance().addPlayer(activeChar);
-		//handlePlayerClanOnSpawn(activeChar);
-
-		if (Config.PLAYER_SPAWN_PROTECTION > 0)
-			activeChar.setSpawnProtection(true);
-
-		activeChar.spawnMe(x, y, z);
-		activeChar.onPlayerEnter();
-
-		if (!activeChar.isGM() && (!activeChar.isInSiege() || activeChar.getSiegeState() < 2)
-				&& activeChar.isInsideZone(ZoneId.SIEGE))
-			activeChar.teleToLocation(TeleportType.TOWN);
-
-		activeChar.heal();
-		return activeChar;
-	}
-
-	public FakePlayer spawnPartyPlayer(int x, int y, int z, ClassId classId) {
-		FakePlayer activeChar = FakeHelpers.createPartyPlayer(classId);
-		World.getInstance().addPlayer(activeChar);
-		//handlePlayerClanOnSpawn(activeChar);
-
-		if (Config.PLAYER_SPAWN_PROTECTION > 0)
-			activeChar.setSpawnProtection(true);
-
-		activeChar.spawnMe(x, y, z);
-		activeChar.onPlayerEnter();
-
 		if (!activeChar.isGM() && (!activeChar.isInSiege() || activeChar.getSiegeState() < 2)
 				&& activeChar.isInsideZone(ZoneId.SIEGE))
 			activeChar.teleToLocation(TeleportType.TOWN);
@@ -142,9 +106,4 @@ public enum FakePlayerManager {
 		return World.getInstance().getPlayers().stream().filter(x -> x instanceof FakePlayer).map(x -> (FakePlayer) x)
 				.collect(Collectors.toList());
 	}
-
-	public List<L2Clan> getFakeClans(){
-		return ClanTable.getInstance().getClans().stream().filter(x->x.getLeader().getPlayerInstance() instanceof FakePlayer).collect(Collectors.toList());
-	}
-
 }

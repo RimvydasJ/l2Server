@@ -1,10 +1,8 @@
 package com.elfocrash.roboto.task;
 
-import com.elfocrash.roboto.FakePlayer;
-import com.elfocrash.roboto.FakePlayerTaskManager;
-
-import java.util.Collections;
 import java.util.List;
+
+import com.elfocrash.roboto.FakePlayerTaskManager;
 
 import net.sf.l2j.commons.concurrent.ThreadPool;
 
@@ -13,7 +11,7 @@ import net.sf.l2j.commons.concurrent.ThreadPool;
  *
  */
 public class AITaskRunner implements Runnable
-{
+{	
 	@Override
 	public void run()
 	{		

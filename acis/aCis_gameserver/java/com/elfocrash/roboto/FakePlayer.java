@@ -44,13 +44,6 @@ import net.sf.l2j.gameserver.templates.skills.L2SkillType;
  */
 public class FakePlayer extends Player
 {
-	private boolean _clanDecisionPassed = false;
-	public boolean getClanDecissionCondition(){
-		return  _clanDecisionPassed;
-	}
-	public void setClanDecisionPassed(){
-		_clanDecisionPassed = true;
-	}
 	private FakePlayerAI _fakeAi;	
 	private boolean _underControl = false;
 	
@@ -224,21 +217,22 @@ public class FakePlayer extends Player
 		// ************************************* Check skill availability *******************************************
 		
 		// Siege summon checks. Both checks send a message to the player if it return false.
-	/*	if (skill.isSiegeSummonSkill())
-		{
-			final Siege siege = CastleManager.getInstance().getActiveSiege(this);
-			if (siege == null || !siege.checkSide(getClan(), SiegeSide.ATTACKER) || (isInSiege() && isInsideZone(ZoneId.CASTLE)))
-			{
-				sendPacket(SystemMessage.getSystemMessage(SystemMessageId.NOT_CALL_PET_FROM_THIS_LOCATION));
-				return false;
-			}
-			
-			if (SevenSigns.getInstance().isSealValidationPeriod() && SevenSigns.getInstance().getSealOwner(SealType.STRIFE) == CabalType.DAWN && SevenSigns.getInstance().getPlayerCabal(getObjectId()) == CabalType.DUSK)
-			{
-				sendPacket(SystemMessageId.SEAL_OF_STRIFE_FORBIDS_SUMMONING);
-				return false;
-			}
-		}*/
+		//TODO Reikia veliau paziureti
+//		if (skill.isSiegeSummonSkill())
+//		{
+//			final Siege siege = CastleManager.getInstance().getActiveSiege(this);
+//			if (siege == null || !siege.checkSide(getClan(), SiegeSide.ATTACKER) || (isInSiege() && isInsideZone(ZoneId.CASTLE)))
+//			{
+//				sendPacket(SystemMessage.getSystemMessage(SystemMessageId.NOT_CALL_PET_FROM_THIS_LOCATION));
+//				return false;
+//			}
+//
+//			if (SevenSigns.getInstance().isSealValidationPeriod() && SevenSigns.getInstance().getSealOwner(SealType.STRIFE) == CabalType.DAWN && SevenSigns.getInstance().getPlayerCabal(getObjectId()) == CabalType.DUSK)
+//			{
+//				sendPacket(SystemMessageId.SEAL_OF_STRIFE_FORBIDS_SUMMONING);
+//				return false;
+//			}
+//		}
 		
 		// ************************************* Check casting conditions *******************************************
 		
@@ -627,29 +621,5 @@ public class FakePlayer extends Player
 		setCurrentCp(getMaxCp());
 		setCurrentHp(getMaxHp());
 		setCurrentMp(getMaxMp());
-	}
-
-	public String getPlayerCurrentTown(){
-		return MapRegionTable.getInstance().getClosestTownName(getX(),getY());
-	}
-
-	public int getNearestTownId(){
-		return MapRegionTable.getInstance().getMapRegion(getX(),getY());
-	}
-
-	public void setAttackerAsTarget(Creature attacker)
-	{
-		if(attacker instanceof Summon)
-		{
-			setTarget(((Summon)attacker).getOwner());
-		}else if(attacker instanceof Player)
-		{
-			setTarget(attacker);
-		}
-		else
-		{
-			setTarget(attacker);
-			//getAI().setIntention(CtrlIntention.ATTACK, attacker);
-		}
 	}
 }

@@ -35,7 +35,8 @@ public final class PlayerNameTable
 		{
 			while (rs.next()) {
 				_players.put(rs.getInt("obj_Id"), new DataHolder(rs.getString("account_name"), rs.getString("char_name"), rs.getInt("accesslevel")));
-				FakeHelpers._usedNames.add(rs.getString("char_name"));
+				//TODO check it
+				//FakeHelpers._usedNames.add(rs.getString("char_name"));
 			}
 		}
 		catch (SQLException e)

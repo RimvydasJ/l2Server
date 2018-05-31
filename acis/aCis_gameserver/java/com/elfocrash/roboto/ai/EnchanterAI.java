@@ -3,9 +3,8 @@ package com.elfocrash.roboto.ai;
 import com.elfocrash.roboto.FakePlayer;
 import com.elfocrash.roboto.helpers.FakeHelpers;
 
-import net.sf.l2j.commons.random.Rnd;
-
 import net.sf.l2j.Config;
+import net.sf.l2j.commons.random.Rnd;
 import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
 import net.sf.l2j.gameserver.model.item.kind.Weapon;
 

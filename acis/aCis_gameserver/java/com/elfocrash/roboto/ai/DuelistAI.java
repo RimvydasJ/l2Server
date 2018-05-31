@@ -1,5 +1,9 @@
 package com.elfocrash.roboto.ai;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import com.elfocrash.roboto.FakePlayer;
 import com.elfocrash.roboto.ai.addon.IConsumableSpender;
 import com.elfocrash.roboto.helpers.FakeHelpers;
@@ -7,10 +11,6 @@ import com.elfocrash.roboto.model.HealingSpell;
 import com.elfocrash.roboto.model.OffensiveSpell;
 import com.elfocrash.roboto.model.SpellUsageCondition;
 import com.elfocrash.roboto.model.SupportSpell;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import net.sf.l2j.gameserver.model.ShotType;
 
@@ -27,9 +27,7 @@ public class DuelistAI extends CombatAI implements IConsumableSpender {
 		applyDefaultBuffs();
 		handleShots();
 		selfSupportBuffs();
-		tryTargetRandomCreatureByTypeInRadius(FakeHelpers.getTestTargetClass(), FakeHelpers.getTestTargetRange());
-		tryTargetPlayerInPvp();
-		tryTargetPlayerInToPk();
+		tryTargetRandomCreatureByTypeInRadius(FakeHelpers.getTestTargetClass(), FakeHelpers.getTestTargetRange());		
 		tryAttackingUsingFighterOffensiveSkill();
 		setBusyThinking(false);
 	}
@@ -47,11 +45,11 @@ public class DuelistAI extends CombatAI implements IConsumableSpender {
 	@Override
 	protected List<OffensiveSpell> getOffensiveSpells() {
 		List<OffensiveSpell> _offensiveSpells = new ArrayList<>();
-		//_offensiveSpells.add(new OffensiveSpell(345, 5));
-		_offensiveSpells.add(new OffensiveSpell(261, 1));
+		_offensiveSpells.add(new OffensiveSpell(345, 1));
+		_offensiveSpells.add(new OffensiveSpell(261, 2));		
 		_offensiveSpells.add(new OffensiveSpell(5, 3));		
 		_offensiveSpells.add(new OffensiveSpell(6, 4));		
-		_offensiveSpells.add(new OffensiveSpell(1, 1));
+		_offensiveSpells.add(new OffensiveSpell(1, 5));
 		return _offensiveSpells;
 	}
 	

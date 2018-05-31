@@ -1,14 +1,14 @@
 package com.elfocrash.roboto.ai;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import com.elfocrash.roboto.FakePlayer;
 import com.elfocrash.roboto.helpers.FakeHelpers;
 import com.elfocrash.roboto.model.HealingSpell;
 import com.elfocrash.roboto.model.OffensiveSpell;
 import com.elfocrash.roboto.model.SupportSpell;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import net.sf.l2j.gameserver.model.ShotType;
 
@@ -30,9 +30,7 @@ public class AdventurerAI extends CombatAI
 		setBusyThinking(true);		
 		applyDefaultBuffs();
 		handleShots();			
-		tryTargetRandomCreatureByTypeInRadius(FakeHelpers.getTestTargetClass(), FakeHelpers.getTestTargetRange());
-		tryTargetPlayerInPvp();
-		tryTargetPlayerInToPk();
+		tryTargetRandomCreatureByTypeInRadius(FakeHelpers.getTestTargetClass(), FakeHelpers.getTestTargetRange());		
 		tryAttackingUsingFighterOffensiveSkill();
 		setBusyThinking(false);
 	}
@@ -48,7 +46,6 @@ public class AdventurerAI extends CombatAI
 	{
 		List<OffensiveSpell> _offensiveSpells = new ArrayList<>();
 		_offensiveSpells.add(new OffensiveSpell(263, 4));
-		_offensiveSpells.add(new OffensiveSpell(30, 2));
 		_offensiveSpells.add(new OffensiveSpell(12, 1));
 		_offensiveSpells.add(new OffensiveSpell(11, 2));
 		_offensiveSpells.add(new OffensiveSpell(4, 3));

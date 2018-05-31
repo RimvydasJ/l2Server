@@ -1,8 +1,13 @@
 package com.elfocrash.roboto.helpers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.elfocrash.roboto.FakePlayer;
 import com.elfocrash.roboto.FakePlayerNameManager;
-import com.elfocrash.roboto.admincommands.AdminFakePlayers;
 import com.elfocrash.roboto.ai.AdventurerAI;
 import com.elfocrash.roboto.ai.ArchmageAI;
 import com.elfocrash.roboto.ai.CardinalAI;
@@ -22,33 +27,19 @@ import com.elfocrash.roboto.ai.StormScreamerAI;
 import com.elfocrash.roboto.ai.TitanAI;
 import com.elfocrash.roboto.ai.WindRiderAI;
 
-import java.net.InetAddress;
-import java.time.ZoneId;
-import java.util.*;
-
-import com.elfocrash.roboto.task.AITaskRunner;
 import net.sf.l2j.commons.random.Rnd;
-
-import net.sf.l2j.gameserver.cache.CrestCache;
 import net.sf.l2j.gameserver.datatables.CharTemplateTable;
-import net.sf.l2j.gameserver.datatables.ClanTable;
 import net.sf.l2j.gameserver.datatables.PlayerNameTable;
-import net.sf.l2j.gameserver.handler.ChatHandler;
-import net.sf.l2j.gameserver.handler.chathandlers.ChatAll;
 import net.sf.l2j.gameserver.idfactory.IdFactory;
-import net.sf.l2j.gameserver.model.L2Clan;
 import net.sf.l2j.gameserver.model.actor.Creature;
 import net.sf.l2j.gameserver.model.actor.appearance.PcAppearance;
 import net.sf.l2j.gameserver.model.actor.instance.Monster;
-import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.actor.template.PlayerTemplate;
 import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.model.base.Experience;
 import net.sf.l2j.gameserver.model.base.Sex;
 import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
-import net.sf.l2j.gameserver.network.L2GameClient;
-import net.sf.l2j.gameserver.scripting.scripts.village_master.Clan;
 
 public class FakeHelpers {
 	
@@ -110,12 +101,12 @@ public class FakeHelpers {
 		return 2000;
 	}
 	
-	public static FakePlayer createRandomFakePlayer(String clanName) {
+	public static FakePlayer createRandomFakePlayer() {
 		int objectId = IdFactory.getInstance().getNextId();
 		String accountName = "AutoPilot";
 		String playerName = FakePlayerNameManager.INSTANCE.getRandomAvailableName();
 
-		ClassId classId = getThirdClasses(false).get(Rnd.get(0, getThirdClasses(false).size() - 1));
+		ClassId classId = getThirdClasses().get(Rnd.get(0, getThirdClasses().size() - 1));
 
 		final PlayerTemplate template = CharTemplateTable.getInstance().getTemplate(classId);
 		PcAppearance app = getRandomAppearance(template.getRace());
@@ -126,79 +117,16 @@ public class FakeHelpers {
 		PlayerNameTable.getInstance().addPlayer(objectId, accountName, playerName, player.getAccessLevel().getLevel());
 		player.setBaseClass(player.getClassId());
 		setLevel(player, 81);
-		//player.rewardSkills();
-		giveArmorsByClass(player,80);
+		player.rewardSkills();
+
+		giveArmorsByClass(player);
 		giveWeaponsByClass(player,true);
-		//player.giveAvailableSkills();
-		if(clanName!= null){
-			L2Clan clan = ClanTable.getInstance().getClanByName(clanName);
-			if(clan != null){
-				player.setClan(clan);
-				clan.addClanMember(player);
-				player.setTitle(clanName);
-			}
-			else {
-				clan = ClanTable.getInstance().createClan(player, clanName);
-				player.setTitle(clanName);
-				int id = CrestCache.getInstance().getRandomCrestId();
-				clan.setLevel(5);
-				clan.changeClanCrest(id);
-
-
-			}
-		}
 		player.heal();
+
 		return player;
 	}
 
-	public static FakePlayer createRandomLowFakePlayer() {
-		int objectId = IdFactory.getInstance().getNextId();
-		String accountName = "AutoPilot";
-		String playerName = FakePlayerNameManager.INSTANCE.getRandomAvailableName();
-
-		ClassId classId = getThirdClasses(true).get(Rnd.get(0, getThirdClasses(true).size() - 1));
-
-		final PlayerTemplate template = CharTemplateTable.getInstance().getTemplate(classId);
-		PcAppearance app = getRandomAppearance(template.getRace());
-		FakePlayer player = new FakePlayer(objectId, template, accountName, app);
-
-		player.setName(playerName);
-		player.setAccessLevel(/*Config.DEFAULT_ACCESS_LEVEL*/0);
-		PlayerNameTable.getInstance().addPlayer(objectId, accountName, playerName, player.getAccessLevel().getLevel());
-		player.setBaseClass(player.getClassId());
-		setLevel(player, 40);
-		//player.rewardSkills();
-		giveArmorsByClass(player,40);
-		giveWeaponsByClass(player,false);
-		player.giveAvailableSkills();
-		player.heal();
-		return player;
-	}
-
-	public static FakePlayer createPartyPlayer(ClassId classId ) {
-		int objectId = IdFactory.getInstance().getNextId();
-		String accountName = "AutoPilot";
-		String playerName = FakePlayerNameManager.INSTANCE.getRandomAvailableName();
-
-		final PlayerTemplate template = CharTemplateTable.getInstance().getTemplate(classId);
-		PcAppearance app = getRandomAppearance(template.getRace());
-		FakePlayer player = new FakePlayer(objectId, template, accountName, app);
-
-		player.setName(playerName);
-		player.setAccessLevel(/*Config.DEFAULT_ACCESS_LEVEL*/0);
-		PlayerNameTable.getInstance().addPlayer(objectId, accountName, playerName, player.getAccessLevel().getLevel());
-		player.setBaseClass(player.getClassId());
-		setLevel(player, 81);
-		//player.rewardSkills();
-		giveArmorsByClass(player,80);
-		giveWeaponsByClass(player,true);
-		player.giveAvailableSkills();
-		player.heal();
-		return player;
-	}
-
-	public static void giveArmorsByClass(FakePlayer player, int level) {
-		//int level = player.getLevel();
+	public static void giveArmorsByClass(FakePlayer player) {
 		List<Integer> itemIds = new ArrayList<>();
 		switch (player.getClassId()) {
 		case ARCHMAGE:
@@ -214,23 +142,7 @@ public class FakeHelpers {
 		case SHILLIEN_SAINT:
 		case DOMINATOR:
 		case DOOMCRYER:
-			if(level == 80) {
-				if( Rnd.nextDouble() < 0.5) {
-					itemIds = Arrays.asList(2407, 512, 5767, 5779, 858, 858, 889, 889, 920);
-				}
-				else{
-					itemIds = Arrays.asList(6383,6386,6384,6385,858, 858, 889, 889, 920);
-				}
-			}
-			else if(level == 61 ){
-				itemIds = Arrays.asList(2407, 512, 5767, 5779, 858, 858, 889, 889, 920);
-			}
-			else if(level >= 52 && level <61){
-				itemIds = Arrays.asList(2406,2464,600,2415,110);
-			}
-			else if(level == 40){
-				itemIds = Arrays.asList(2454,471,439,2414,2497);
-			}
+			itemIds = Arrays.asList(2407, 512, 5767, 5779, 858, 858, 889, 889, 920);
 			break;
 		case DUELIST:
 		case DREADNOUGHT:
@@ -242,17 +154,7 @@ public class FakeHelpers {
 		case SHILLIEN_TEMPLAR:
 		case TITAN:
 		case MAESTRO:
-			if(level == 80){
-			itemIds = Arrays.asList(6373, 6374, 6375, 6376, 6378, 858, 858, 889, 889, 920);}
-			else if(level == 61){
-				itemIds = Arrays.asList(2382,5768,5780,547);
-			}
-			else if (level >= 52 && level <61){
-				itemIds = Arrays.asList(358,2380,2487,2439,2416);
-			}
-			else if(level == 40){
-				itemIds = Arrays.asList(356,2414,2438,2462);
-			}
+			itemIds = Arrays.asList(6373, 6374, 6375, 6376, 6378, 858, 858, 889, 889, 920);
 			break;
 		case SAGGITARIUS:
 		case ADVENTURER:
@@ -262,17 +164,7 @@ public class FakeHelpers {
 		case GHOST_SENTINEL:
 		case FORTUNE_SEEKER:
 		case GRAND_KHAVATARI:
-			if(level==80){
-			itemIds = Arrays.asList(6379, 6380, 6381, 6382, 858, 858, 889, 889, 920);}
-			else if(level == 61){
-				itemIds = Arrays.asList(2385,2389,5766,5778,512);
-			}
-			else if (level >= 52 && level <61){
-				itemIds = Arrays.asList(2392,2475,601,2417);
-			}
-			else if(level == 40){
-				itemIds = Arrays.asList(398,418,2431,2414,2462);
-			}
+			itemIds = Arrays.asList(6379, 6380, 6381, 6382, 858, 858, 889, 889, 920);
 			break;
 		default:
 			break;
@@ -294,104 +186,32 @@ public class FakeHelpers {
 		case GHOST_HUNTER:
 		case WIND_RIDER:
 		case ADVENTURER:
-			if(player.getLevel() == 80){
 			itemIds = Arrays.asList(6590);
-			}
-			else if(player.getLevel() == 61){
-			itemIds = Arrays.asList(5618);
-			}
-			else if (player.getLevel() >= 52 && player.getLevel() <61){
-				itemIds = Arrays.asList(4780);
-			}
-			else if(player.getLevel()== 40){
-				itemIds = Arrays.asList(4776);
-			}
 			break;
 		case SAGGITARIUS:
 		case MOONLIGHT_SENTINEL:
 		case GHOST_SENTINEL:
-			if(player.getLevel() == 80) {
-				itemIds = Arrays.asList(7577);
-			}
-			else if(player.getLevel() == 61) {
-				itemIds = Arrays.asList(5608);
-			}
-			else if (player.getLevel() >= 52 && player.getLevel() <61) {
-				itemIds = Arrays.asList(4829);
-			}
-			else if(player.getLevel()== 40) {
-				itemIds = Arrays.asList(4822);
-			}
+			itemIds = Arrays.asList(7577);
 			break;
 		case PHOENIX_KNIGHT:
 		case SWORD_MUSE:
 		case HELL_KNIGHT:
 		case EVAS_TEMPLAR:
 		case SHILLIEN_TEMPLAR:
-			if(player.getLevel() == 80){
-			itemIds = Arrays.asList(6583, 6377);}
-			else if(player.getLevel() == 61) {
-				itemIds = Arrays.asList(5648,641);
-			}
-			else if (player.getLevel() >= 52 && player.getLevel() <61) {
-				itemIds = Arrays.asList(4717,110);
-			}
-			else if(player.getLevel()== 40) {
-				itemIds = Arrays.asList(4708,2497);
-			}
+			itemIds = Arrays.asList(6583, 6377);
 			break;
 		case MAESTRO:
-			if(player.getLevel() == 80){
-			itemIds = Arrays.asList(6585, 6377);}
-			else if(player.getLevel() == 61) {
-				itemIds = Arrays.asList(5604,641);
-			}
-			else if (player.getLevel() >= 52 && player.getLevel() <61) {
-				itemIds = Arrays.asList(4754,110);
-			}
-			else if(player.getLevel()== 40) {
-				itemIds = Arrays.asList(4745,2497);
-			}
+			itemIds = Arrays.asList(6585, 6377);
 			break;
 		case TITAN:
-			if(player.getLevel() == 80){
-			itemIds = Arrays.asList(6607);}
-			else if(player.getLevel() == 61) {
-				itemIds = Arrays.asList(5645);
-			}
-			else if (player.getLevel() >= 52 && player.getLevel() <61) {
-				itemIds = Arrays.asList(4724);
-			}
-			else if(player.getLevel()== 40) {
-				itemIds = Arrays.asList(6348);
-			}
+			itemIds = Arrays.asList(6607);
 			break;
 		case DUELIST:
 		case SPECTRAL_DANCER:
-			if(player.getLevel() == 80){
-			itemIds = Arrays.asList(6580);}
-			else if(player.getLevel() == 61) {
-				itemIds = Arrays.asList(5705);
-			}
-			else if (player.getLevel() >= 52 && player.getLevel() <61) {
-				itemIds = Arrays.asList(2626);
-			}
-			else if(player.getLevel()== 40) {
-				itemIds = Arrays.asList(2561);
-			}
+			itemIds = Arrays.asList(6580);
 			break;
 		case DREADNOUGHT:
-			if(player.getLevel() == 80){
-			itemIds = Arrays.asList(6599);}
-			else if(player.getLevel() == 61) {
-				itemIds = Arrays.asList(5634);
-			}
-			else if (player.getLevel() >= 52 && player.getLevel() <61) {
-				itemIds = Arrays.asList(4859);
-			}
-			else if(player.getLevel()== 40) {
-				itemIds = Arrays.asList(4853);
-			}
+			itemIds = Arrays.asList(6599);
 			break;
 		case ARCHMAGE:
 		case SOULTAKER:
@@ -406,31 +226,10 @@ public class FakeHelpers {
 		case SHILLIEN_SAINT:
 		case DOMINATOR:
 		case DOOMCRYER:
-			if(player.getLevel() == 80){
-			itemIds = Arrays.asList(6608);}
-			else if(player.getLevel() == 61) {
-				itemIds = Arrays.asList(5643);
-			}
-			else if (player.getLevel() >= 52 && player.getLevel() <61) {
-				itemIds = Arrays.asList(8117);
-			}
-			else if(player.getLevel()== 40) {
-				itemIds = Arrays.asList(6313);
-			}
-
+			itemIds = Arrays.asList(6608);
 			break;
 		case GRAND_KHAVATARI:
-			if(player.getLevel() == 80){
-			itemIds = Arrays.asList(6602);}
-			else if(player.getLevel() == 61) {
-				itemIds = Arrays.asList(5624);
-			}
-			else if (player.getLevel() >= 52 && player.getLevel() <61) {
-				itemIds = Arrays.asList(4804);
-			}
-			else if(player.getLevel()== 40) {
-				itemIds = Arrays.asList(4795);
-			}
+			itemIds = Arrays.asList(6602);
 			break;
 		default:
 			break;
@@ -439,13 +238,13 @@ public class FakeHelpers {
 			player.getInventory().addItem("Weapon", id, 1, player, null);
 			ItemInstance item = player.getInventory().getItemByItemId(id);
 			if(randomlyEnchant)
-				item.setEnchantLevel(Rnd.get(1, 10));
+				item.setEnchantLevel(Rnd.get(7, 20));
 			player.getInventory().equipItemAndRecord(item);
 			player.getInventory().reloadEquippedItems();
 		}
 	}
 
-	public static List<ClassId> getThirdClasses(boolean isForLowLevelBots) {
+	public static List<ClassId> getThirdClasses() {
 		// removed summoner classes because fuck those guys
 		List<ClassId> classes = new ArrayList<>();
 
@@ -477,17 +276,13 @@ public class FakeHelpers {
 		classes.add(ClassId.GHOST_SENTINEL);
 		classes.add(ClassId.ADVENTURER);
 		classes.add(ClassId.WIND_RIDER);
+		classes.add(ClassId.DOMINATOR);
 		classes.add(ClassId.TITAN);
+		classes.add(ClassId.CARDINAL);
 		classes.add(ClassId.DUELIST);
 		classes.add(ClassId.GRAND_KHAVATARI);
 		classes.add(ClassId.DREADNOUGHT);
-
-		//Use only for random bots
-		if(!isForLowLevelBots){
-			classes.add(ClassId.CARDINAL);
-			classes.add(ClassId.DOMINATOR);
-		}
-
+		
 		return classes;
 	}
 
@@ -525,7 +320,7 @@ public class FakeHelpers {
 	public static void setLevel(FakePlayer player, int level) {
 		if (level >= 1 && level <= Experience.MAX_LEVEL) {
 			long pXp = player.getExp();
-			long tXp = Experience.LEVEL[level];
+			long tXp = Experience.LEVEL[81];
 
 			if (pXp > tXp)
 				player.removeExpAndSp(pXp - tXp, 0);
@@ -541,20 +336,4 @@ public class FakeHelpers {
 
 		return ai;
 	}
-
-	public static String getRandomClanName(){
-		List<String> clanNames = new ArrayList<>();
-		clanNames.add("Clan1");
-		clanNames.add("Clan2");
-		clanNames.add("Clan3");
-		clanNames.add("Clan4");
-		clanNames.add("Clan5");
-		clanNames.add("Clan6");
-		clanNames.add("Clan7");
-
-		return clanNames.get(Rnd.get(0,clanNames.size()-1));
-	}
-
-	public static HashSet<String> _usedNames = new HashSet<>();
-
 }

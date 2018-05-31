@@ -90,12 +90,13 @@ public final class World
 	public void addPlayer(Player cha)
 	{
 		_players.putIfAbsent(cha.getObjectId(), cha);
-		try{
-			FakeHelpers._usedNames.add(cha.getName());
-		}
-		catch (Exception e){
-		    System.out.println("Name already exists: " + cha.getName());
-        }
+		//TODO check it
+//		try{
+//			FakeHelpers._usedNames.add(cha.getName());
+//		}
+//		catch (Exception e){
+//		    System.out.println("Name already exists: " + cha.getName());
+//        }
 	}
 	
 	public void removePlayer(Player cha)
