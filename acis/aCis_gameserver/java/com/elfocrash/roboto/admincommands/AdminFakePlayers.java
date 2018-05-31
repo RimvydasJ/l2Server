@@ -6,9 +6,15 @@ import com.elfocrash.roboto.FakePlayerTaskManager;
 import com.elfocrash.roboto.ai.EnchanterAI;
 import com.elfocrash.roboto.ai.walker.GiranWalkerAI;
 
+import net.sf.l2j.commons.random.Rnd;
 import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
+import net.sf.l2j.gameserver.model.World;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.network.serverpackets.NpcHtmlMessage;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Elfocrash
@@ -55,41 +61,61 @@ public class AdminFakePlayers implements IAdminCommandHandler
 				FakePlayer fakePlayer = (FakePlayer)activeChar.getTarget();
 				fakePlayer.despawnPlayer();
 			}
+			else{
+				List<FakePlayer> allFakes = FakePlayerManager.INSTANCE.getFakePlayers();
+				for(int i = 0; i <allFakes.size(); i++){
+					allFakes.get(i).despawnPlayer();
+				}
+			}
 			return true;
 		}
-		
-		if(command.startsWith("admin_spawnwalker")) {
-			if(command.contains(" ")) {
-				String locationName = command.split(" ")[1];
+
+		if (command.startsWith("admin_spawnrandom")) {
+			String[] params = command.split(" ");
+
+			//2 - clan name provided
+			if(params.length == 2){
+				//TODO Clan things
+			}
+
+			//3 - clan name && count
+			else if(params.length == 3){
+				Thread t1 = new Thread(() -> {
+					System.out.println("Start spawning: " + params[2]+ " bots");
+					for(int i = 0; i < Integer.parseInt(params[2]); i++){
+						FakePlayer fakePlayer = FakePlayerManager.INSTANCE.spawnPlayer(activeChar.getX()+ Rnd.get(-200,200),activeChar.getY()+Rnd.get(-200,200),activeChar.getZ());
+						fakePlayer.assignDefaultAI();
+					}
+					System.out.println("Finish");
+				});
+				t1.start();
+			}
+			else{
 				FakePlayer fakePlayer = FakePlayerManager.INSTANCE.spawnPlayer(activeChar.getX(),activeChar.getY(),activeChar.getZ());
+					fakePlayer.assignDefaultAI();
+			}
+				return true;
+			}
+
+			if(command.startsWith("admin_spawnwalker")) {
+				if(command.contains(" ")) {
+					String locationName = command.split(" ")[1];
+					FakePlayer fakePlayer = FakePlayerManager.INSTANCE.spawnPlayer(activeChar.getX(),activeChar.getY(),activeChar.getZ());
 				switch(locationName) {
 					case "giran":
 						fakePlayer.setFakeAi(new GiranWalkerAI(fakePlayer));
-					break;
+						break;
 				}
 				return true;
 			}
-			
+
 			return true;
 		}
-		
-		if(command.startsWith("admin_spawnenchanter")) {
-			FakePlayer fakePlayer = FakePlayerManager.INSTANCE.spawnPlayer(activeChar.getX(),activeChar.getY(),activeChar.getZ());
-			fakePlayer.setFakeAi(new EnchanterAI(fakePlayer));
-			return true;
-		}
-		
-		if (command.startsWith("admin_spawnrandom")) {
-			FakePlayer fakePlayer = FakePlayerManager.INSTANCE.spawnPlayer(activeChar.getX(),activeChar.getY(),activeChar.getZ());
-			fakePlayer.assignDefaultAI();
-			if(command.contains(" ")) {
-				String arg = command.split(" ")[1];
-				if(arg.equalsIgnoreCase("htm")) {
-					showFakeDashboard(activeChar);
-				}
-			}
-			return true;
-		}		
+//		if(command.startsWith("admin_spawnenchanter")) {
+//			FakePlayer fakePlayer = FakePlayerManager.INSTANCE.spawnPlayer(activeChar.getX(),activeChar.getY(),activeChar.getZ());
+//			fakePlayer.setFakeAi(new EnchanterAI(fakePlayer));
+//			return true;
+//		}
 		/*if (command.startsWith("admin_takecontrol"))
 		{
 			if(activeChar.getTarget() != null && activeChar.getTarget() instanceof FakePlayer) {
