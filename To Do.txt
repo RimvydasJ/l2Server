@@ -1,6 +1,6 @@
 **Dead lock - pize klientui
 
-Kad pradetu iskarto reguoti i tai, ka turi daryti - vos sukurus
+Kad pradetu iskarto reguoti i tai, ka turi daryti - vos sukurus -MP
 
 Kad normaliai begiotu po miestus - jokiu sienu
 
