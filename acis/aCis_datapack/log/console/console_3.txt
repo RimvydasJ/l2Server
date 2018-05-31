@@ -1,4 +1,0 @@
-[31-05-2018 09:09:32]	INFO	---------------------------------------------------------------------=[ aCis ]
-[31-05-2018 09:09:33]	INFO	Loading loginserver configuration files.
-[31-05-2018 09:09:33]	INFO	MLog clients using java 1.4+ standard logging.
-[31-05-2018 09:09:34]	INFO	Initializing c3p0-0.9.5-pre5 [debug? false; trace: 5]
