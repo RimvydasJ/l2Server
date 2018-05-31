@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="aCis-datapack" target="1.5" />
+      <module name="aCis_gameserver" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

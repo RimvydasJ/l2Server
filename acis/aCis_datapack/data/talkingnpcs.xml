@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<list>
+	<npc instance="Merchant" msg="Buy armors n sh1t!"/>
+	<npc instance="Merchant" msg="Unseal that crap n1gga!"/>
+	<npc instance="Merchant" msg="Got some focken ass armors m8!"/>
+	<npc instance="Buffer" msg="Buff yourself and sh1t!"/>
+	<npc instance="Buffer" msg="Fuck what do i say?"/>
+	<npc instance="Gatekeeper" msg="I sh1t on my d1ck"/>
+	<npc instance="SymbolMaker" msg="Get some tattoes n1gga!"/>
+</list>

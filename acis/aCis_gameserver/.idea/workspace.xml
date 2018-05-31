@@ -1,0 +1,1206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5d3ed204-33df-45e6-98d8-c7212827fa51" name="Default" comment="" />
+    <ignored path="$PROJECT_DIR$/bin/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <ignored path="$PROJECT_DIR$/../aCis_datapack/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <expand />
+    <select />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="aCis_gameserver" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="FakeHelpers.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/java/com/elfocrash/roboto/helpers/FakeHelpers.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="20">
+              <caret line="136" column="41" lean-forward="false" selection-start-line="136" selection-start-column="35" selection-end-line="136" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FakePlayerManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/java/com/elfocrash/roboto/FakePlayerManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="20">
+              <caret line="77" column="29" lean-forward="false" selection-start-line="77" selection-start-column="29" selection-end-line="77" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FakePlayerAI.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/java/com/elfocrash/roboto/ai/FakePlayerAI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-7725">
+              <caret line="35" column="3" lean-forward="true" selection-start-line="35" selection-start-column="3" selection-end-line="35" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CombatAI.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/java/com/elfocrash/roboto/ai/CombatAI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="335">
+              <caret line="359" column="51" lean-forward="false" selection-start-line="359" selection-start-column="51" selection-end-line="359" selection-end-column="51" />
+              <folding>
+                <marker date="1517236308391" expanded="true" signature="2445:3084" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Olympiad.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/java/net/sf/l2j/gameserver/model/olympiad/Olympiad.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-40">
+              <caret line="47" column="52" lean-forward="false" selection-start-line="47" selection-start-column="32" selection-end-line="47" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Participant.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/java/net/sf/l2j/gameserver/model/olympiad/Participant.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="14" column="21" lean-forward="false" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OlympiadManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/java/net/sf/l2j/gameserver/model/olympiad/OlympiadManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="283">
+              <caret line="127" column="59" lean-forward="true" selection-start-line="127" selection-start-column="59" selection-end-line="127" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CompetitionType.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/java/net/sf/l2j/gameserver/model/olympiad/CompetitionType.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="8" column="15" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FakePlayerTaskManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/java/com/elfocrash/roboto/FakePlayerTaskManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="29">
+              <caret line="19" column="47" lean-forward="false" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AdminFakePlayers.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/java/com/elfocrash/roboto/admincommands/AdminFakePlayers.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="183" column="0" lean-forward="true" selection-start-line="183" selection-start-column="0" selection-end-line="183" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>grade pen</find>
+      <find>grade penalty</find>
+      <find>4267</find>
+      <find>reducehp</find>
+      <find>21442</find>
+      <find>arrows</find>
+      <find>soulshot</find>
+      <find>spawn</find>
+      <find>handlesho</find>
+      <find>fakein</find>
+      <find>21206</find>
+      <find>default</find>
+      <find>assignDefaultAI</find>
+      <find>20651</find>
+      <find>unstuck</find>
+      <find>level</find>
+      <find>21392</find>
+      <find>giveAvailableSkills</find>
+      <find>getparty</find>
+      <find>party</find>
+      <find>greater bat</find>
+      <find>balance</find>
+      <find>BALANCE_LIFE</find>
+      <find>OlympiadManagerNpc</find>
+      <find>OlympiadNoble</find>
+      <find>mass re</find>
+      <find>1254</find>
+      <find>oly</find>
+      <find>olympiad</find>
+      <find>joinol</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>\n#</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>C:\Lineage2\acis\aCis_datapack\config</dir>
+      <dir>C:\Lineage2\acis\aCis_datapack\data</dir>
+    </dirStrings>
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/helpers/ZoneHelper.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/walker/GiranWalkerAI.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/walker/allWalkersAI.java" />
+        <option value="$PROJECT_DIR$/java/net/sf/l2j/gameserver/model/zone/type/L2TownZone.java" />
+        <option value="$PROJECT_DIR$/java/net/sf/l2j/gameserver/handler/admincommandhandlers/AdminZone.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/StuckHelperAI.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/FakePlayerManager.java" />
+        <option value="$PROJECT_DIR$/java/net/sf/l2j/gameserver/model/actor/status/PlayerStatus.java" />
+        <option value="$PROJECT_DIR$/java/net/sf/l2j/gameserver/model/actor/instance/Player.java" />
+        <option value="$PROJECT_DIR$/../aCis_datapack/build/gameserver/data/xml/npcs/21000-21999.xml" />
+        <option value="$PROJECT_DIR$/java/net/sf/l2j/gameserver/model/WorldObject.java" />
+        <option value="$PROJECT_DIR$/../aCis_datapack/data/xml/npcs/20000-20999.xml" />
+        <option value="$PROJECT_DIR$/java/net/sf/l2j/gameserver/model/L2Clan.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/FakePlayer.java" />
+        <option value="$PROJECT_DIR$/../aCis_datapack/config/players.properties" />
+        <option value="$PROJECT_DIR$/../aCis_datapack/config/npcs.properties" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/LvlUpAI.java" />
+        <option value="$PROJECT_DIR$/../aCis_datapack/config/loginserver.properties" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/AdventurerAI.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/ArchmageAI.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/DominatorAI.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/DreadnoughtAI.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/DuelistAI.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/GhostHunterAI.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/GhostSentinelAI.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/GrandKhavatariAI.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/MoonlightSentinelAI.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/MysticMuseAI.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/SaggitariusAI.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/SoultakerAI.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/StormScreamerAI.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/TitanAI.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/WindRiderAI.java" />
+        <option value="$PROJECT_DIR$/../aCis_datapack/data/xml/admin_commands_rights.xml" />
+        <option value="$PROJECT_DIR$/../aCis_datapack/config/geoengine.properties" />
+        <option value="$PROJECT_DIR$/../aCis_datapack/data/xml/npcs/21000-21999.xml" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/walker/setCommonWalkerAI.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/FakePlayerNameManager.java" />
+        <option value="$PROJECT_DIR$/java/net/sf/l2j/gameserver/datatables/PlayerNameTable.java" />
+        <option value="$PROJECT_DIR$/java/net/sf/l2j/gameserver/model/World.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/walker/WalkerAI.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/FakePlayerAI.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/addon/IConsumableSpender.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/addon/IHealer.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/CardinalAI.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/helpers/FakeHelpers.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/FakePlayerTaskManager.java" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/admincommands/AdminFakePlayers.java" />
+        <option value="$PROJECT_DIR$/../aCis_datapack/data/html/admin/fakeplayers/index.htm" />
+        <option value="$PROJECT_DIR$/../aCis_datapack/config/server.properties" />
+        <option value="$PROJECT_DIR$/java/com/elfocrash/roboto/ai/CombatAI.java" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="-7" />
+    <option name="width" value="1612" />
+    <option name="height" value="867" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource ProjectPane="true" />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="aCis_gameserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aCis_datapack" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aCis_gameserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aCis_datapack" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aCis_gameserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aCis_datapack" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="html" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aCis_gameserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aCis_datapack" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="html" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aCis_gameserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aCis_datapack" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="html" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="fakeplayers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aCis_gameserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aCis_gameserver" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aCis_gameserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aCis_gameserver" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aCis_gameserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aCis_gameserver" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="roboto" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aCis_gameserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aCis_gameserver" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="roboto" type="462c0819:PsiDirectoryNode" />
+              <item name="admincommands" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aCis_gameserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aCis_gameserver" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="roboto" type="462c0819:PsiDirectoryNode" />
+              <item name="ai" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aCis_gameserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aCis_gameserver" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="roboto" type="462c0819:PsiDirectoryNode" />
+              <item name="helpers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aCis_gameserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aCis_gameserver" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="roboto" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aCis_gameserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aCis_gameserver" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="l2j" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aCis_gameserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aCis_gameserver" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="l2j" type="462c0819:PsiDirectoryNode" />
+              <item name="gameserver" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aCis_gameserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aCis_gameserver" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="l2j" type="462c0819:PsiDirectoryNode" />
+              <item name="gameserver" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aCis_gameserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aCis_gameserver" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="l2j" type="462c0819:PsiDirectoryNode" />
+              <item name="gameserver" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="olympiad" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aCis_gameserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+            <path>
+              <item name="aCis_gameserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 1.8 &gt;" type="70bed36:NamedLibraryElementNode" />
+            </path>
+            <path>
+              <item name="aCis_gameserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 1.8 &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="rt.jar" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aCis_gameserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 1.8 &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="rt.jar" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aCis_gameserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 1.8 &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="rt.jar" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="nio" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../aCis_datapack" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="SearchEverywhereHistoryKey" value="zone&#9;FILE&#9;file://C:/Lineage2/acis/aCis_datapack/build/gameserver/data/html/admin/zone.htm&#10;location&#9;PSI&#9;JAVA://net.sf.l2j.gameserver.model.Location&#10;getBuffs&#9;PSI&#9;JAVA://com.elfocrash.roboto.helpers.FakeHelpers#getFighterBuffs&#10;party&#9;PSI&#9;JAVA://net.sf.l2j.gameserver.network.serverpackets.PartyMatchList&#10;resurrec&#9;PSI&#9;JAVA://net.sf.l2j.gameserver.handler.skillhandlers.Resurrect&#10;chat&#9;PSI&#9;JAVA://net.sf.l2j.gameserver.handler.chathandlers.ChatAll&#10;global&#9;FILE&#9;jar://C:/Program Files/Java/jdk1.8.0_151/jre/lib/ext/nashorn.jar!/jdk/nashorn/internal/runtime/GlobalConstants.class&#10;speak&#9;PSI&#9;JAVA://net.sf.l2j.gameserver.scripting.scripts.ai.group.SpeakingNPCs&#10;checkIfPvP&#9;PSI&#9;JAVA://net.sf.l2j.gameserver.model.actor.Playable#checkIfPvP&#10;getOffensiveSpells&#9;PSI&#9;JAVA://com.elfocrash.roboto.ai.CombatAI#getOffensiveSpells&#10;mmocore&#9;FILE&#9;file://C:/Lineage2/acis/aCis_gameserver/bin/net/sf/l2j/commons/mmocore&#10;log&#9;PSI&#9;JAVA://net.sf.l2j.commons.lang.StringUtil#LOG&#10;access&#9;FILE&#9;file://C:/Lineage2/acis/aCis_gameserver/build/classes/net/sf/l2j/gameserver/datatables/AccessLevels.class" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Lineage2\acis\aCis_gameserver" />
+      <recent name="C:\Lineage2\acis\aCis_gameserver\main" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Lineage2\acis\aCis_datapack\data" />
+      <recent name="C:\Lineage2\acis\aCis_datapack\config" />
+      <recent name="C:\Lineage2\acis\aCis_datapack" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.Gameserver">
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+    </configuration>
+    <configuration name="Gameserver" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="net.sf.l2j.gameserver.GameServer" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/../aCis_datapack" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="aCis_gameserver" />
+      <envs />
+    </configuration>
+    <configuration name="Loginserver" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="net.sf.l2j.loginserver.LoginServer" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/../aCis_datapack" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="aCis_gameserver" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+    </configuration>
+    <list size="2">
+      <item index="0" class="java.lang.String" itemvalue="Application.Loginserver" />
+      <item index="1" class="java.lang.String" itemvalue="Application.Gameserver" />
+    </list>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5d3ed204-33df-45e6-98d8-c7212827fa51" name="Default" comment="" />
+      <created>1515161557849</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1515161557849</updated>
+      <workItem from="1515161564311" duration="1502000" />
+      <workItem from="1515171976217" duration="4784000" />
+      <workItem from="1515225336852" duration="1667000" />
+      <workItem from="1515229978589" duration="4242000" />
+      <workItem from="1515234239844" duration="24557000" />
+      <workItem from="1515314297640" duration="26719000" />
+      <workItem from="1515417703389" duration="9000" />
+      <workItem from="1515420890279" duration="1596000" />
+      <workItem from="1515484165850" duration="33760000" />
+      <workItem from="1515565716885" duration="4775000" />
+      <workItem from="1515611402620" duration="6792000" />
+      <workItem from="1515687460193" duration="17578000" />
+      <workItem from="1515785651841" duration="1262000" />
+      <workItem from="1515837428676" duration="5331000" />
+      <workItem from="1515960807024" duration="1886000" />
+      <workItem from="1516017069608" duration="17765000" />
+      <workItem from="1516105761350" duration="13348000" />
+      <workItem from="1516205716663" duration="4205000" />
+      <workItem from="1516296136924" duration="1855000" />
+      <workItem from="1516639404247" duration="11527000" />
+      <workItem from="1516698518318" duration="12907000" />
+      <workItem from="1516715732610" duration="4587000" />
+      <workItem from="1516731033316" duration="7509000" />
+      <workItem from="1516783068919" duration="12778000" />
+      <workItem from="1516880265023" duration="9870000" />
+      <workItem from="1516963084438" duration="7566000" />
+      <workItem from="1517043518105" duration="9311000" />
+      <workItem from="1517053307365" duration="8949000" />
+      <workItem from="1517235866072" duration="1363000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="260000000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="0" width="1612" height="867" extended-state="1" />
+    <layout>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32768363" sideWeight="0.49573562" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34309623" sideWeight="0.44987145" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3374036" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32914925" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32768363" sideWeight="0.49573562" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26610824" sideWeight="0.49417636" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41143653" sideWeight="0.48933902" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14872068" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23187633" sideWeight="0.5058236" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34309623" sideWeight="0.5501285" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2608089" sideWeight="0.4936034" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="280" />
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="_clan = {L2Clan@3816} &quot;Cbb[268480352]&quot;" />
+        <watch expression="_clan = {L2Clan@3816} &quot;Cbb[268480352]&quot;" />
+        <watch expression="partyPlayers" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+    <buildFile url="file://$PROJECT_DIR$/build.xml">
+      <targetFilters>
+        <filter targetName="dist" isVisible="false" />
+        <filter targetName="jar" isVisible="true" />
+        <filter targetName="compile" isVisible="true" />
+        <filter targetName="init" isVisible="true" />
+        <filter targetName="clean" isVisible="true" />
+        <filter targetName="checkRequirements" isVisible="true" />
+      </targetFilters>
+      <expanded value="true" />
+    </buildFile>
+    <buildFile url="file://$PROJECT_DIR$/../aCis_datapack/build.xml">
+      <targetFilters>
+        <filter targetName="build" isVisible="true" />
+        <filter targetName="init" isVisible="true" />
+      </targetFilters>
+      <expanded value="false" />
+    </buildFile>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/java/com/elfocrash/roboto/task/AITask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="26" column="13" lean-forward="false" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/net/sf/l2j/gameserver/model/actor/Creature.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1539">
+          <caret line="3258" column="16" lean-forward="false" selection-start-line="3258" selection-start-column="16" selection-end-line="3258" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/util/function/Predicate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="48" column="12" lean-forward="false" selection-start-line="48" selection-start-column="12" selection-end-line="48" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/util/List.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="530">
+          <caret line="640" column="8" lean-forward="false" selection-start-line="640" selection-start-column="8" selection-end-line="640" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/net/sf/l2j/commons/math/MathUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1105">
+          <caret line="97" column="25" lean-forward="false" selection-start-line="97" selection-start-column="25" selection-end-line="97" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/net/sf/l2j/gameserver/templates/skills/L2SkillType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="23" column="1" lean-forward="true" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/net/sf/l2j/gameserver/model/L2Skill.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="1274" column="37" lean-forward="false" selection-start-line="1274" selection-start-column="25" selection-end-line="1274" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/net/sf/l2j/gameserver/model/WorldObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="451" column="36" lean-forward="false" selection-start-line="451" selection-start-column="36" selection-end-line="451" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/util/Comparator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="149" column="8" lean-forward="false" selection-start-line="149" selection-start-column="8" selection-end-line="149" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/net/sf/l2j/gameserver/model/olympiad/OlympiadGameManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2011">
+          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../aCis_datapack/data/html/olympiad/noble_main.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../aCis_datapack/data/html/olympiad/noble_10.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../aCis_datapack/data/html/olympiad/noble_11.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="2" column="36" lean-forward="true" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/net/sf/l2j/gameserver/model/actor/instance/OlympiadManagerNpc.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="151" column="20" lean-forward="false" selection-start-line="151" selection-start-column="20" selection-end-line="151" selection-end-column="101" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/net/sf/l2j/gameserver/skills/l2skills/L2SkillTeleport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="590">
+          <caret line="64" column="35" lean-forward="false" selection-start-line="64" selection-start-column="35" selection-end-line="64" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/net/sf/l2j/gameserver/model/actor/instance/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="7865" column="33" lean-forward="true" selection-start-line="7865" selection-start-column="33" selection-end-line="7865" selection-end-column="33" />
+          <folding>
+            <element signature="e#221957#221958#0" expanded="false" />
+            <element signature="e#221988#221989#0" expanded="false" />
+            <marker date="1516022430196" expanded="true" signature="14891:14978" ph="SELECT skill... character_skills" />
+            <marker date="1516022430196" expanded="true" signature="15027:15119" ph="INSERT INTO character_skills... " />
+            <marker date="1516022430196" expanded="true" signature="15183:15277" ph="UPDATE character_skills... " />
+            <marker date="1516022430196" expanded="true" signature="15335:15416" ph="DELETE FROM character_skills... " />
+            <marker date="1516022430196" expanded="true" signature="15470:15536" ph="DELETE FROM character_skills... " />
+            <marker date="1516022430196" expanded="true" signature="15588:15770" ph="INSERT INTO character_skills_save... " />
+            <marker date="1516022430196" expanded="true" signature="15824:16005" ph="SELECT skill... character_skills_save" />
+            <marker date="1516022430196" expanded="true" signature="16058:16129" ph="DELETE FROM character_skills_save... " />
+            <marker date="1516022430196" expanded="true" signature="16183:16563" ph="INSERT INTO characters... " />
+            <marker date="1516022430196" expanded="true" signature="16615:17214" ph="UPDATE characters... " />
+            <marker date="1516022430196" expanded="true" signature="17267:17869" ph="SELECT accou... characters" />
+            <marker date="1516022430196" expanded="true" signature="17930:18041" ph="SELECT class... character_subclasses" />
+            <marker date="1516022430196" expanded="true" signature="18094:18195" ph="INSERT INTO character_subclasses... " />
+            <marker date="1516022430196" expanded="true" signature="18251:18351" ph="UPDATE character_subclasses... " />
+            <marker date="1516022430196" expanded="true" signature="18407:18477" ph="DELETE FROM character_subclasses... " />
+            <marker date="1516022430196" expanded="true" signature="18534:18615" ph="SELECT slot,... character_hennas" />
+            <marker date="1516022430196" expanded="true" signature="18665:18751" ph="INSERT INTO character_hennas... " />
+            <marker date="1516022430196" expanded="true" signature="18804:18881" ph="DELETE FROM character_hennas... " />
+            <marker date="1516022430196" expanded="true" signature="18935:19001" ph="DELETE FROM character_hennas... " />
+            <marker date="1516022430196" expanded="true" signature="19058:19127" ph="DELETE FROM character_shortcuts... " />
+            <marker date="1516022430196" expanded="true" signature="19184:19250" ph="SELECT char_... character_recommends" />
+            <marker date="1516022430196" expanded="true" signature="19300:19365" ph="INSERT INTO character_recommends... " />
+            <marker date="1516022430196" expanded="true" signature="19419:19467" ph="DELETE FROM character_recommends... " />
+            <marker date="1516022430196" expanded="true" signature="19519:19565" ph="UPDATE characters... " />
+            <marker date="1516022430196" expanded="true" signature="143838:143881" ph="UPDATE pets... " />
+            <marker date="1516022430196" expanded="true" signature="151718:151777" ph="UPDATE characters... " />
+            <marker date="1516022430196" expanded="true" signature="158605:158680" ph="SELECT obj_I... characters" />
+            <marker date="1516022430196" expanded="true" signature="162550:162598" ph="DELETE FROM character_recipebook... " />
+            <marker date="1516022430196" expanded="true" signature="162785:162851" ph="INSERT INTO character_recipebook... " />
+            <marker date="1516022430196" expanded="true" signature="163088:163154" ph="INSERT INTO character_recipebook... " />
+            <marker date="1516022430196" expanded="true" signature="163615:163672" ph="SELECT id, t... character_recipebook" />
+            <marker date="1516022430196" expanded="true" signature="281149:281223" ph="SELECT frien... character_friends" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../aCis_datapack/data/html/olympiad/noble.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../aCis_datapack/data/html/olympiad/noble_1.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../aCis_datapack/data/html/olympiad/noble_4.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../aCis_datapack/data/html/olympiad/noble_5.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../aCis_datapack/data/html/olympiad/noble_7.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../aCis_datapack/data/html/olympiad/noble_14.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../aCis_datapack/data/html/olympiad/noble_cant_cw.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../aCis_datapack/data/html/olympiad/noble_cant_sub.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../aCis_datapack/data/html/olympiad/noble_cant_thirdclass.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../aCis_datapack/data/html/olympiad/hero_main.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/net/sf/l2j/gameserver/handler/usercommandhandlers/Loc.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/net/sf/l2j/gameserver/handler/usercommandhandlers/OlympiadStat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="1379" column="0" lean-forward="false" selection-start-line="1379" selection-start-column="0" selection-end-line="1379" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/net/sf/l2j/gameserver/model/itemcontainer/ItemContainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="103" column="50" lean-forward="false" selection-start-line="103" selection-start-column="44" selection-end-line="103" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/com/elfocrash/roboto/ai/addon/IConsumableSpender.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="17" lean-forward="false" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/com/elfocrash/roboto/ai/MoonlightSentinelAI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="33" column="18" lean-forward="true" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/com/elfocrash/roboto/ai/addon/IHealer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="27" column="32" lean-forward="true" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/com/elfocrash/roboto/model/HealingSpell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="16" column="5" lean-forward="false" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/com/elfocrash/roboto/ai/CardinalAI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="36" column="8" lean-forward="false" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/net/sf/l2j/gameserver/model/group/Party.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="164" column="4" lean-forward="false" selection-start-line="164" selection-start-column="4" selection-end-line="164" selection-end-column="4" />
+          <folding>
+            <element signature="e#4434#4435#0" expanded="false" />
+            <element signature="e#4456#4457#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/nio/HeapByteBuffer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="371" column="0" lean-forward="false" selection-start-line="371" selection-start-column="0" selection-end-line="371" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../aCis_datapack/config/server.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1300">
+          <caret line="65" column="26" lean-forward="false" selection-start-line="65" selection-start-column="26" selection-end-line="65" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../aCis_datapack/config/clans.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/com/elfocrash/roboto/FakePlayerNameManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="17" column="12" lean-forward="false" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/com/elfocrash/roboto/FakePlayerTaskManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="29">
+          <caret line="19" column="47" lean-forward="false" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/com/elfocrash/roboto/helpers/FakeHelpers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="136" column="41" lean-forward="false" selection-start-line="136" selection-start-column="35" selection-end-line="136" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/com/elfocrash/roboto/FakePlayerManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="77" column="29" lean-forward="false" selection-start-line="77" selection-start-column="29" selection-end-line="77" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/com/elfocrash/roboto/ai/FakePlayerAI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7725">
+          <caret line="35" column="3" lean-forward="true" selection-start-line="35" selection-start-column="3" selection-end-line="35" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../aCis_datapack/data/html/admin/fakeplayers/index.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/com/elfocrash/roboto/admincommands/AdminFakePlayers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="183" column="0" lean-forward="true" selection-start-line="183" selection-start-column="0" selection-end-line="183" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/net/sf/l2j/gameserver/model/olympiad/Olympiad.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-40">
+          <caret line="47" column="52" lean-forward="false" selection-start-line="47" selection-start-column="32" selection-end-line="47" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/net/sf/l2j/gameserver/model/olympiad/Participant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="14" column="21" lean-forward="false" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/net/sf/l2j/gameserver/model/olympiad/OlympiadManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="127" column="59" lean-forward="true" selection-start-line="127" selection-start-column="59" selection-end-line="127" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/net/sf/l2j/gameserver/model/olympiad/CompetitionType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="8" column="15" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/com/elfocrash/roboto/ai/CombatAI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="335">
+          <caret line="359" column="51" lean-forward="false" selection-start-line="359" selection-start-column="51" selection-end-line="359" selection-end-column="51" />
+          <folding>
+            <marker date="1517236308391" expanded="true" signature="2445:3084" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>aCis_datapack</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

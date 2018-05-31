@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<list>
+		<npc id="50009" idTemplate="31076" name="Emma" title="Buffer">
+		<set name="level" val="70"/>
+		<set name="radius" val="8"/>
+		<set name="height" val="18"/>
+		<set name="rHand" val="0"/>
+		<set name="lHand" val="0"/>
+		<set name="type" val="Buffer"/>
+		<set name="exp" val="0"/>
+		<set name="sp" val="0"/>
+		<set name="hp" val="2444.46819"/>
+		<set name="mp" val="1345.8"/>
+		<set name="hpRegen" val="7.5"/>
+		<set name="mpRegen" val="2.7"/>
+		<set name="pAtk" val="688.86373"/>
+		<set name="pDef" val="295.91597"/>
+		<set name="mAtk" val="470.40463"/>
+		<set name="mDef" val="216.53847"/>
+		<set name="crit" val="4"/>
+		<set name="atkSpd" val="253"/>
+		<set name="str" val="40"/>
+		<set name="int" val="21"/>
+		<set name="dex" val="30"/>
+		<set name="wit" val="20"/>
+		<set name="con" val="43"/>
+		<set name="men" val="20"/>
+		<set name="corpseTime" val="7"/>
+		<set name="walkSpd" val="50"/>
+		<set name="runSpd" val="120"/>
+		<set name="dropHerbGroup" val="0"/>
+		<set name="attackRange" val="40"/>
+		<ai type="DEFAULT" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="false"/>
+		<skills>
+			<skill id="4045" level="1"/>
+			<skill id="4416" level="18"/>
+		</skills>
+	</npc>
+<!--		<npc id="50010" idTemplate="31049" name="Pepper" title="Symbol Maker">
+		<set name="level" val="70"/>
+		<set name="radius" val="8"/>
+		<set name="height" val="23"/>
+		<set name="rHand" val="0"/>
+		<set name="lHand" val="0"/>
+		<set name="type" val="L2SymbolMaker"/>
+		<set name="exp" val="0"/>
+		<set name="sp" val="0"/>
+		<set name="hp" val="2444.46819"/>
+		<set name="mp" val="1345.8"/>
+		<set name="hpRegen" val="7.5"/>
+		<set name="mpRegen" val="2.7"/>
+		<set name="pAtk" val="688.86373"/>
+		<set name="pDef" val="295.91597"/>
+		<set name="mAtk" val="470.40463"/>
+		<set name="mDef" val="216.53847"/>
+		<set name="crit" val="4"/>
+		<set name="atkSpd" val="253"/>
+		<set name="str" val="40"/>
+		<set name="int" val="21"/>
+		<set name="dex" val="30"/>
+		<set name="wit" val="20"/>
+		<set name="con" val="43"/>
+		<set name="men" val="20"/>
+		<set name="corpseTime" val="7"/>
+		<set name="walkSpd" val="50"/>
+		<set name="runSpd" val="120"/>
+		<set name="dropHerbGroup" val="0"/>
+		<set name="attackRange" val="40"/>
+		<ai type="DEFAULT" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="false"/>
+		<skills>
+			<skill id="4045" level="1"/>
+			<skill id="4416" level="14"/>
+		</skills>
+	</npc>
+	<npc id="50011" idTemplate="31049" name="Pepper" title="Symbol Remover">
+		<set name="level" val="70"/>
+		<set name="radius" val="8"/>
+		<set name="height" val="23"/>
+		<set name="rHand" val="0"/>
+		<set name="lHand" val="0"/>
+		<set name="type" val="L2SymbolRemover"/>
+		<set name="exp" val="0"/>
+		<set name="sp" val="0"/>
+		<set name="hp" val="2444.46819"/>
+		<set name="mp" val="1345.8"/>
+		<set name="hpRegen" val="7.5"/>
+		<set name="mpRegen" val="2.7"/>
+		<set name="pAtk" val="688.86373"/>
+		<set name="pDef" val="295.91597"/>
+		<set name="mAtk" val="470.40463"/>
+		<set name="mDef" val="216.53847"/>
+		<set name="crit" val="4"/>
+		<set name="atkSpd" val="253"/>
+		<set name="str" val="40"/>
+		<set name="int" val="21"/>
+		<set name="dex" val="30"/>
+		<set name="wit" val="20"/>
+		<set name="con" val="43"/>
+		<set name="men" val="20"/>
+		<set name="corpseTime" val="7"/>
+		<set name="walkSpd" val="50"/>
+		<set name="runSpd" val="120"/>
+		<set name="dropHerbGroup" val="0"/>
+		<set name="attackRange" val="40"/>
+		<ai type="DEFAULT" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="false"/>
+		<skills>
+			<skill id="4045" level="1"/>
+			<skill id="4416" level="14"/>
+		</skills>
+	</npc>
+	<npc id="50012" idTemplate="14001" name="Kip" title="Top Players">
+		<set name="level" val="70"/>
+		<set name="radius" val="8"/>
+		<set name="height" val="26"/>
+		<set name="rHand" val="314"/>
+		<set name="lHand" val="0"/>
+		<set name="type" val="L2Top"/>
+		<set name="exp" val="0"/>
+		<set name="sp" val="0"/>
+		<set name="hp" val="2444.46819"/>
+		<set name="mp" val="1345.8"/>
+		<set name="hpRegen" val="7.5"/>
+		<set name="mpRegen" val="2.7"/>
+		<set name="pAtk" val="688.86373"/>
+		<set name="pDef" val="295.91597"/>
+		<set name="mAtk" val="470.40463"/>
+		<set name="mDef" val="216.53847"/>
+		<set name="crit" val="4"/>
+		<set name="atkSpd" val="253"/>
+		<set name="str" val="40"/>
+		<set name="int" val="21"/>
+		<set name="dex" val="30"/>
+		<set name="wit" val="20"/>
+		<set name="con" val="43"/>
+		<set name="men" val="20"/>
+		<set name="corpseTime" val="7"/>
+		<set name="walkSpd" val="50"/>
+		<set name="runSpd" val="120"/>
+		<set name="dropHerbGroup" val="0"/>
+		<set name="attackRange" val="40"/>
+		<ai type="DEFAULT" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="false"/>
+		<skills>
+			<skill id="4045" level="1"/>
+			<skill id="4416" level="14"/>
+		</skills>
+	</npc>
+	<npc id="50013" idTemplate="30500" name="Jim" title="Augmenter">
+		<set name="level" val="70"/>
+		<set name="radius" val="8"/>
+		<set name="height" val="23"/>
+		<set name="rHand" val="0"/>
+		<set name="lHand" val="0"/>
+		<set name="type" val="L2Augmenter"/>
+		<set name="exp" val="0"/>
+		<set name="sp" val="0"/>
+		<set name="hp" val="2444.46819"/>
+		<set name="mp" val="1345.8"/>
+		<set name="hpRegen" val="7.5"/>
+		<set name="mpRegen" val="2.7"/>
+		<set name="pAtk" val="688.86373"/>
+		<set name="pDef" val="295.91597"/>
+		<set name="mAtk" val="470.40463"/>
+		<set name="mDef" val="216.53847"/>
+		<set name="crit" val="4"/>
+		<set name="atkSpd" val="253"/>
+		<set name="str" val="40"/>
+		<set name="int" val="21"/>
+		<set name="dex" val="30"/>
+		<set name="wit" val="20"/>
+		<set name="con" val="43"/>
+		<set name="men" val="20"/>
+		<set name="corpseTime" val="7"/>
+		<set name="walkSpd" val="50"/>
+		<set name="runSpd" val="120"/>
+		<set name="dropHerbGroup" val="0"/>
+		<set name="attackRange" val="40"/>
+		<ai type="DEFAULT" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="false"/>
+		<skills>
+			<skill id="4045" level="1"/>
+			<skill id="4416" level="14"/>
+		</skills>
+	</npc>
+	<npc id="50014" idTemplate="22047" name="Shena" title="Augment Skills">
+		<set name="level" val="70"/>
+		<set name="radius" val="21"/>
+		<set name="height" val="43"/>
+		<set name="rHand" val="0"/>
+		<set name="lHand" val="0"/>
+		<set name="type" val="L2Augment"/>
+		<set name="exp" val="0"/>
+		<set name="sp" val="0"/>
+		<set name="hp" val="2444.46819"/>
+		<set name="mp" val="1345.8"/>
+		<set name="hpRegen" val="7.5"/>
+		<set name="mpRegen" val="2.7"/>
+		<set name="pAtk" val="688.86373"/>
+		<set name="pDef" val="295.91597"/>
+		<set name="mAtk" val="470.40463"/>
+		<set name="mDef" val="216.53847"/>
+		<set name="crit" val="4"/>
+		<set name="atkSpd" val="253"/>
+		<set name="str" val="40"/>
+		<set name="int" val="21"/>
+		<set name="dex" val="30"/>
+		<set name="wit" val="20"/>
+		<set name="con" val="43"/>
+		<set name="men" val="20"/>
+		<set name="corpseTime" val="7"/>
+		<set name="walkSpd" val="50"/>
+		<set name="runSpd" val="120"/>
+		<set name="dropHerbGroup" val="0"/>
+		<set name="attackRange" val="40"/>
+		<ai type="DEFAULT" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="false"/>
+		<skills>
+			<skill id="4045" level="1"/>
+			<skill id="4416" level="14"/>
+		</skills>
+	</npc>
+	<npc id="50015" idTemplate="22055" name="Maurine" title="Enchanter">
+		<set name="level" val="70"/>
+		<set name="radius" val="23"/>
+		<set name="height" val="32.8"/>
+		<set name="rHand" val="0"/>
+		<set name="lHand" val="0"/>
+		<set name="type" val="L2QuickEnchanter"/>
+		<set name="exp" val="0"/>
+		<set name="sp" val="0"/>
+		<set name="hp" val="2444.46819"/>
+		<set name="mp" val="1345.8"/>
+		<set name="hpRegen" val="7.5"/>
+		<set name="mpRegen" val="2.7"/>
+		<set name="pAtk" val="688.86373"/>
+		<set name="pDef" val="295.91597"/>
+		<set name="mAtk" val="470.40463"/>
+		<set name="mDef" val="216.53847"/>
+		<set name="crit" val="4"/>
+		<set name="atkSpd" val="253"/>
+		<set name="str" val="40"/>
+		<set name="int" val="21"/>
+		<set name="dex" val="30"/>
+		<set name="wit" val="20"/>
+		<set name="con" val="43"/>
+		<set name="men" val="20"/>
+		<set name="corpseTime" val="7"/>
+		<set name="walkSpd" val="50"/>
+		<set name="runSpd" val="120"/>
+		<set name="dropHerbGroup" val="0"/>
+		<set name="attackRange" val="40"/>
+		<ai type="DEFAULT" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="false"/>
+		<skills>
+			<skill id="4045" level="1"/>
+			<skill id="4416" level="14"/>
+		</skills>
+	</npc>
+	<npc id="50016" idTemplate="21107" name="Tom" title="Matcher">
+		<set name="level" val="70"/>
+		<set name="radius" val="8"/>
+		<set name="height" val="30"/>
+		<set name="rHand" val="0"/>
+		<set name="lHand" val="0"/>
+		<set name="type" val="L2Matcher"/>
+		<set name="exp" val="0"/>
+		<set name="sp" val="0"/>
+		<set name="hp" val="2444.46819"/>
+		<set name="mp" val="1345.8"/>
+		<set name="hpRegen" val="7.5"/>
+		<set name="mpRegen" val="2.7"/>
+		<set name="pAtk" val="688.86373"/>
+		<set name="pDef" val="295.91597"/>
+		<set name="mAtk" val="470.40463"/>
+		<set name="mDef" val="216.53847"/>
+		<set name="crit" val="4"/>
+		<set name="atkSpd" val="253"/>
+		<set name="str" val="40"/>
+		<set name="int" val="21"/>
+		<set name="dex" val="30"/>
+		<set name="wit" val="20"/>
+		<set name="con" val="43"/>
+		<set name="men" val="20"/>
+		<set name="corpseTime" val="7"/>
+		<set name="walkSpd" val="50"/>
+		<set name="runSpd" val="120"/>
+		<set name="dropHerbGroup" val="0"/>
+		<set name="attackRange" val="40"/>
+		<ai type="DEFAULT" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="false"/>
+		<skills>
+			<skill id="4045" level="1"/>
+			<skill id="4416" level="14"/>
+		</skills>
+	</npc>-->
+	<npc id="50017" idTemplate="30634" name="Silva" title="Skill Enchanter">
+		<set name="level" val="70"/>
+		<set name="radius" val="8"/>
+		<set name="height" val="23"/>
+		<set name="rHand" val="0"/>
+		<set name="lHand" val="0"/>
+		<set name="type" val="SkillEnchanter"/>
+		<set name="exp" val="0"/>
+		<set name="sp" val="0"/>
+		<set name="hp" val="2444.46819"/>
+		<set name="mp" val="1345.8"/>
+		<set name="hpRegen" val="7.5"/>
+		<set name="mpRegen" val="2.7"/>
+		<set name="pAtk" val="688.86373"/>
+		<set name="pDef" val="295.91597"/>
+		<set name="mAtk" val="470.40463"/>
+		<set name="mDef" val="216.53847"/>
+		<set name="crit" val="4"/>
+		<set name="atkSpd" val="253"/>
+		<set name="str" val="40"/>
+		<set name="int" val="21"/>
+		<set name="dex" val="30"/>
+		<set name="wit" val="20"/>
+		<set name="con" val="43"/>
+		<set name="men" val="20"/>
+		<set name="corpseTime" val="7"/>
+		<set name="walkSpd" val="50"/>
+		<set name="runSpd" val="120"/>
+		<set name="dropHerbGroup" val="0"/>
+		<set name="attackRange" val="40"/>
+		<ai type="DEFAULT" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="false"/>
+		<skills>
+			<skill id="4045" level="1"/>
+			<skill id="4416" level="14"/>
+		</skills>
+	</npc>
+<!--	<npc id="50018" idTemplate="31553" name="Donald" title="Shop">
+		<set name="level" val="70"/>
+		<set name="radius" val="8"/>
+		<set name="height" val="23"/>
+		<set name="rHand" val="0"/>
+		<set name="lHand" val="0"/>
+		<set name="type" val="L2Merchant"/>
+		<set name="exp" val="0"/>
+		<set name="sp" val="0"/>
+		<set name="hp" val="2444.46819"/>
+		<set name="mp" val="1345.8"/>
+		<set name="hpRegen" val="7.5"/>
+		<set name="mpRegen" val="2.7"/>
+		<set name="pAtk" val="688.86373"/>
+		<set name="pDef" val="999999.91597"/>
+		<set name="mAtk" val="470.40463"/>
+		<set name="mDef" val="216.53847"/>
+		<set name="crit" val="4"/>
+		<set name="atkSpd" val="253"/>
+		<set name="str" val="40"/>
+		<set name="int" val="21"/>
+		<set name="dex" val="30"/>
+		<set name="wit" val="20"/>
+		<set name="con" val="43"/>
+		<set name="men" val="20"/>
+		<set name="corpseTime" val="7"/>
+		<set name="walkSpd" val="50"/>
+		<set name="runSpd" val="120"/>
+		<set name="dropHerbGroup" val="0"/>
+		<set name="attackRange" val="40"/>
+		<ai type="DEFAULT" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="false"/>
+		<skills>
+			<skill id="4045" level="1"/>
+			<skill id="4416" level="14"/>
+		</skills>
+	</npc>
+	<npc id="50019" idTemplate="31490" name="Ronald" title="Teleport">
+		<set name="level" val="70"/>
+		<set name="radius" val="8"/>
+		<set name="height" val="23"/>
+		<set name="rHand" val="0"/>
+		<set name="lHand" val="0"/>
+		<set name="type" val="L2Teleport"/>
+		<set name="exp" val="0"/>
+		<set name="sp" val="0"/>
+		<set name="hp" val="2444.46819"/>
+		<set name="mp" val="1345.8"/>
+		<set name="hpRegen" val="7.5"/>
+		<set name="mpRegen" val="2.7"/>
+		<set name="pAtk" val="688.86373"/>
+		<set name="pDef" val="295.91597"/>
+		<set name="mAtk" val="470.40463"/>
+		<set name="mDef" val="216.53847"/>
+		<set name="crit" val="4"/>
+		<set name="atkSpd" val="253"/>
+		<set name="str" val="40"/>
+		<set name="int" val="21"/>
+		<set name="dex" val="30"/>
+		<set name="wit" val="20"/>
+		<set name="con" val="43"/>
+		<set name="men" val="20"/>
+		<set name="corpseTime" val="7"/>
+		<set name="walkSpd" val="50"/>
+		<set name="runSpd" val="120"/>
+		<set name="dropHerbGroup" val="0"/>
+		<set name="attackRange" val="40"/>
+		<ai type="DEFAULT" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="false"/>
+		<skills>
+			<skill id="4045" level="1"/>
+			<skill id="4416" level="14"/>
+		</skills>
+	</npc>	
+	<npc id="50020" idTemplate="31490" name="Tommy" title="Teleport">
+		<set name="level" val="70"/>
+		<set name="radius" val="8"/>
+		<set name="height" val="23"/>
+		<set name="rHand" val="0"/>
+		<set name="lHand" val="0"/>
+		<set name="type" val="L2RaidQuest"/>
+		<set name="exp" val="0"/>
+		<set name="sp" val="0"/>
+		<set name="hp" val="2444.46819"/>
+		<set name="mp" val="1345.8"/>
+		<set name="hpRegen" val="7.5"/>
+		<set name="mpRegen" val="2.7"/>
+		<set name="pAtk" val="688.86373"/>
+		<set name="pDef" val="295.91597"/>
+		<set name="mAtk" val="470.40463"/>
+		<set name="mDef" val="216.53847"/>
+		<set name="crit" val="4"/>
+		<set name="atkSpd" val="253"/>
+		<set name="str" val="40"/>
+		<set name="int" val="21"/>
+		<set name="dex" val="30"/>
+		<set name="wit" val="20"/>
+		<set name="con" val="43"/>
+		<set name="men" val="20"/>
+		<set name="corpseTime" val="7"/>
+		<set name="walkSpd" val="50"/>
+		<set name="runSpd" val="120"/>
+		<set name="dropHerbGroup" val="0"/>
+		<set name="attackRange" val="40"/>
+		<ai type="DEFAULT" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="false"/>
+		<skills>
+			<skill id="4045" level="1"/>
+			<skill id="4416" level="14"/>
+		</skills>
+	</npc>-->
+</list>

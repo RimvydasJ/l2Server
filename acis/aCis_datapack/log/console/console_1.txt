@@ -1,0 +1,20 @@
+[31-05-2018 09:32:52]	INFO	---------------------------------------------------------------------=[ aCis ]
+[31-05-2018 09:32:52]	INFO	Loading loginserver configuration files.
+[31-05-2018 09:32:52]	INFO	MLog clients using java 1.4+ standard logging.
+[31-05-2018 09:32:53]	INFO	Initializing c3p0-0.9.5-pre5 [debug? false; trace: 5]
+[31-05-2018 09:32:54]	INFO	----------------------------------------------------------=[ LoginController ]
+[31-05-2018 09:32:54]	INFO	Loading LoginController...
+[31-05-2018 09:32:55]	INFO	Cached 10 KeyPairs for RSA communication.
+[31-05-2018 09:32:56]	INFO	Stored 20 keys for Blowfish communication.
+[31-05-2018 09:32:56]	WARNING	GameServerTable: servername.xml could not be loaded.
+[31-05-2018 09:32:56]	INFO	Loaded 0 server names.
+[31-05-2018 09:32:56]	INFO	Loaded 1 registered gameserver(s).
+[31-05-2018 09:32:56]	INFO	Cached 10 RSA keys for gameserver communication.
+[31-05-2018 09:32:56]	INFO	-----------------------------------------------------------------=[ Ban List ]
+[31-05-2018 09:32:56]	INFO	Loaded 0 banned IP(s).
+[31-05-2018 09:32:56]	INFO	-------------------------------------------------=[ IP, Ports & Socket infos ]
+[31-05-2018 09:32:56]	INFO	Listening for gameservers on *:9014
+[31-05-2018 09:32:56]	INFO	Loginserver ready on *:2106
+[31-05-2018 09:32:56]	INFO	--------------------------------------------=[ Waiting for gameserver answer ]
+[31-05-2018 09:33:30]	INFO	Hooked [1] null gameserver on: 127.0.0.1
+[31-05-2018 09:39:44]	INFO	GameServer (127.0.0.1): socket closed.
