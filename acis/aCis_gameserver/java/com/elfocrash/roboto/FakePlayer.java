@@ -5,6 +5,7 @@ import com.elfocrash.roboto.helpers.FakeHelpers;
 
 import java.util.logging.Level;
 
+import com.elfocrash.roboto.model.WalkNode;
 import net.sf.l2j.gameserver.datatables.GmListTable;
 import net.sf.l2j.gameserver.datatables.MapRegionTable;
 import net.sf.l2j.gameserver.datatables.SkillTable.FrequentSkill;
@@ -44,6 +45,7 @@ import net.sf.l2j.gameserver.templates.skills.L2SkillType;
  */
 public class FakePlayer extends Player
 {
+	public WalkNode destinationWalkNode;
 	private FakePlayerAI _fakeAi;	
 	private boolean _underControl = false;
 	
@@ -621,5 +623,9 @@ public class FakePlayer extends Player
 		setCurrentCp(getMaxCp());
 		setCurrentHp(getMaxHp());
 		setCurrentMp(getMaxMp());
+	}
+
+	public int getNearestTownId(){
+		return MapRegionTable.getInstance().getMapRegion(getX(),getY());
 	}
 }

@@ -54,6 +54,7 @@ public abstract class CombatAI extends FakePlayerAI {
 	@Override
 	public void thinkAndAct() {
 		handleDeath();
+		changeBotAiToWalkerBecauseOfTown();
 	}
 	
 	protected int getShotId() {

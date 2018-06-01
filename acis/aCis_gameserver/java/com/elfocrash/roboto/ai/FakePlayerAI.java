@@ -6,14 +6,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.elfocrash.roboto.FakePlayer;
-import com.elfocrash.roboto.helpers.FakeHelpers;
-import net.sf.l2j.commons.math.MathUtil;
+import com.elfocrash.roboto.ai.walker.CommonWalkerAi;
 import net.sf.l2j.commons.random.Rnd;
 
-import net.sf.l2j.gameserver.cache.CrestCache;
-import net.sf.l2j.gameserver.datatables.ClanTable;
 import net.sf.l2j.gameserver.datatables.MapRegionTable;
-import net.sf.l2j.gameserver.datatables.MapRegionTable.TeleportType;
 import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.geoengine.GeoEngine;
 import net.sf.l2j.gameserver.model.*;
@@ -22,7 +18,6 @@ import net.sf.l2j.gameserver.model.actor.Creature;
 import net.sf.l2j.gameserver.model.actor.ai.CtrlIntention;
 import net.sf.l2j.gameserver.model.actor.instance.*;
 import net.sf.l2j.gameserver.model.zone.ZoneId;
-import net.sf.l2j.gameserver.model.zone.type.L2TownZone;
 import net.sf.l2j.gameserver.network.serverpackets.MoveToLocation;
 import net.sf.l2j.gameserver.network.serverpackets.MoveToPawn;
 import net.sf.l2j.gameserver.network.serverpackets.StopMove;
@@ -45,7 +40,9 @@ public abstract class FakePlayerAI
 	protected boolean _isBusyThinking = false;
 	protected int iterationsOnDeath = 0;
 	private final int toVillageIterationsOnDeath = 10;
-	
+	protected int iterationBeforeSetAiInTown = 0;
+	protected  boolean wasDead = false;
+
 	public FakePlayerAI(FakePlayer character)
 	{
 		_fakePlayer = character;
@@ -85,7 +82,7 @@ public abstract class FakePlayerAI
 			iterationsOnDeath++;
 			return;
 		}
-		
+
 		iterationsOnDeath = 0;		
 	}
 	
@@ -97,7 +94,7 @@ public abstract class FakePlayerAI
 		return _isBusyThinking;
 	}
 	
-	protected void teleportToLocation(int x, int y, int z, int randomOffset) {
+	public boolean teleportToLocation(int x, int y, int z, int randomOffset) {
 		_fakePlayer.stopMove(null);
 		_fakePlayer.abortAttack();
 		_fakePlayer.abortCast();		
@@ -115,6 +112,7 @@ public abstract class FakePlayerAI
 		_fakePlayer.setXYZ(x, y, z);
 		_fakePlayer.onTeleported();		
 		_fakePlayer.revalidateZone(true);
+		return true;
 	}
 	
 	protected void tryTargetRandomCreatureByTypeInRadius(Class<? extends Creature> creatureClass, int radius)
@@ -129,8 +127,8 @@ public abstract class FakePlayerAI
 			if(((Creature)_fakePlayer.getTarget()).isDead())
 			_fakePlayer.setTarget(null);
 		}	
-	}	
-		
+	}
+
 	public void castSpell(L2Skill skill) {
 		if(!_fakePlayer.isCastingNow()) {		
 			
@@ -184,14 +182,14 @@ public abstract class FakePlayerAI
 			_fakePlayer.doCast(skill);
 		}
 	}
-	
+
+	//Visada po mirties i Giran
 	protected void toVillageOnDeath() {
-		Location location = MapRegionTable.getInstance().getLocationToTeleport(_fakePlayer, TeleportType.TOWN);
-		
+		Location location = MapRegionTable.getTown(9).getSpawnLoc();
 		if (_fakePlayer.isDead())
 			_fakePlayer.doRevive();
-		
 		_fakePlayer.getFakeAi().teleportToLocation(location.getX(), location.getY(), location.getZ(), 20);
+		wasDead = true;
 	}
 	
 	protected void clientStopMoving(SpawnLocation loc)
@@ -325,17 +323,17 @@ public abstract class FakePlayerAI
 	}
 	
 	public void moveTo(int x, int y, int z)	{
-		
+
 		if (!_fakePlayer.isMovementDisabled())
 		{
 			_clientMoving = true;
 			_clientMovingToPawnOffset = 0;
 			_fakePlayer.moveToLocation(x, y, z, 0);
-			
+
 			_fakePlayer.broadcastPacket(new MoveToLocation(_fakePlayer));
-			
 		}
 	}
+
 	
 	protected boolean maybeMoveToPawn(WorldObject target, int offset) {
 		
@@ -377,8 +375,22 @@ public abstract class FakePlayerAI
 		
 		
 		return false;
-	}	
-	
+	}
+
 	public abstract void thinkAndAct(); 
 	protected abstract int[][] getBuffs();
+
+	public void changeBotAiToWalkerBecauseOfTown(){
+		if(iterationBeforeSetAiInTown >=15) {
+			if((_fakePlayer.getFakeAi() instanceof CommonWalkerAi)) {
+				moveTo(_fakePlayer.getX() + Rnd.get(-5, 5), _fakePlayer.getY() + Rnd.get(-5, 5), _fakePlayer.getZ());
+			}
+			if (_fakePlayer.isInsideZone(ZoneId.TOWN)) {
+
+				_fakePlayer.setFakeAi(new CommonWalkerAi(_fakePlayer));
+			}
+			iterationBeforeSetAiInTown = 0;
+		}
+		iterationBeforeSetAiInTown++;
+	}
 }
