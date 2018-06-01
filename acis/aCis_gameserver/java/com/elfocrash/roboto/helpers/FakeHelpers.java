@@ -108,12 +108,7 @@ public class FakeHelpers {
 
 		ClassId classId = null;
 
-		if(level < 75 && level >= 40){
-			 classId = getSecondClasses().get(Rnd.get(0, getSecondClasses().size() - 1));
-		}
-		else {
-			classId = getThirdClasses().get(Rnd.get(0, getThirdClasses().size() - 1));
-		}
+		classId = getThirdClasses().get(Rnd.get(0, getThirdClasses().size() - 1));
 
 
 		final PlayerTemplate template = CharTemplateTable.getInstance().getTemplate(classId);
@@ -131,71 +126,6 @@ public class FakeHelpers {
 		player.heal();
 
 		return player;
-	}
-
-	public static void giveWeaponsByClass(FakePlayer player, boolean randomlyEnchant) {
-		List<Integer> itemIds = new ArrayList<>();
-		switch (player.getClassId()) {
-		case FORTUNE_SEEKER:
-		case GHOST_HUNTER:
-		case WIND_RIDER:
-		case ADVENTURER:
-			itemIds = Arrays.asList(6590);
-			break;
-		case SAGGITARIUS:
-		case MOONLIGHT_SENTINEL:
-		case GHOST_SENTINEL:
-			itemIds = Arrays.asList(7577);
-			break;
-		case PHOENIX_KNIGHT:
-		case SWORD_MUSE:
-		case HELL_KNIGHT:
-		case EVAS_TEMPLAR:
-		case SHILLIEN_TEMPLAR:
-			itemIds = Arrays.asList(6583, 6377);
-			break;
-		case MAESTRO:
-			itemIds = Arrays.asList(6585, 6377);
-			break;
-		case TITAN:
-			itemIds = Arrays.asList(6607);
-			break;
-		case DUELIST:
-		case SPECTRAL_DANCER:
-			itemIds = Arrays.asList(6580);
-			break;
-		case DREADNOUGHT:
-			itemIds = Arrays.asList(6599);
-			break;
-		case ARCHMAGE:
-		case SOULTAKER:
-		case HIEROPHANT:
-		case ARCANA_LORD:
-		case CARDINAL:
-		case MYSTIC_MUSE:
-		case ELEMENTAL_MASTER:
-		case EVAS_SAINT:
-		case STORM_SCREAMER:
-		case SPECTRAL_MASTER:
-		case SHILLIEN_SAINT:
-		case DOMINATOR:
-		case DOOMCRYER:
-			itemIds = Arrays.asList(6608);
-			break;
-		case GRAND_KHAVATARI:
-			itemIds = Arrays.asList(6602);
-			break;
-		default:
-			break;
-		}
-		for (int id : itemIds) {
-			player.getInventory().addItem("Weapon", id, 1, player, null);
-			ItemInstance item = player.getInventory().getItemByItemId(id);
-			if(randomlyEnchant)
-				item.setEnchantLevel(Rnd.get(7, 20));
-			player.getInventory().equipItemAndRecord(item);
-			player.getInventory().reloadEquippedItems();
-		}
 	}
 
 	public static List<ClassId> getSecondClasses(){

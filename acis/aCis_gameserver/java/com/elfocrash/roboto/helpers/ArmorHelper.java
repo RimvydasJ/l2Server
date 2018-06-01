@@ -44,9 +44,17 @@ public class ArmorHelper {
         List<Integer> itemIds = new ArrayList<>();
 
         ClassId classid = player.getClassId();
+
         switch (classid) {
-            case GLADIATOR:
-            case DESTROYER:
+            case DUELIST:
+            case DREADNOUGHT:
+            case TITAN:
+            case PHOENIX_KNIGHT:
+            case SWORD_MUSE:
+            case HELL_KNIGHT:
+            case EVAS_TEMPLAR:
+            case SHILLIEN_TEMPLAR:
+            case MAESTRO:
                 if(level >= 40 && level < 52){
                     itemIds = new Armor().Heavy40;
                 } else if (level >= 52 && level < 61) {
@@ -55,13 +63,17 @@ public class ArmorHelper {
                     itemIds = new Armor().Heavy61;
                 }
                 break;
-            case WARLORD:
-            case SORCERER:
-            case NECROMANCER:
-            case BISHOP:
-            case SPELLSINGER:
-            case SPELLHOWLER:
-            case OVERLORD:
+            case HIEROPHANT:
+            case ARCANA_LORD:
+            case CARDINAL:
+            case MYSTIC_MUSE:
+            case ELEMENTAL_MASTER:
+            case EVAS_SAINT:
+            case STORM_SCREAMER:
+            case SPECTRAL_MASTER:
+            case SHILLIEN_SAINT:
+            case DOMINATOR:
+            case DOOMCRYER:
                 if(level >= 40 && level < 52){
                     itemIds = new Armor().Robe40;
                 } else if (level >= 52 && level < 61) {
@@ -70,13 +82,14 @@ public class ArmorHelper {
                     itemIds = new Armor().Robe61;
                 }
                 break;
-            case TREASURE_HUNTER:
-            case HAWKEYE:
-            case PLAINS_WALKER:
-            case SILVER_RANGER:
-            case ABYSS_WALKER:
-            case PHANTOM_RANGER:
-            case TYRANT:
+            case FORTUNE_SEEKER:
+            case GHOST_HUNTER:
+            case WIND_RIDER:
+            case ADVENTURER:
+            case SAGGITARIUS:
+            case MOONLIGHT_SENTINEL:
+            case GHOST_SENTINEL:
+            case GRAND_KHAVATARI:
                 if(level >= 40 && level < 52){
                     itemIds = new Armor().Light40;
                 } else if (level >= 52 && level < 61) {

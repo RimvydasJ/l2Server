@@ -117,9 +117,8 @@ public class AdminFakePlayers implements IAdminCommandHandler {
             final int count = characterCount;
 
             Thread charCreator = new Thread(() -> {
-                Random rand = new Random();
                 for (int i = 0; i < count; i++) {
-                    int coordId = rand.nextInt(MapSpawnHelper.RainbowSprings.size());
+                    int coordId = Rnd.nextInt(MapSpawnHelper.RainbowSprings.size());
                     FakePlayer fakePlayer = FakePlayerManager.INSTANCE.spawnPlayer(MapSpawnHelper.RainbowSprings.get(coordId).X, MapSpawnHelper.RainbowSprings.get(coordId).Y, MapSpawnHelper.RainbowSprings.get(coordId).Z, 40);
                     fakePlayer.assignDefaultAI();
                 }

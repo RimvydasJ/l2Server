@@ -70,7 +70,7 @@ public class WeaponHelper {
 
         ClassId classid = player.getClassId();
         switch (classid) {
-            case GLADIATOR:
+            case DUELIST:
                 if(level >= 40 && level < 52){
                     itemIds = new Weapon().Dual40;
                 } else if (level >= 52 && level < 61) {
@@ -79,7 +79,7 @@ public class WeaponHelper {
                     itemIds = new Weapon().Dual61;
                 }
                 break;
-            case DESTROYER:
+            case TITAN:
                 if(level >= 40 && level < 52){
                     itemIds = new Weapon().TwoHanded40;
                 } else if (level >= 52 && level < 61) {
@@ -88,13 +88,17 @@ public class WeaponHelper {
                     itemIds = new Weapon().TwoHanded61;
                 }
                 break;
-            case WARLORD:
-            case SORCERER:
-            case NECROMANCER:
-            case BISHOP:
-            case SPELLSINGER:
-            case SPELLHOWLER:
-            case OVERLORD:
+            case HIEROPHANT:
+            case ARCANA_LORD:
+            case CARDINAL:
+            case MYSTIC_MUSE:
+            case ELEMENTAL_MASTER:
+            case EVAS_SAINT:
+            case STORM_SCREAMER:
+            case SPECTRAL_MASTER:
+            case SHILLIEN_SAINT:
+            case DOMINATOR:
+            case DOOMCRYER:
                 if(level >= 40 && level < 52){
                     itemIds = new Weapon().Staff40;
                 } else if (level >= 52 && level < 61) {
@@ -103,9 +107,10 @@ public class WeaponHelper {
                     itemIds = new Weapon().Staff61;
                 }
                 break;
-            case TREASURE_HUNTER:
-            case PLAINS_WALKER:
-            case ABYSS_WALKER:
+            case FORTUNE_SEEKER:
+            case GHOST_HUNTER:
+            case WIND_RIDER:
+            case ADVENTURER:
                 if(level >= 40 && level < 52){
                     itemIds = new Weapon().Dagger40;
                 } else if (level >= 52 && level < 61) {
@@ -114,9 +119,9 @@ public class WeaponHelper {
                     itemIds = new Weapon().Dagger61;
                 }
                 break;
-            case HAWKEYE:
-            case SILVER_RANGER:
-            case PHANTOM_RANGER:
+            case SAGGITARIUS:
+            case MOONLIGHT_SENTINEL:
+            case GHOST_SENTINEL:
                 if(level >= 40 && level < 52){
                     itemIds = new Weapon().Bow40;
                 } else if (level >= 52 && level < 61) {
@@ -125,13 +130,47 @@ public class WeaponHelper {
                     itemIds = new Weapon().Bow61;
                 }
                 break;
-            case TYRANT:
+            case GRAND_KHAVATARI:
                 if(level >= 40 && level < 52){
                     itemIds = new Weapon().Fist40;
                 } else if (level >= 52 && level < 61) {
                     itemIds = new Weapon().Fist52;
                 } else if (level >= 61){
                     itemIds = new Weapon().Fist61;
+                }
+                break;
+
+            case PHOENIX_KNIGHT:
+            case SWORD_MUSE:
+            case HELL_KNIGHT:
+            case EVAS_TEMPLAR:
+            case SHILLIEN_TEMPLAR:
+                if(level >= 40 && level < 52){
+                    itemIds = new Weapon().Sword40;
+                } else if (level >= 52 && level < 61) {
+                    itemIds = new Weapon().Sword52;
+                } else if (level >= 61){
+                    itemIds = new Weapon().Sword61;
+                }
+                break;
+
+            case MAESTRO:
+                if(level >= 40 && level < 52){
+                    itemIds = new Weapon().Blunt40;
+                } else if (level >= 52 && level < 61) {
+                    itemIds = new Weapon().Blunt52;
+                } else if (level >= 61){
+                    itemIds = new Weapon().Blunt61;
+                }
+                break;
+
+            case DREADNOUGHT:
+                if(level >= 40 && level < 52){
+                    itemIds = new Weapon().Pole40;
+                } else if (level >= 52 && level < 61) {
+                    itemIds = new Weapon().Pole52;
+                } else if (level >= 61){
+                    itemIds = new Weapon().Pole61;
                 }
                 break;
         }
