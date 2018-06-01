@@ -13,7 +13,7 @@
 	<aCar name="admin_spawnlow" accessLevel="1"/>
 	<aCar name="admin_deletefakes" accessLevel="1"/>
 	<aCar name="admin_getallcommands" accessLevel="1"/>
-	
+	<aCar name="admin_spawnlowlevel" accessLevel="1"/>
 	<!-- ADMIN -->
 	<aCar name="admin_admin" accessLevel="1" />
 	<aCar name="admin_admin1" accessLevel="1" />

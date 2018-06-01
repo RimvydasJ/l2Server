@@ -39,14 +39,19 @@ public enum FakePlayerManager {
 		FakePlayerTaskManager.INSTANCE.initialise();
 	}
 
-	public FakePlayer spawnPlayer(int x, int y, int z) {
-		FakePlayer activeChar = FakeHelpers.createRandomFakePlayer();
+	public FakePlayer spawnPlayer(int x, int y, int z){
+		return spawnPlayer(x,y,z,40);
+	}
+
+	public FakePlayer spawnPlayer(int x, int y, int z, int level) {
+		FakePlayer activeChar = FakeHelpers.createRandomFakePlayer(level);
 		World.getInstance().addPlayer(activeChar);
 		handlePlayerClanOnSpawn(activeChar);
 		
 		if (Config.PLAYER_SPAWN_PROTECTION > 0)
 			activeChar.setSpawnProtection(true);
-		
+
+		FakeHelpers.setLevel(activeChar, level);
 		activeChar.spawnMe(x, y, z);
 		activeChar.onPlayerEnter();
 		

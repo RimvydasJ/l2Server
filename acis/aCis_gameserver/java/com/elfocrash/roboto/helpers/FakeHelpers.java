@@ -101,12 +101,20 @@ public class FakeHelpers {
 		return 2000;
 	}
 	
-	public static FakePlayer createRandomFakePlayer() {
+	public static FakePlayer createRandomFakePlayer(int level) {
 		int objectId = IdFactory.getInstance().getNextId();
 		String accountName = "AutoPilot";
 		String playerName = FakePlayerNameManager.INSTANCE.getRandomAvailableName();
 
-		ClassId classId = getThirdClasses().get(Rnd.get(0, getThirdClasses().size() - 1));
+		ClassId classId = null;
+
+		if(level < 75 && level >= 40){
+			 classId = getSecondClasses().get(Rnd.get(0, getSecondClasses().size() - 1));
+		}
+		else {
+			classId = getThirdClasses().get(Rnd.get(0, getThirdClasses().size() - 1));
+		}
+
 
 		final PlayerTemplate template = CharTemplateTable.getInstance().getTemplate(classId);
 		PcAppearance app = getRandomAppearance(template.getRace());
@@ -116,67 +124,13 @@ public class FakeHelpers {
 		player.setAccessLevel(/*Config.DEFAULT_ACCESS_LEVEL*/0);
 		PlayerNameTable.getInstance().addPlayer(objectId, accountName, playerName, player.getAccessLevel().getLevel());
 		player.setBaseClass(player.getClassId());
-		setLevel(player, 81);
 		player.rewardSkills();
 
-		giveArmorsByClass(player);
-		giveWeaponsByClass(player,true);
+		new ArmorHelper().giveArmorsByClass(player, level);
+		new WeaponHelper().giveWeaponsByClass(player, false, level);
 		player.heal();
 
 		return player;
-	}
-
-	public static void giveArmorsByClass(FakePlayer player) {
-		List<Integer> itemIds = new ArrayList<>();
-		switch (player.getClassId()) {
-		case ARCHMAGE:
-		case SOULTAKER:
-		case HIEROPHANT:
-		case ARCANA_LORD:
-		case CARDINAL:
-		case MYSTIC_MUSE:
-		case ELEMENTAL_MASTER:
-		case EVAS_SAINT:
-		case STORM_SCREAMER:
-		case SPECTRAL_MASTER:
-		case SHILLIEN_SAINT:
-		case DOMINATOR:
-		case DOOMCRYER:
-			itemIds = Arrays.asList(2407, 512, 5767, 5779, 858, 858, 889, 889, 920);
-			break;
-		case DUELIST:
-		case DREADNOUGHT:
-		case PHOENIX_KNIGHT:
-		case SWORD_MUSE:
-		case HELL_KNIGHT:
-		case SPECTRAL_DANCER:
-		case EVAS_TEMPLAR:
-		case SHILLIEN_TEMPLAR:
-		case TITAN:
-		case MAESTRO:
-			itemIds = Arrays.asList(6373, 6374, 6375, 6376, 6378, 858, 858, 889, 889, 920);
-			break;
-		case SAGGITARIUS:
-		case ADVENTURER:
-		case WIND_RIDER:
-		case MOONLIGHT_SENTINEL:
-		case GHOST_HUNTER:
-		case GHOST_SENTINEL:
-		case FORTUNE_SEEKER:
-		case GRAND_KHAVATARI:
-			itemIds = Arrays.asList(6379, 6380, 6381, 6382, 858, 858, 889, 889, 920);
-			break;
-		default:
-			break;
-		}
-		for (int id : itemIds) {
-			player.getInventory().addItem("Armors", id, 1, player, null);
-			ItemInstance item = player.getInventory().getItemByItemId(id);
-			// enchant the item??
-			player.getInventory().equipItemAndRecord(item);
-			player.getInventory().reloadEquippedItems();
-			player.broadcastCharInfo();
-		}
 	}
 
 	public static void giveWeaponsByClass(FakePlayer player, boolean randomlyEnchant) {
@@ -244,6 +198,53 @@ public class FakeHelpers {
 		}
 	}
 
+	public static List<ClassId> getSecondClasses(){
+		List<ClassId> classes = new ArrayList<>();
+
+		//Human
+		classes.add(ClassId.GLADIATOR);
+		classes.add(ClassId.WARLORD);
+		//classes.add(ClassId.PALADIN);
+		//classes.add(ClassId.DARK_AVENGER);
+		classes.add(ClassId.TREASURE_HUNTER);
+		classes.add(ClassId.HAWKEYE);
+		classes.add(ClassId.SORCERER);
+		classes.add(ClassId.NECROMANCER);
+		//classes.add(ClassId.WARLOCK);
+		classes.add(ClassId.BISHOP);
+		//classes.add(ClassId.PROPHET);
+
+		//Elf
+		//classes.add(ClassId.TEMPLE_KNIGHT);
+		//classes.add(ClassId.SWORD_SINGER);
+		classes.add(ClassId.PLAINS_WALKER);
+		classes.add(ClassId.SILVER_RANGER);
+		classes.add(ClassId.SPELLSINGER);
+		//classes.add(ClassId.ELEMENTAL_SUMMONER);
+		//classes.add(ClassId.ELVEN_ELDER);
+
+		//DarkElf
+		//classes.add(ClassId.SHILLIEN_KNIGHT);
+		//classes.add(ClassId.BLADEDANCER);
+		classes.add(ClassId.ABYSS_WALKER);
+		classes.add(ClassId.PHANTOM_RANGER);
+		classes.add(ClassId.SPELLHOWLER);
+		//classes.add(ClassId.PHANTOM_SUMMONER);
+		//classes.add(ClassId.SHILLIEN_ELDER);
+
+		//Orc
+		classes.add(ClassId.DESTROYER);
+		classes.add(ClassId.TYRANT);
+		classes.add(ClassId.OVERLORD);
+		//classes.add(ClassId.WARCRYER);
+
+		//Dwarf
+		//classes.add(ClassId.BOUNTY_HUNTER);
+		//classes.add(ClassId.WARSMITH);
+
+		return classes;
+	}
+
 	public static List<ClassId> getThirdClasses() {
 		// removed summoner classes because fuck those guys
 		List<ClassId> classes = new ArrayList<>();
@@ -304,6 +305,24 @@ public class FakeHelpers {
 		ais.put(ClassId.DUELIST, DuelistAI.class);
 		ais.put(ClassId.GRAND_KHAVATARI, GrandKhavatariAI.class);
 		ais.put(ClassId.DREADNOUGHT, DreadnoughtAI.class);
+
+		//Second classes
+		ais.put(ClassId.SPELLHOWLER, StormScreamerAI.class);
+		ais.put(ClassId.SPELLSINGER, MysticMuseAI.class);
+		ais.put(ClassId.SORCERER, ArchmageAI.class);
+		ais.put(ClassId.NECROMANCER, SoultakerAI.class);
+		ais.put(ClassId.HAWKEYE, SaggitariusAI.class);
+		ais.put(ClassId.SILVER_RANGER, MoonlightSentinelAI.class);
+		ais.put(ClassId.TREASURE_HUNTER, AdventurerAI.class);
+		ais.put(ClassId.PLAINS_WALKER, WindRiderAI.class);
+		ais.put(ClassId.ABYSS_WALKER, GhostHunterAI.class);
+		ais.put(ClassId.OVERLORD, DominatorAI.class);
+		ais.put(ClassId.DESTROYER, TitanAI.class);
+		ais.put(ClassId.BISHOP, CardinalAI.class);
+		ais.put(ClassId.GLADIATOR, DuelistAI.class);
+		ais.put(ClassId.TYRANT, GrandKhavatariAI.class);
+		ais.put(ClassId.WARLORD, DreadnoughtAI.class);
+
 		return ais;
 	}
 
@@ -320,7 +339,7 @@ public class FakeHelpers {
 	public static void setLevel(FakePlayer player, int level) {
 		if (level >= 1 && level <= Experience.MAX_LEVEL) {
 			long pXp = player.getExp();
-			long tXp = Experience.LEVEL[81];
+			long tXp = Experience.LEVEL[level];
 
 			if (pXp > tXp)
 				player.removeExpAndSp(pXp - tXp, 0);

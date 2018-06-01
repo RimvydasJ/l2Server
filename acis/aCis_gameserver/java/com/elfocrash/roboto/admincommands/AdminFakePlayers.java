@@ -6,6 +6,8 @@ import com.elfocrash.roboto.FakePlayerTaskManager;
 import com.elfocrash.roboto.ai.EnchanterAI;
 import com.elfocrash.roboto.ai.walker.GiranWalkerAI;
 
+import com.elfocrash.roboto.helpers.MapSpawnHelper;
+import com.mchange.v2.cfg.PropertiesConfigSource;
 import net.sf.l2j.commons.random.Rnd;
 import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
 import net.sf.l2j.gameserver.model.World;
@@ -15,6 +17,7 @@ import net.sf.l2j.gameserver.network.serverpackets.NpcHtmlMessage;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author Elfocrash
@@ -31,7 +34,8 @@ public class AdminFakePlayers implements IAdminCommandHandler
 		"admin_spawnrandom",
 		"admin_deletefake",
 		"admin_spawnenchanter",
-		"admin_spawnwalker"
+		"admin_spawnwalker",
+			"admin_spawnlowlevel"
 	};
 	
 	@Override
@@ -111,37 +115,30 @@ public class AdminFakePlayers implements IAdminCommandHandler
 
 			return true;
 		}
-//		if(command.startsWith("admin_spawnenchanter")) {
-//			FakePlayer fakePlayer = FakePlayerManager.INSTANCE.spawnPlayer(activeChar.getX(),activeChar.getY(),activeChar.getZ());
-//			fakePlayer.setFakeAi(new EnchanterAI(fakePlayer));
-//			return true;
-//		}
-		/*if (command.startsWith("admin_takecontrol"))
-		{
-			if(activeChar.getTarget() != null && activeChar.getTarget() instanceof FakePlayer) {
-				FakePlayer fakePlayer = (FakePlayer)activeChar.getTarget();
-				fakePlayer.setUnderControl(true);
-				activeChar.setPlayerUnderControl(fakePlayer);
-				activeChar.sendMessage("You are now controlling: " + fakePlayer.getName());
-				return true;
+
+		if(command.startsWith("admin_spawnlowlevel")){
+			String[] params = command.split(" ");
+			int characterCount = 1;
+
+			if(params.length == 2){
+				characterCount = Integer.parseInt(params[1]);
 			}
-			
-			activeChar.sendMessage("You can only take control of a Fake Player");
-			return true;
+
+			final int count = characterCount;
+
+			Thread charCreator = new Thread(() -> {
+				Random rand = new Random();
+				for(int i=0; i < count; i++) {
+					int coordId = rand.nextInt(MapSpawnHelper.RainbowSprings.size());
+					FakePlayer fakePlayer = FakePlayerManager.INSTANCE.spawnPlayer(MapSpawnHelper.RainbowSprings.get(coordId).X, MapSpawnHelper.RainbowSprings.get(coordId).Y, MapSpawnHelper.RainbowSprings.get(coordId).Z, 40);
+					fakePlayer.assignDefaultAI();
+				}
+			});
+			charCreator.start();
+
+
 		}
-		if (command.startsWith("admin_releasecontrol"))
-		{
-			if(activeChar.isControllingFakePlayer()) {
-				FakePlayer fakePlayer = activeChar.getPlayerUnderControl();
-				activeChar.sendMessage("You are no longer controlling: " + fakePlayer.getName());
-				fakePlayer.setUnderControl(false);
-				activeChar.setPlayerUnderControl(null);
-				return true;
-			}
-			
-			activeChar.sendMessage("You are not controlling a Fake Player");
-			return true;
-		}*/
+
 		return true;
 	}
 }
