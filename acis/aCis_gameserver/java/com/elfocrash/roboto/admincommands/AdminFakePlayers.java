@@ -118,8 +118,11 @@ public class AdminFakePlayers implements IAdminCommandHandler {
 
             Thread charCreator = new Thread(() -> {
                 for (int i = 0; i < count; i++) {
-                    int coordId = Rnd.nextInt(MapSpawnHelper.RainbowSprings.size());
-                    FakePlayer fakePlayer = FakePlayerManager.INSTANCE.spawnPlayer(MapSpawnHelper.RainbowSprings.get(coordId).X, MapSpawnHelper.RainbowSprings.get(coordId).Y, MapSpawnHelper.RainbowSprings.get(coordId).Z, 40);
+                    int coordId = Rnd.nextInt(MapSpawnHelper.RainbowSprings.size()-1);
+                    int x = MapSpawnHelper.RainbowSprings.get(coordId).X;
+                    int y = MapSpawnHelper.RainbowSprings.get(coordId).Y;
+                    int z = MapSpawnHelper.RainbowSprings.get(coordId).Z;
+                    FakePlayer fakePlayer = FakePlayerManager.INSTANCE.spawnPlayer(x, y, z, 40);
                     fakePlayer.assignDefaultAI();
                 }
             });

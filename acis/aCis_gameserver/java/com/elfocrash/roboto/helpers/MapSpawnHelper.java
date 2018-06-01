@@ -20,6 +20,7 @@ public class MapSpawnHelper {
 
     public static Map<Integer, Coordinates> RainbowSprings = new HashMap<Integer, Coordinates>() {
         {
+            put(0, new Coordinates(141464,-123688,-1904));
             put(1, new Coordinates(140856,-124056,-1904));
             put(2, new Coordinates(140888,-124040,-1904));
             put(3, new Coordinates(140984,-123912,-1904));

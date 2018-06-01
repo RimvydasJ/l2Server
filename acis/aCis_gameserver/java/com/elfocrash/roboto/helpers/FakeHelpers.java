@@ -106,9 +106,7 @@ public class FakeHelpers {
 		String accountName = "AutoPilot";
 		String playerName = FakePlayerNameManager.INSTANCE.getRandomAvailableName();
 
-		ClassId classId = null;
-
-		classId = getThirdClasses().get(Rnd.get(0, getThirdClasses().size() - 1));
+		ClassId classId = getThirdClasses().get(Rnd.get(0, getThirdClasses().size() - 1));
 
 
 		final PlayerTemplate template = CharTemplateTable.getInstance().getTemplate(classId);
@@ -116,9 +114,11 @@ public class FakeHelpers {
 		FakePlayer player = new FakePlayer(objectId, template, accountName, app);
 
 		player.setName(playerName);
+
 		player.setAccessLevel(/*Config.DEFAULT_ACCESS_LEVEL*/0);
 		PlayerNameTable.getInstance().addPlayer(objectId, accountName, playerName, player.getAccessLevel().getLevel());
 		player.setBaseClass(player.getClassId());
+		setLevel(player, 81);
 		player.rewardSkills();
 
 		new ArmorHelper().giveArmorsByClass(player, level);
@@ -269,7 +269,7 @@ public class FakeHelpers {
 	public static void setLevel(FakePlayer player, int level) {
 		if (level >= 1 && level <= Experience.MAX_LEVEL) {
 			long pXp = player.getExp();
-			long tXp = Experience.LEVEL[level];
+			long tXp = Experience.LEVEL[81];
 
 			if (pXp > tXp)
 				player.removeExpAndSp(pXp - tXp, 0);

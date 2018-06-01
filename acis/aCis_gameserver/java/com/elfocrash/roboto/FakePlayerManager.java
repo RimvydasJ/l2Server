@@ -51,7 +51,6 @@ public enum FakePlayerManager {
 		if (Config.PLAYER_SPAWN_PROTECTION > 0)
 			activeChar.setSpawnProtection(true);
 
-		FakeHelpers.setLevel(activeChar, level);
 		activeChar.spawnMe(x, y, z);
 		activeChar.onPlayerEnter();
 		
