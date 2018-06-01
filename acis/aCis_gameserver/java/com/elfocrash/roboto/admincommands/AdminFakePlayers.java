@@ -3,17 +3,14 @@ package com.elfocrash.roboto.admincommands;
 import com.elfocrash.roboto.FakePlayer;
 import com.elfocrash.roboto.FakePlayerManager;
 import com.elfocrash.roboto.FakePlayerTaskManager;
-import com.elfocrash.roboto.ai.EnchanterAI;
-import com.elfocrash.roboto.ai.walker.GiranWalkerAI;
+import com.elfocrash.roboto.ai.walker.CommonWalkerAi;
 
 import net.sf.l2j.commons.random.Rnd;
 import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
-import net.sf.l2j.gameserver.model.World;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
+import net.sf.l2j.gameserver.model.zone.ZoneId;
 import net.sf.l2j.gameserver.network.serverpackets.NpcHtmlMessage;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -31,7 +28,8 @@ public class AdminFakePlayers implements IAdminCommandHandler
 		"admin_spawnrandom",
 		"admin_deletefake",
 		"admin_spawnenchanter",
-		"admin_spawnwalker"
+		"admin_spawnwalker",
+			"admin_fakeinfo",
 	};
 	
 	@Override
@@ -103,13 +101,22 @@ public class AdminFakePlayers implements IAdminCommandHandler
 					FakePlayer fakePlayer = FakePlayerManager.INSTANCE.spawnPlayer(activeChar.getX(),activeChar.getY(),activeChar.getZ());
 				switch(locationName) {
 					case "giran":
-						fakePlayer.setFakeAi(new GiranWalkerAI(fakePlayer));
+						fakePlayer.setFakeAi(new CommonWalkerAi(fakePlayer));
 						break;
 				}
 				return true;
 			}
-
 			return true;
+		}
+		if(command.startsWith("admin_fakeinfo")){
+			if(activeChar.getTarget() instanceof  FakePlayer) {
+				FakePlayer fake = (FakePlayer)activeChar.getTarget();
+
+				FakePlayer target = (FakePlayer) activeChar.getTarget();
+				activeChar.sendMessage(target.getFakeAi().getClass().getSimpleName());
+				if (target.isInsideZone(ZoneId.TOWN))
+					activeChar.sendMessage("Is in town");
+			}
 		}
 //		if(command.startsWith("admin_spawnenchanter")) {
 //			FakePlayer fakePlayer = FakePlayerManager.INSTANCE.spawnPlayer(activeChar.getX(),activeChar.getY(),activeChar.getZ());

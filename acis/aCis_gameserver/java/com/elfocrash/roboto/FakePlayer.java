@@ -622,4 +622,8 @@ public class FakePlayer extends Player
 		setCurrentHp(getMaxHp());
 		setCurrentMp(getMaxMp());
 	}
+
+	public int getNearestTownId(){
+		return MapRegionTable.getInstance().getMapRegion(getX(),getY());
+	}
 }
