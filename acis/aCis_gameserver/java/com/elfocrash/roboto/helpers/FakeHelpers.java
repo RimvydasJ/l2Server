@@ -118,7 +118,7 @@ public class FakeHelpers {
 		player.setAccessLevel(/*Config.DEFAULT_ACCESS_LEVEL*/0);
 		PlayerNameTable.getInstance().addPlayer(objectId, accountName, playerName, player.getAccessLevel().getLevel());
 		player.setBaseClass(player.getClassId());
-		setLevel(player, 81);
+		setLevel(player, level);
 		player.rewardSkills();
 
 		new ArmorHelper().giveArmorsByClass(player, level);
@@ -269,7 +269,7 @@ public class FakeHelpers {
 	public static void setLevel(FakePlayer player, int level) {
 		if (level >= 1 && level <= Experience.MAX_LEVEL) {
 			long pXp = player.getExp();
-			long tXp = Experience.LEVEL[81];
+			long tXp = Experience.LEVEL[level];
 
 			if (pXp > tXp)
 				player.removeExpAndSp(pXp - tXp, 0);
