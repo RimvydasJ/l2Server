@@ -1,13 +1,6 @@
-Kad pradetu iskarto reguoti i tai, ka turi daryti - vos sukurus -MP
-
-Kad normaliai begiotu po miestus - jokiu sienu
-
-Kad begiotu ne i tas pacias koordinates (ir kad atrodytu realistiskai)
-
 Fighter - po skillo leidimo, nebenori musti auto attack
 
 Surasti, kas neuzdaro mysql connectionu
-
 
 Kaip padaryti parcius
 Kaip padaryti klanus
