@@ -27,28 +27,28 @@ public class CommonWalkerAi extends WalkerAI {
 		switch (townId) {
 			case 0:
 				// "Talking Island Village";
-
+			break;
 			case 1:
 				// "Elven Village";
-
+				break;
 			case 2:
 				// "Dark Elven Village";
-
+				break;
 			case 3:
 				// "Orc Village";
-
+				break;
 			case 4:
 				// "Dwarven Village";
-
+				break;
 			case 5:
 				// "Town of Gludio";
-
+				break;
 			case 6:
 				// "Gludin Village";
-
+				break;
 			case 7:
 				// "Town of Dion";
-
+				break;
 			case 8:
 				//Town of Giran
 				isLinear = false;
@@ -69,26 +69,26 @@ public class CommonWalkerAi extends WalkerAI {
 						giranTpNode();
 					}
 				}
-
+				break;
 			case 9:
 				// "Town of Oren";
-
+				break;
 			case 10:
 				// "Town of Aden";
-
+				break;
 			case 11:
 				// "Hunters Village";
-
+				break;
 			case 12:
 				// "Giran Harbor";
-
+				break;
 			case 13:
 				isLinear = false;
 				farmEvaGarden();
-
+				break;
 			case 14:
 				// "Rune Township";
-
+				break;
 			case 15://Goddard
 				if(_fakePlayer.getLevel() <76){
 					isLinear = false;
@@ -98,35 +98,35 @@ public class CommonWalkerAi extends WalkerAI {
 					isLinear = false;
 					lvlUpZoneLeave();
 				}
-
+				break;
 			case 16:
 				// "Town of Schuttgart";
-
+				break;
 			case 17:
 				// "Floran Village";
-
+				break;
 			case 18:
 				// "Primeval Isle";
-
+				break;
 			default:
 				// "Town of Aden";
+				break;
 		}
 	}
 
 	private void giranWalkNodes() {
-		_walkNodes.add(new WalkNode(82248, 148600, -3464, Rnd.get(1, 20)));
-		_walkNodes.add(new WalkNode(82072, 147560, -3464, Rnd.get(1, 20)));
-		_walkNodes.add(new WalkNode(82792, 147832, -3464, Rnd.get(1, 20)));
-		_walkNodes.add(new WalkNode(81352, 149688, -3464, Rnd.get(1, 20)));
-		_walkNodes.add(new WalkNode(81064, 147784, -3464, Rnd.get(1, 20)));
-		_walkNodes.add(new WalkNode(82792, 149384, -3464, Rnd.get(1, 40)));
-		//_walkNodes.add(new WalkNode(87016, 148632, -3400, Rnd.get(1, 40)));
+		_walkNodes.add(new WalkNode(82248 + Rnd.get(-35,35), 148600 + Rnd.get(-35,35), -3464, Rnd.get(1, 20)));
+		_walkNodes.add(new WalkNode(82072 + Rnd.get(-35,35), 147560 + Rnd.get(-35,35), -3464, Rnd.get(1, 20)));
+		_walkNodes.add(new WalkNode(82792 + Rnd.get(-35,35), 147832 + Rnd.get(-35,35), -3464, Rnd.get(1, 20)));
+		_walkNodes.add(new WalkNode(81352 + Rnd.get(-35,35), 149688 + Rnd.get(-35,35), -3464, Rnd.get(1, 20)));
+		_walkNodes.add(new WalkNode(81064 + Rnd.get(-35,35), 147784 + Rnd.get(-35,35), -3464, Rnd.get(1, 20)));
+		_walkNodes.add(new WalkNode(82792 + Rnd.get(-35,35), 149384 + Rnd.get(-35,35), -3464, Rnd.get(1, 40)));
 	}
 
 	private void giranTpNode() {
-		_walkNodes.add(new WalkNode(83384, 147928, -3400, Rnd.get(1, 20)));
-		_walkNodes.add(new WalkNode(83656, 149272, -3400, Rnd.get(1, 20)));
-		_walkNodes.add(new WalkNode(81304, 147592, -3463, Rnd.get(1, 20)));
+		_walkNodes.add(new WalkNode(83384 + Rnd.get(-20,20), 147928 + Rnd.get(-20,20), -3400, Rnd.get(1, 20)));
+		_walkNodes.add(new WalkNode(83656 + Rnd.get(-20,20), 149272 + Rnd.get(-20,20), -3400, Rnd.get(1, 20)));
+		_walkNodes.add(new WalkNode(81304 + Rnd.get(-20,20), 147592 + Rnd.get(-20,20), -3463, Rnd.get(1, 20)));
 	}
 
 	private void giranZoneFarm() {

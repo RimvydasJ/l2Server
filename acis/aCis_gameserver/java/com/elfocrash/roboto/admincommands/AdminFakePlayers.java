@@ -111,7 +111,6 @@ public class AdminFakePlayers implements IAdminCommandHandler
 		if(command.startsWith("admin_fakeinfo")){
 			if(activeChar.getTarget() instanceof  FakePlayer) {
 				FakePlayer fake = (FakePlayer)activeChar.getTarget();
-
 				FakePlayer target = (FakePlayer) activeChar.getTarget();
 				activeChar.sendMessage(target.getFakeAi().getClass().getSimpleName());
 				if (target.isInsideZone(ZoneId.TOWN))

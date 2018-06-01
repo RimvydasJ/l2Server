@@ -2,6 +2,7 @@ package com.elfocrash.roboto.ai.walker;
 
 import com.elfocrash.roboto.FakePlayer;
 import com.elfocrash.roboto.ai.FakePlayerAI;
+import com.elfocrash.roboto.helpers.Enums.TownIds;
 import com.elfocrash.roboto.helpers.FakeHelpers;
 import com.elfocrash.roboto.model.WalkNode;
 import com.elfocrash.roboto.model.WalkerType;
@@ -75,6 +76,7 @@ public abstract class WalkerAI extends FakePlayerAI {
 					//Mostly is used in towns.
 					case RANDOM:
 						_currentWalkNode = (WalkNode) getWalkNodes().toArray()[Rnd.get(0, getWalkNodes().size() - 1)];
+						_fakePlayer.destinationWalkNode = _currentWalkNode;
 						break;
 					//TODO: implement LINEAR if its needed in any zone. For example: going to any loc from spawn loc.
 					case LINEAR:
@@ -188,7 +190,7 @@ public abstract class WalkerAI extends FakePlayerAI {
 
 	private void cancelWalkingStartAttack(){
 		if (Rnd.nextDouble() <= 0.05) {
-			if (!_fakePlayer.isInsideZone(ZoneId.TOWN) && !_fakePlayer.isInsideZone(ZoneId.PEACE) && _fakePlayer.getNearestTownId() != 15 && _fakePlayer.getLevel() >=78) {
+			if (!_fakePlayer.isInsideZone(ZoneId.TOWN) && !_fakePlayer.isInsideZone(ZoneId.PEACE) && _fakePlayer.getNearestTownId() != TownIds.Goddard && _fakePlayer.getLevel() >=78) {
 
 				//tryTargetPlayerInPvp();
 				tryTargetRandomCreatureByTypeInRadius(FakeHelpers.getTestTargetClass(), FakeHelpers.getTestTargetRange());
