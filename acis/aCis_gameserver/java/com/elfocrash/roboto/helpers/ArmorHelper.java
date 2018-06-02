@@ -29,7 +29,7 @@ public class ArmorHelper {
 
 
     public void giveArmorsByClass(FakePlayer player, int level) {
-        List<Integer> itemIds = giveArmor(player, level);
+        List<Integer> itemIds = returnArmorIdList(player, level);
         for (int id : itemIds) {
             player.getInventory().addItem("Armors", id, 1, player, null);
             ItemInstance item = player.getInventory().getItemByItemId(id);
@@ -40,7 +40,7 @@ public class ArmorHelper {
         }
     }
 
-    private List<Integer> giveArmor(FakePlayer player, int level){
+    public List<Integer> returnArmorIdList(FakePlayer player, int level){
         List<Integer> itemIds = new ArrayList<>();
 
         ClassId classid = player.getClassId();
@@ -63,17 +63,19 @@ public class ArmorHelper {
                     itemIds = new Armor().Heavy61;
                 }
                 break;
-            case HIEROPHANT:
-            case ARCANA_LORD:
-            case CARDINAL:
-            case MYSTIC_MUSE:
-            case ELEMENTAL_MASTER:
-            case EVAS_SAINT:
-            case STORM_SCREAMER:
-            case SPECTRAL_MASTER:
-            case SHILLIEN_SAINT:
-            case DOMINATOR:
-            case DOOMCRYER:
+            case ARCHMAGE:
+                case SOULTAKER:
+               case HIEROPHANT:
+               case ARCANA_LORD:
+               case CARDINAL:
+               case MYSTIC_MUSE:
+               case ELEMENTAL_MASTER:
+               case EVAS_SAINT:
+               case STORM_SCREAMER:
+               case SPECTRAL_MASTER:
+               case SHILLIEN_SAINT:
+               case DOMINATOR:
+               case DOOMCRYER:
                 if(level >= 40 && level < 52){
                     itemIds = new Armor().Robe40;
                 } else if (level >= 52 && level < 61) {

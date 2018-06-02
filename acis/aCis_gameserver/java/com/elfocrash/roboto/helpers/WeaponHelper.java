@@ -54,7 +54,7 @@ public class WeaponHelper {
     }
 
     public void giveWeaponsByClass(FakePlayer player, boolean randomlyEnchant, int level) {
-        List<Integer> itemIds = giveWeapon(player, level);
+        List<Integer> itemIds = returnWeaponId(player, level);
         for (int id : itemIds) {
             player.getInventory().addItem("Weapon", id, 1, player, null);
             ItemInstance item = player.getInventory().getItemByItemId(id);
@@ -65,7 +65,7 @@ public class WeaponHelper {
         }
     }
 
-    private List<Integer> giveWeapon(FakePlayer player, int level){
+    public List<Integer> returnWeaponId(FakePlayer player, int level){
         List<Integer> itemIds = new ArrayList<>();
 
         ClassId classid = player.getClassId();
@@ -88,6 +88,8 @@ public class WeaponHelper {
                     itemIds = new Weapon().TwoHanded61;
                 }
                 break;
+            case ARCHMAGE:
+            case SOULTAKER:
             case HIEROPHANT:
             case ARCANA_LORD:
             case CARDINAL:

@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import com.elfocrash.roboto.FakePlayer;
 import com.elfocrash.roboto.ai.walker.CommonWalkerAi;
+import com.elfocrash.roboto.helpers.ArmorHelper;
 import com.elfocrash.roboto.helpers.Enums.TownIds;
 import net.sf.l2j.commons.random.Rnd;
 
@@ -44,12 +45,16 @@ public abstract class FakePlayerAI
 	private final int toVillageIterationsOnDeath = 10;
 	protected int iterationBeforeSetAiInTown = 0;
 	protected  boolean wasDead = false;
+	private boolean gearB = false;
+	private boolean gearA = false;
 
 	public FakePlayerAI(FakePlayer character)
 	{
 		_fakePlayer = character;
 		setup();
 		applyDefaultBuffs();
+		setCurrentPlayerGear();
+
 	}
 	
 	public void setup() {
@@ -137,8 +142,8 @@ public abstract class FakePlayerAI
 	private void setTargetbasedOnLevel(List<Creature> targets){
 		if(checkIfInRainboSprings()){
 			List<Creature> newAvailableTargets = targets.stream()
-					.filter(q -> ((_fakePlayer.getLevel() - q.getLevel()) < 6) && ((_fakePlayer.getLevel() - q.getLevel()) >= -5))
-					.filter(q -> (q.getCurrentHp() == q.getMaxMp() && !q.isAttackingNow() && !q.isInCombat()))
+					.filter(q -> ((_fakePlayer.getLevel() - q.getLevel()) < 7) && ((_fakePlayer.getLevel() - q.getLevel()) >= -5))
+					.filter(q -> !q.isAttackingNow() && !q.isInCombat())
 					.collect(Collectors.toList());
 
 
@@ -161,7 +166,7 @@ public abstract class FakePlayerAI
 
 
 	// Rainbow springs area (reikia iskelti koordinates)
-	private boolean checkIfInRainboSprings(){
+	protected boolean checkIfInRainboSprings(){
 		return _fakePlayer.getNearestTownId() == TownIds.Goddard
 				&& (_fakePlayer.getX() > 135000 && _fakePlayer.getX() < 150000)
 				&& (_fakePlayer.getY() < -110000 && _fakePlayer.getY() > -140000)
@@ -431,5 +436,49 @@ public abstract class FakePlayerAI
 			iterationBeforeSetAiInTown = 0;
 		}
 		iterationBeforeSetAiInTown++;
+	}
+
+	public boolean checkGearAvailability(){
+		if((_fakePlayer.getLevel() >= 52 && _fakePlayer.getLevel() < 61 && !getGearB())
+				|| (_fakePlayer.getLevel() >= 61 && !getGearA())){
+			return true;
+		}
+		return false;
+	}
+
+	public boolean getGearB(){
+		return gearB;
+	}
+
+	public void setGearB(boolean value){
+		gearB = value;
+	}
+
+	public boolean getGearA(){
+		return gearA;
+	}
+
+	public void setGearA(boolean value){
+		gearA = value;
+	}
+
+	private void setCurrentPlayerGear(){
+		ArmorHelper helper = new ArmorHelper();
+
+		List<Integer> idListBgrade = helper.returnArmorIdList(_fakePlayer, 53);
+		List<Integer> idListAgrade = helper.returnArmorIdList(_fakePlayer, 62);
+
+		if(_fakePlayer.getLevel() >= 61){
+			setGearB(true);
+			if(_fakePlayer.getInventory().getItemByItemId(idListAgrade.get(1)) != null){
+				setGearA(true);return;
+			}
+		}
+
+		if(_fakePlayer.getInventory().getItemByItemId(idListBgrade.get(1)) != null){
+			setGearB(true);return;
+		}
+
+
 	}
 }

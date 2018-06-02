@@ -76,8 +76,16 @@ public class FakePlayer extends Player
 	{
 		this._fakeAi = _fakeAi;
 	}
-	
+
 	public void assignDefaultAI() {
+		try {
+			setFakeAi(FakeHelpers.getAIbyClassId(getClassId()).getConstructor(FakePlayer.class).newInstance(this));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void assignDefaultAI(boolean gearB, boolean gearA) {
 		try {
 			setFakeAi(FakeHelpers.getAIbyClassId(getClassId()).getConstructor(FakePlayer.class).newInstance(this));
 		} catch (Exception e) {
