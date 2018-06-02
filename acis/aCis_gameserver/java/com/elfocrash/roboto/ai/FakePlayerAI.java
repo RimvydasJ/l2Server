@@ -1,5 +1,6 @@
 package com.elfocrash.roboto.ai;
 
+import java.io.Console;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.stream.Collectors;
 
 import com.elfocrash.roboto.FakePlayer;
 import com.elfocrash.roboto.ai.walker.CommonWalkerAi;
+import com.elfocrash.roboto.helpers.Enums.TownIds;
 import net.sf.l2j.commons.random.Rnd;
 
 import net.sf.l2j.gameserver.datatables.MapRegionTable;
@@ -117,16 +119,50 @@ public abstract class FakePlayerAI
 	
 	protected void tryTargetRandomCreatureByTypeInRadius(Class<? extends Creature> creatureClass, int radius)
 	{
+		if(_fakePlayer.getLevel() >= 78 && checkIfInRainboSprings()){
+			if (_fakePlayer.getFakeAi().teleportToLocation(83448 + Rnd.get(-100, 100), 148568 + Rnd.get(-100, 100), -3473, 20)) {
+				_fakePlayer.setFakeAi(new CommonWalkerAi(_fakePlayer));
+			}
+		}
+
 		if(_fakePlayer.getTarget() == null) {
 			List<Creature> targets = _fakePlayer.getKnownTypeInRadius(creatureClass, radius).stream().filter(x->!x.isDead()).collect(Collectors.toList());
-			if(!targets.isEmpty()) {
-				Creature target = targets.get(Rnd.get(0, targets.size() -1 ));
-				_fakePlayer.setTarget(target);				
-			}
+			setTargetbasedOnLevel(targets);
 		}else {
 			if(((Creature)_fakePlayer.getTarget()).isDead())
 			_fakePlayer.setTarget(null);
 		}	
+	}
+
+	private void setTargetbasedOnLevel(List<Creature> targets){
+		if(checkIfInRainboSprings()){
+			List<Creature> newAvailableTargets = targets.stream()
+					.filter(q -> ((_fakePlayer.getLevel() - q.getLevel()) < 6) && ((_fakePlayer.getLevel() - q.getLevel()) >= -5))
+					.collect(Collectors.toList());
+
+			if(!newAvailableTargets.isEmpty()) {
+				Creature target = newAvailableTargets.get(Rnd.get(0, newAvailableTargets.size() - 1));
+				_fakePlayer.setTarget(target);
+			}
+		}
+		else {
+			System.out.println(targets.size());
+			if(!targets.isEmpty()) {
+				Creature target = targets.get(Rnd.get(0, targets.size() -1 ));
+				_fakePlayer.setTarget(target);
+		}
+
+
+		}
+	}
+
+
+	// Rainbow springs area (reikia iskelti koordinates)
+	private boolean checkIfInRainboSprings(){
+		return _fakePlayer.getNearestTownId() == TownIds.Goddard
+				&& (_fakePlayer.getX() > 135000 && _fakePlayer.getX() < 150000)
+				&& (_fakePlayer.getY() < -110000 && _fakePlayer.getY() > -140000)
+				&& (_fakePlayer.getZ() < -1400 && _fakePlayer.getZ() > -3000);
 	}
 
 	public void castSpell(L2Skill skill) {
