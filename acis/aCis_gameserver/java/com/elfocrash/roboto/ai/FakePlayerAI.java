@@ -119,11 +119,6 @@ public abstract class FakePlayerAI
 	
 	protected void tryTargetRandomCreatureByTypeInRadius(Class<? extends Creature> creatureClass, int radius)
 	{
-		if(_fakePlayer.getLevel() >= 78 && checkIfInRainboSprings()){
-			if (_fakePlayer.getFakeAi().teleportToLocation(83448 + Rnd.get(-100, 100), 148568 + Rnd.get(-100, 100), -3473, 20)) {
-				_fakePlayer.setFakeAi(new CommonWalkerAi(_fakePlayer));
-			}
-		}
 
 		if(_fakePlayer.getTarget() == null) {
 			List<Creature> targets = _fakePlayer.getKnownTypeInRadius(creatureClass, radius).stream().filter(x->!x.isDead()).collect(Collectors.toList());
@@ -131,6 +126,11 @@ public abstract class FakePlayerAI
 		}else {
 			if(((Creature)_fakePlayer.getTarget()).isDead())
 			_fakePlayer.setTarget(null);
+			if(_fakePlayer.getLevel() >= 78 && checkIfInRainboSprings()){
+				if (_fakePlayer.getFakeAi().teleportToLocation(83448 + Rnd.get(-100, 100), 148568 + Rnd.get(-100, 100), -3473, 20)) {
+					_fakePlayer.setFakeAi(new CommonWalkerAi(_fakePlayer));
+				}
+			}
 		}	
 	}
 
