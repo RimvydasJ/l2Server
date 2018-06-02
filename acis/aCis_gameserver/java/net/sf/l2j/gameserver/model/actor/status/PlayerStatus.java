@@ -56,9 +56,8 @@ public class PlayerStatus extends PlayableStatus
 		if (getActiveChar().isDead())
 			return;
 
-		//TODO buvo sena logica del targeto uzmetimo
-//		if(getActiveChar() instanceof FakePlayer && getActiveChar().getTarget() != null)
-//			((FakePlayer)getActiveChar()).setAttackerAsTarget(attacker);
+		if(getActiveChar() instanceof FakePlayer && getActiveChar().getTarget() != null)
+			((FakePlayer)getActiveChar()).setAttackerAsTarget(attacker);
 		
 		// invul handling
 		if (getActiveChar().isInvul())

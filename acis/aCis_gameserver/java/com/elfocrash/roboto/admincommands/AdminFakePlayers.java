@@ -9,6 +9,8 @@ import com.elfocrash.roboto.helpers.MapSpawnHelper;
 import com.mchange.v2.cfg.PropertiesConfigSource;
 import net.sf.l2j.commons.random.Rnd;
 import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
+import net.sf.l2j.gameserver.model.actor.Creature;
+import net.sf.l2j.gameserver.model.actor.ai.CtrlIntention;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.zone.ZoneId;
 import net.sf.l2j.gameserver.network.serverpackets.NpcHtmlMessage;
@@ -133,9 +135,8 @@ public class AdminFakePlayers implements IAdminCommandHandler {
 
         if (command.startsWith("admin_fakeinfo")) {
             if (activeChar.getTarget() instanceof FakePlayer) {
-                FakePlayer fake = (FakePlayer) activeChar.getTarget();
                 FakePlayer target = (FakePlayer) activeChar.getTarget();
-                activeChar.sendMessage(target.getFakeAi().getClass().getSimpleName());
+                activeChar.sendMessage(target.getFakeAi().getClass().getSimpleName() + " Level: " + target.getLevel());
                 if (target.isInsideZone(ZoneId.TOWN))
                     activeChar.sendMessage("Is in town");
             }
