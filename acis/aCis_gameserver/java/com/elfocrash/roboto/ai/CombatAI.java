@@ -40,8 +40,8 @@ public abstract class CombatAI extends FakePlayerAI {
 	protected void tryAttackingUsingFighterOffensiveSkill()	{
 		if(_fakePlayer.getTarget() != null && _fakePlayer.getTarget() instanceof Creature) {
 			_fakePlayer.forceAutoAttack((Creature)_fakePlayer.getTarget());
-
-			if(Rnd.nextDouble() < 0.2) {
+			//TODO reikia kad skirtingai pagal profesijas chance butu. Pvz lankai praktiskai tik is basic varo, kai dageriai is skill tik
+			if(Rnd.nextDouble() < 0.1) {
 				if(getOffensiveSpells() != null && !getOffensiveSpells().isEmpty()) {
 					L2Skill skill = getRandomAvaiableFighterSpellForTarget();
 					if(skill != null) {

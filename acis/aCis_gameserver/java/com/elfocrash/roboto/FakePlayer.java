@@ -462,7 +462,7 @@ public class FakePlayer extends Player
 		if(this.getTarget() == null)
 			return;
 		
-		if (isInsidePeaceZone(this, this.getTarget()))
+		if (isInsidePeaceZone(this, creature))
 		{
 			return;
 		}
@@ -487,13 +487,13 @@ public class FakePlayer extends Player
 		}
 		
 		// GeoData Los Check or dz > 1000
-		if (!GeoEngine.getInstance().canSeeTarget(this,this.getTarget()))
+		if (!GeoEngine.getInstance().canSeeTarget(this,creature))
 		{
 			return;
 		}
 		
 		// Notify AI with ATTACK
-		getAI().setIntention(CtrlIntention.ATTACK, this.getTarget());
+		getAI().setIntention(CtrlIntention.ATTACK, creature);
 	}
 	
 	public synchronized void despawnPlayer()
