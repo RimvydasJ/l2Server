@@ -40,13 +40,14 @@ public abstract class CombatAI extends FakePlayerAI {
 	protected void tryAttackingUsingFighterOffensiveSkill()	{
 		if(_fakePlayer.getTarget() != null && _fakePlayer.getTarget() instanceof Creature) {
 			_fakePlayer.forceAutoAttack((Creature)_fakePlayer.getTarget());
-			if(Rnd.nextDouble() < changeOfUsingSkill()) {			
+
+			if(Rnd.nextDouble() < 0.2) {
 				if(getOffensiveSpells() != null && !getOffensiveSpells().isEmpty()) {
-					L2Skill skill = getRandomAvaiableFighterSpellForTarget();			
+					L2Skill skill = getRandomAvaiableFighterSpellForTarget();
 					if(skill != null) {
 						castSpell(skill);
 					}
-				}	
+				}
 			}
 		}
 	}
@@ -134,8 +135,8 @@ public abstract class CombatAI extends FakePlayerAI {
 		BotSkill botSkill = spellsOrdered.get(skillIndex);
 		_fakePlayer.getCurrentSkill().setCtrlPressed(!_fakePlayer.getTarget().isInsideZone(ZoneId.PEACE));
 		L2Skill skill = _fakePlayer.getSkill(botSkill.getSkillId());
-		
-		if (skill.getCastRange() > 0)
+
+		if (skill!=null && skill.getCastRange() > 0)
 		{
 			if (!GeoEngine.getInstance().canSeeTarget(_fakePlayer, _fakePlayer.getTarget()))
 			{
@@ -143,8 +144,8 @@ public abstract class CombatAI extends FakePlayerAI {
 				return null;
 			}
 		}
-		
-		while(!_fakePlayer.checkUseMagicConditions(skill,true,false)) {			
+
+		while(!_fakePlayer.checkUseMagicConditions(skill,true,false)) {
 			_isBusyThinking = true;
 			if(_fakePlayer.isDead() || _fakePlayer.isOutOfControl()) {
 				return null;
@@ -154,7 +155,7 @@ public abstract class CombatAI extends FakePlayerAI {
 			}
 			skill = _fakePlayer.getSkill(spellsOrdered.get(skillIndex).getSkillId());
 			botSkill = spellsOrdered.get(skillIndex);
-			skillIndex++;			
+			skillIndex++;
 		}
 		return botSkill;
 	}

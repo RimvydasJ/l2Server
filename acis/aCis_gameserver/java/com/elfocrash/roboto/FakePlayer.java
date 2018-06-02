@@ -628,4 +628,19 @@ public class FakePlayer extends Player
 	public int getNearestTownId(){
 		return MapRegionTable.getInstance().getMapRegion(getX(),getY());
 	}
+
+	public void setAttackerAsTarget(Creature attacker)
+	{
+		if(attacker instanceof Summon)
+		{
+			setTarget(((Summon)attacker).getOwner());
+		}else if(attacker instanceof Player)
+		{
+			setTarget(attacker);
+		}
+		else
+		{
+			setTarget(attacker);
+		}
+	}
 }
