@@ -5,12 +5,16 @@ import com.elfocrash.roboto.FakePlayerManager;
 import com.elfocrash.roboto.FakePlayerTaskManager;
 import com.elfocrash.roboto.ai.walker.CommonWalkerAi;
 
+import com.elfocrash.roboto.helpers.FakeHelpers;
 import com.elfocrash.roboto.helpers.MapSpawnHelper;
 import com.mchange.v2.cfg.PropertiesConfigSource;
 import net.sf.l2j.commons.random.Rnd;
 import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
+import net.sf.l2j.gameserver.model.L2Skill;
+import net.sf.l2j.gameserver.model.WorldObject;
 import net.sf.l2j.gameserver.model.actor.Creature;
 import net.sf.l2j.gameserver.model.actor.ai.CtrlIntention;
+import net.sf.l2j.gameserver.model.actor.ai.IntentionCommand;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.zone.ZoneId;
 import net.sf.l2j.gameserver.network.serverpackets.NpcHtmlMessage;
@@ -35,6 +39,7 @@ public class AdminFakePlayers implements IAdminCommandHandler {
                     "admin_spawnwalker",
                     "admin_spawnlowlevel",
                     "admin_fakeinfo",
+                    "admin_faketest"
             };
 
     @Override
@@ -137,10 +142,24 @@ public class AdminFakePlayers implements IAdminCommandHandler {
             if (activeChar.getTarget() instanceof FakePlayer) {
                 FakePlayer target = (FakePlayer) activeChar.getTarget();
                 activeChar.sendMessage(target.getFakeAi().getClass().getSimpleName() + " Level: " + target.getLevel());
+                activeChar.sendMessage("Target: " + target.getTarget().getName());
+
+//                L2Skill skill = target.getSkill(101);
+//                target.getFakeAi().castSpell(skill);
                 if (target.isInsideZone(ZoneId.TOWN))
                     activeChar.sendMessage("Is in town");
             }
             return true;
+        }
+
+        if(command.startsWith("admin_faketest")){
+            if(activeChar.getTarget() instanceof FakePlayer){
+                FakePlayer target = (FakePlayer)activeChar.getTarget();
+
+                activeChar.sendMessage("Start auto attack: " + target.getTarget().getName());
+                target.getAI().setAutoAttacking(true);
+                target.forceAutoAttack((Creature)target.getTarget());
+            }
         }
 
 

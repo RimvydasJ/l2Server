@@ -1,5 +1,6 @@
 package net.sf.l2j.gameserver.model.actor.ai.type;
 
+import com.elfocrash.roboto.FakePlayer;
 import net.sf.l2j.commons.util.ArraysUtil;
 
 import net.sf.l2j.gameserver.geoengine.GeoEngine;
@@ -151,9 +152,10 @@ public class CreatureAI extends AbstractAI
 		// Check if the Intention is already ATTACK
 		if (getIntention() == CtrlIntention.ATTACK)
 		{
-			// Check if the AI already targets the Creature
-			if (getTarget() != target)
-			{
+			//TODO ziuresim kaip eis su situo
+//			// Check if the AI already targets the Creature
+//			if (getTarget() != target)
+//			{
 				// Set the AI attack target (change target)
 				setTarget(target);
 				
@@ -161,9 +163,9 @@ public class CreatureAI extends AbstractAI
 				
 				// Launch the Think Event
 				notifyEvent(CtrlEvent.EVT_THINK, null);
-			}
-			else
-				clientActionFailed(); // else client freezes until cancel target
+//			}
+//			else
+//				clientActionFailed(); // else client freezes until cancel target
 		}
 		else
 		{
@@ -178,6 +180,7 @@ public class CreatureAI extends AbstractAI
 			// Launch the Think Event
 			notifyEvent(CtrlEvent.EVT_THINK, null);
 		}
+
 	}
 	
 	/**
