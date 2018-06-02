@@ -138,7 +138,10 @@ public abstract class FakePlayerAI
 		if(checkIfInRainboSprings()){
 			List<Creature> newAvailableTargets = targets.stream()
 					.filter(q -> ((_fakePlayer.getLevel() - q.getLevel()) < 6) && ((_fakePlayer.getLevel() - q.getLevel()) >= -5))
+					.filter(q -> (q.getCurrentHp() == q.getMaxMp() && !q.isAttackingNow() && !q.isInCombat()))
 					.collect(Collectors.toList());
+
+
 
 			if(!newAvailableTargets.isEmpty()) {
 				Creature target = newAvailableTargets.get(Rnd.get(0, newAvailableTargets.size() - 1));
