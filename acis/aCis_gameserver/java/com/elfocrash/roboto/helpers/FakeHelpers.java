@@ -128,53 +128,6 @@ public class FakeHelpers {
 		return player;
 	}
 
-	public static List<ClassId> getSecondClasses(){
-		List<ClassId> classes = new ArrayList<>();
-
-		//Human
-		classes.add(ClassId.GLADIATOR);
-		classes.add(ClassId.WARLORD);
-		//classes.add(ClassId.PALADIN);
-		//classes.add(ClassId.DARK_AVENGER);
-		classes.add(ClassId.TREASURE_HUNTER);
-		classes.add(ClassId.HAWKEYE);
-		classes.add(ClassId.SORCERER);
-		classes.add(ClassId.NECROMANCER);
-		//classes.add(ClassId.WARLOCK);
-		classes.add(ClassId.BISHOP);
-		//classes.add(ClassId.PROPHET);
-
-		//Elf
-		//classes.add(ClassId.TEMPLE_KNIGHT);
-		//classes.add(ClassId.SWORD_SINGER);
-		classes.add(ClassId.PLAINS_WALKER);
-		classes.add(ClassId.SILVER_RANGER);
-		classes.add(ClassId.SPELLSINGER);
-		//classes.add(ClassId.ELEMENTAL_SUMMONER);
-		//classes.add(ClassId.ELVEN_ELDER);
-
-		//DarkElf
-		//classes.add(ClassId.SHILLIEN_KNIGHT);
-		//classes.add(ClassId.BLADEDANCER);
-		classes.add(ClassId.ABYSS_WALKER);
-		classes.add(ClassId.PHANTOM_RANGER);
-		classes.add(ClassId.SPELLHOWLER);
-		//classes.add(ClassId.PHANTOM_SUMMONER);
-		//classes.add(ClassId.SHILLIEN_ELDER);
-
-		//Orc
-		classes.add(ClassId.DESTROYER);
-		classes.add(ClassId.TYRANT);
-		classes.add(ClassId.OVERLORD);
-		//classes.add(ClassId.WARCRYER);
-
-		//Dwarf
-		//classes.add(ClassId.BOUNTY_HUNTER);
-		//classes.add(ClassId.WARSMITH);
-
-		return classes;
-	}
-
 	public static List<ClassId> getThirdClasses() {
 		// removed summoner classes because fuck those guys
 		List<ClassId> classes = new ArrayList<>();
@@ -209,7 +162,7 @@ public class FakeHelpers {
 		classes.add(ClassId.WIND_RIDER);
 		classes.add(ClassId.DOMINATOR);
 		classes.add(ClassId.TITAN);
-		classes.add(ClassId.CARDINAL);
+		//classes.add(ClassId.CARDINAL);
 		classes.add(ClassId.DUELIST);
 		classes.add(ClassId.GRAND_KHAVATARI);
 		classes.add(ClassId.DREADNOUGHT);

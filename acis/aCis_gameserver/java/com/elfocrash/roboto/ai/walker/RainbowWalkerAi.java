@@ -2,6 +2,7 @@ package com.elfocrash.roboto.ai.walker;
 
 import com.elfocrash.roboto.FakePlayer;
 import com.elfocrash.roboto.ai.FakePlayerAI;
+import com.elfocrash.roboto.helpers.Enums.TownIds;
 import com.elfocrash.roboto.helpers.FakeHelpers;
 import com.elfocrash.roboto.model.WalkNode;
 import net.sf.l2j.commons.random.Rnd;
@@ -33,6 +34,8 @@ public class RainbowWalkerAi extends FakePlayerAI {
         getBuffs();
         startWalking();
         checkIfStuck();
+        handleDeath();
+        checkIfInGiran();
     }
 
     @Override
@@ -78,7 +81,7 @@ public class RainbowWalkerAi extends FakePlayerAI {
     }
 
     public void checkIfStuck() {
-        if (!_fakePlayer.isMoving()) {
+        if (!_fakePlayer.isMoving() && !_fakePlayer.isDead()) {
             if (Iterations > 5) {
                 Iterations = 0;
                 _fakePlayer.setFakeAi(new RainbowWalkerAi(_fakePlayer));
@@ -86,6 +89,12 @@ public class RainbowWalkerAi extends FakePlayerAI {
             Iterations++;
         } else {
             Iterations = 0;
+        }
+    }
+
+    private void checkIfInGiran(){
+        if(_fakePlayer.getNearestTownId() == TownIds.Giran){
+            _fakePlayer.setFakeAi(new CommonWalkerAi(_fakePlayer));
         }
     }
 

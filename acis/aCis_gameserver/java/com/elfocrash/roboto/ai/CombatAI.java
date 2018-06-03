@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.elfocrash.roboto.FakePlayer;
-import com.elfocrash.roboto.ai.walker.CommonWalkerAi;
 import com.elfocrash.roboto.ai.walker.LevelingUpAi;
 import com.elfocrash.roboto.model.BotSkill;
 import com.elfocrash.roboto.model.HealingSpell;
@@ -18,7 +17,6 @@ import net.sf.l2j.gameserver.geoengine.GeoEngine;
 import net.sf.l2j.gameserver.model.L2Skill;
 import net.sf.l2j.gameserver.model.ShotType;
 import net.sf.l2j.gameserver.model.actor.Creature;
-import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
 import net.sf.l2j.gameserver.model.zone.ZoneId;
 
 public abstract class CombatAI extends FakePlayerAI {

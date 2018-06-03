@@ -45,6 +45,9 @@ public abstract class WalkerAI extends FakePlayerAI {
 	@Override
 	public void thinkAndAct() {
 		_fakePlayer.broadcastUserInfo();
+		if(checkIfInRainboSprings()){
+			_fakePlayer.setFakeAi(new RainbowWalkerAi(_fakePlayer));
+		}
 		setBusyThinking(true);
 
 			if (freezeTestInteration == 0)
@@ -124,7 +127,6 @@ public abstract class WalkerAI extends FakePlayerAI {
 
 				L2TeleportLocation giranFarmLoc = TeleportLocationTable.getInstance().getTemplate(1060);
 				locations.add(giranFarmLoc);
-				//TODO kolkas viena zona tik - Anthara's Lair
 				//locations.add(locEvaGarden);
 
 				L2TeleportLocation whereToGo = locations.get(Rnd.get(0, locations.size() - 1));
@@ -189,8 +191,8 @@ public abstract class WalkerAI extends FakePlayerAI {
 	}
 
 	private void cancelWalkingStartAttack(){
-		if (Rnd.nextDouble() <= 0.05) {
-			if (!_fakePlayer.isInsideZone(ZoneId.TOWN) && !_fakePlayer.isInsideZone(ZoneId.PEACE) && _fakePlayer.getNearestTownId() != TownIds.Goddard && _fakePlayer.getLevel() >=78) {
+		if (Rnd.nextDouble() <= 0.01) {
+			if (!_fakePlayer.isInsideZone(ZoneId.TOWN) && !_fakePlayer.isInsideZone(ZoneId.PEACE) && !checkIfInRainboSprings() && _fakePlayer.getLevel() >=78) {
 
 				//tryTargetPlayerInPvp();
 				tryTargetRandomCreatureByTypeInRadius(FakeHelpers.getTestTargetClass(), FakeHelpers.getTestTargetRange());
@@ -198,12 +200,6 @@ public abstract class WalkerAI extends FakePlayerAI {
 					_fakePlayer.assignDefaultAI();
 				}
 			}
-			//TODO jeigu level zonoje
-//			else if(_fakePlayer.isInsideZone(ZoneId.TOWN) && !_fakePlayer.isInsideZone(ZoneId.PEACE) && _fakePlayer.getNearestTownId() == 15 && _fakePlayer.getLevel() <78){
-//				tryTargetMobByLevel();
-//				if(_fakePlayer.getTarget() !=null)
-//					_fakePlayer.setFakeAi(new LvlUpAI(_fakePlayer));
-//			}
 		}
 	}
 }

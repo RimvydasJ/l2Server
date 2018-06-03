@@ -129,8 +129,7 @@ public abstract class FakePlayerAI
 		setPkTarget();
 		if(_fakePlayer.getTarget() == null) {
 			List<Creature> targets = _fakePlayer.getKnownTypeInRadius(creatureClass, radius).stream().filter(x->!x.isDead()).collect(Collectors.toList());
-			if(_fakePlayer.getLevel()< 76)
-				setTargetbasedOnLevel(targets);
+			setTargetbasedOnLevel(targets);
 		}else {
 			if(((Creature)_fakePlayer.getTarget()).isDead())
 			_fakePlayer.setTarget(null);
@@ -146,7 +145,7 @@ public abstract class FakePlayerAI
 		if(_fakePlayer.getPvpFlag() == 1){
 			pvpPercentages = 1.0;
 			if(Rnd.nextDouble() < 0.01){
-				pvpPercentages = 0.1;
+				pvpPercentages = 0.01;
 			}
 		}
 		if (Rnd.nextDouble() <= pvpPercentages && !checkIfInRainboSprings()) {
@@ -163,7 +162,7 @@ public abstract class FakePlayerAI
 	}
 
 	protected void setPkTarget() {
-		if (Rnd.nextDouble() <= 0.01 && !checkIfInRainboSprings()) {
+		if (Rnd.nextDouble() <= 0.001 && !checkIfInRainboSprings()) {
 			if (_fakePlayer.getTarget() == null) {
 				List<Player> pvpTarget = _fakePlayer.getKnownTypeInRadius(Player.class, 1500).stream().filter(x -> !x.isDead() && (x.getClan() == null || (_fakePlayer.getClan() != null && x.getClan().getClanId() != _fakePlayer.getClan().getClanId()))).collect(Collectors.toList());
 				if (!pvpTarget.isEmpty()) {
@@ -180,7 +179,7 @@ public abstract class FakePlayerAI
 	private void setTargetbasedOnLevel(List<Creature> targets){
 		if(checkIfInRainboSprings()){
 			List<Creature> newAvailableTargets = targets.stream()
-					.filter(q -> ((_fakePlayer.getLevel() - q.getLevel()) < 4) && ((_fakePlayer.getLevel() - q.getLevel()) >= -8))
+					.filter(q -> ((_fakePlayer.getLevel() - q.getLevel()) < 6) && ((_fakePlayer.getLevel() - q.getLevel()) >= -10))
 					.filter(q -> !q.isAttackingNow() && !q.isInCombat() && q.getMaxHp() == q.getCurrentHp())
 					.collect(Collectors.toList());
 

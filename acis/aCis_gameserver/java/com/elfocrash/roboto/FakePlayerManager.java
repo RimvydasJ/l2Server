@@ -40,7 +40,7 @@ public enum FakePlayerManager {
 	}
 
 	public FakePlayer spawnPlayer(int x, int y, int z){
-		return spawnPlayer(x,y,z,40);
+		return spawnPlayer(x,y,z,80);
 	}
 
 	public FakePlayer spawnPlayer(int x, int y, int z, int level) {

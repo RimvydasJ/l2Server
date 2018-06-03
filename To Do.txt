@@ -55,6 +55,10 @@ Kaip jie vaiskciosi kartu (kas ka seks)
 	
 9)Item enchantinimas
 	a)Pliusinasi itemus
+
+
+EVENT:
+Apgultis
 	
 	
 	

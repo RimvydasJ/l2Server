@@ -43,8 +43,8 @@ public class LevelingUpAi extends FakePlayerAI {
     private boolean isWalking = false;
     public LevelingUpAi(FakePlayer player){
         super(player);
-        RandX = Rnd.get(-10,10);
-        RandY = Rnd.get(-10,10);
+        RandX = Rnd.get(-30,30);
+        RandY = Rnd.get(-30,30);
         isWalking = false;
     }
 
