@@ -1,8 +1,4 @@
 #the hexID to auth into login
-<<<<<<< HEAD
-#Sun Jun 03 16:47:23 CEST 2018
-=======
-#Sun Jun 03 16:10:31 CEST 2018
->>>>>>> 8053c120f33547afb783ecc859192bbff2912d60
+#Sun Jun 03 19:41:18 CEST 2018
 HexID=-4a035fc7b7a17ec2a59c0bf62bd51cd4
 ServerID=1

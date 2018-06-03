@@ -8,6 +8,7 @@ import com.elfocrash.roboto.model.WalkNode;
 import net.sf.l2j.commons.random.Rnd;
 import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class LevelingUpAi extends FakePlayerAI {
@@ -15,6 +16,25 @@ public class LevelingUpAi extends FakePlayerAI {
 
     WalkNode GmShopInRainbow = new WalkNode(141435, -123674, -1904, 1);
     WalkNode BufferInRainbow = new WalkNode(140904, -123736, -1904,1);
+
+    List<WalkNode> _rainboSpringsWalkingNodes = Arrays.asList(
+            new WalkNode(141224,-123480,-1904,1),
+            new WalkNode(141656,-123464,-1904,1),
+            new WalkNode(142360,-123240,-1912,1),
+            new WalkNode(142312,-123528,-1888,1),
+            new WalkNode(141096,-122920,-1920,1),
+            new WalkNode(140584,-123272,-1904,1),
+            new WalkNode(141336,-122392,-1928,1),
+            new WalkNode(141224,-123480,-1904,1),
+            new WalkNode(142600,-122232,-1880,1),
+            new WalkNode(142664,-122520,-1856,1),
+            new WalkNode(140488,-122104,-1896,1),
+            new WalkNode(140488,-122072,-1936,1),
+            new WalkNode(140680,-122760,-1904,1),
+            new WalkNode(140696,-122920,-1896,1),
+            new WalkNode(140200,-12336,-1904,1),
+            new WalkNode(141208,-122056,-1936,1),
+            new WalkNode(140792,-123016,-1904,1));
 
     private int RandX = 0;
     private int RandY = 0;
@@ -83,7 +103,7 @@ public class LevelingUpAi extends FakePlayerAI {
             }
 
             if(_fakePlayer.isInsideRadius(x,y, 50, false)){
-                _fakePlayer.assignDefaultAI();
+                _fakePlayer.setFakeAi(new RainbowWalkerAi(_fakePlayer));
             }
 
 

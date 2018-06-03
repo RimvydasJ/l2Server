@@ -5,6 +5,7 @@ import com.elfocrash.roboto.FakePlayerManager;
 import com.elfocrash.roboto.FakePlayerTaskManager;
 import com.elfocrash.roboto.ai.walker.CommonWalkerAi;
 
+import com.elfocrash.roboto.ai.walker.RainbowWalkerAi;
 import com.elfocrash.roboto.helpers.FakeHelpers;
 import com.elfocrash.roboto.helpers.MapSpawnHelper;
 import com.mchange.v2.cfg.PropertiesConfigSource;
@@ -130,7 +131,7 @@ public class AdminFakePlayers implements IAdminCommandHandler {
                     int y = MapSpawnHelper.RainbowSprings.get(coordId).Y;
                     int z = MapSpawnHelper.RainbowSprings.get(coordId).Z;
                     FakePlayer fakePlayer = FakePlayerManager.INSTANCE.spawnPlayer(x, y, z, 40);
-                    fakePlayer.assignDefaultAI();
+                    fakePlayer.setFakeAi(new RainbowWalkerAi(fakePlayer));
                 }
             });
             charCreator.start();
