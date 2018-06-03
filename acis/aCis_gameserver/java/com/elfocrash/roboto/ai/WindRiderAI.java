@@ -29,7 +29,7 @@ public class WindRiderAI extends CombatAI
 		super.thinkAndAct();
 		setBusyThinking(true);
 		applyDefaultBuffs();
-		handleShots();			
+		handleShots();
 		tryTargetRandomCreatureByTypeInRadius(FakeHelpers.getTestTargetClass(), FakeHelpers.getTestTargetRange());		
 		tryAttackingUsingFighterOffensiveSkill();
 		setBusyThinking(false);

@@ -6,20 +6,33 @@ import com.elfocrash.roboto.helpers.ArmorHelper;
 import com.elfocrash.roboto.helpers.WeaponHelper;
 import com.elfocrash.roboto.model.WalkNode;
 import net.sf.l2j.commons.random.Rnd;
-import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
-import net.sf.l2j.gameserver.scripting.quests.Q643_RiseAndFallOfTheElrokiTribe;
 
 import java.util.List;
 
 public class LevelingUpAi extends FakePlayerAI {
 
 
-    WalkNode GmShopInRainbow = new WalkNode(141435, -123674, -1908, 1);
+    WalkNode GmShopInRainbow = new WalkNode(141435, -123674, -1904, 1);
     WalkNode BufferInRainbow = new WalkNode(140904, -123736, -1904,1);
 
+    private int RandX = 0;
+    private int RandY = 0;
+    private int Iterations = 0;
+    private int ShotId = 0;
+    private boolean isWalking = false;
     public LevelingUpAi(FakePlayer player){
         super(player);
+        RandX = Rnd.get(-10,10);
+        RandY = Rnd.get(-10,10);
+        isWalking = false;
+    }
+
+    public LevelingUpAi(FakePlayer player, int shotId){
+        super(player);
+        RandX = Rnd.get(-10,10);
+        RandY = Rnd.get(-10,10);
+        ShotId = shotId;
     }
 
     @Override
@@ -32,6 +45,8 @@ public class LevelingUpAi extends FakePlayerAI {
         _fakePlayer.broadcastUserInfo();
         setBusyThinking(true);
         changeGearAndBuffs();
+        checkIfStuck();
+        goToGiran();
         setBusyThinking(false);
     }
 
@@ -44,21 +59,34 @@ public class LevelingUpAi extends FakePlayerAI {
         //If in RainboSprings up area
         if(checkIfInRainboSprings()){
             boolean gearedUp = false;
+            boolean buffedUp = false;
             if(checkGearAvailability()){
-                _fakePlayer.getFakeAi().moveTo(GmShopInRainbow.getX(), GmShopInRainbow.getY(), GmShopInRainbow.getZ());
-                if(_fakePlayer.isInsideRadius(GmShopInRainbow.getX(),GmShopInRainbow.getY(), 50, false)){
+                int x = GmShopInRainbow.getX()+RandX;
+                int y = GmShopInRainbow.getY()+RandY;
+
+                if(!isWalking) {
+                    _fakePlayer.getFakeAi().moveTo(x, y, GmShopInRainbow.getZ());
+                    isWalking = true;
+                }
+                if (_fakePlayer.isInsideRadius(x, y, 50, false)) {
                     gearUp();
                     gearedUp = true;
+                    isWalking = false;
                 }
             }
 
+            int x = BufferInRainbow.getX() +RandX;
+            int y = BufferInRainbow.getY() + RandY;
+
             if(gearedUp){
-                _fakePlayer.getFakeAi().moveTo(BufferInRainbow.getX(), BufferInRainbow.getY(), BufferInRainbow.getZ());
+                _fakePlayer.getFakeAi().moveTo(x, y, BufferInRainbow.getZ());
             }
 
-            if(_fakePlayer.isInsideRadius(BufferInRainbow.getX(),BufferInRainbow.getY(), 50, false)){
+            if(_fakePlayer.isInsideRadius(x,y, 50, false)){
                 _fakePlayer.assignDefaultAI();
             }
+
+
 
             //Kol nera npc ideta
             /*
@@ -70,7 +98,6 @@ public class LevelingUpAi extends FakePlayerAI {
 
 
         }
-
         //If in Giran
 
         //If somewhere else
@@ -100,6 +127,8 @@ public class LevelingUpAi extends FakePlayerAI {
         _fakePlayer.broadcastCharInfo();
         weaponHelper.giveWeaponsByClass(_fakePlayer, false, _fakePlayer.getLevel());
 
+        _fakePlayer.addAutoSoulShot(ShotId);
+
         if(_fakePlayer.getLevel() < 61){
             super.setGearB(true);
         }else {
@@ -109,6 +138,33 @@ public class LevelingUpAi extends FakePlayerAI {
     }
 
     private void buffUp(){
+
+    }
+
+    private void goToGiran(){
+        if(_fakePlayer.getLevel() >= 78 && checkIfInRainboSprings()){
+            int x = 140904+RandX;
+            int y = -124056+RandY;
+            int z = -1904;
+            _fakePlayer.getFakeAi().moveTo(x, y, z);
+            if(_fakePlayer.isInsideRadius(x,y, 50, false)){
+                if (_fakePlayer.getFakeAi().teleportToLocation(83448 + Rnd.get(-100, 100), 148568 + Rnd.get(-100, 100), -3473, 20)) {
+                    _fakePlayer.setFakeAi(new CommonWalkerAi(_fakePlayer));
+                }
+            }
+        }
+    }
+
+    public void checkIfStuck(){
+        if(!_fakePlayer.isMoving()){
+            if(Iterations > 20){
+                Iterations = 0;
+                _fakePlayer.assignDefaultAI();
+            }
+            Iterations++;
+        } else {
+            Iterations = 0;
+        }
 
     }
 }

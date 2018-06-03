@@ -124,26 +124,20 @@ public abstract class FakePlayerAI
 	
 	protected void tryTargetRandomCreatureByTypeInRadius(Class<? extends Creature> creatureClass, int radius)
 	{
-
 		if(_fakePlayer.getTarget() == null) {
 			List<Creature> targets = _fakePlayer.getKnownTypeInRadius(creatureClass, radius).stream().filter(x->!x.isDead()).collect(Collectors.toList());
 			setTargetbasedOnLevel(targets);
 		}else {
 			if(((Creature)_fakePlayer.getTarget()).isDead())
 			_fakePlayer.setTarget(null);
-			if(_fakePlayer.getLevel() >= 78 && checkIfInRainboSprings()){
-				if (_fakePlayer.getFakeAi().teleportToLocation(83448 + Rnd.get(-100, 100), 148568 + Rnd.get(-100, 100), -3473, 20)) {
-					_fakePlayer.setFakeAi(new CommonWalkerAi(_fakePlayer));
-				}
-			}
 		}	
 	}
 
 	private void setTargetbasedOnLevel(List<Creature> targets){
 		if(checkIfInRainboSprings()){
 			List<Creature> newAvailableTargets = targets.stream()
-					.filter(q -> ((_fakePlayer.getLevel() - q.getLevel()) < 7) && ((_fakePlayer.getLevel() - q.getLevel()) >= -5))
-					.filter(q -> !q.isAttackingNow() && !q.isInCombat())
+					.filter(q -> ((_fakePlayer.getLevel() - q.getLevel()) < 4) && ((_fakePlayer.getLevel() - q.getLevel()) >= -8))
+					.filter(q -> !q.isAttackingNow() && !q.isInCombat() && q.getMaxHp() == q.getCurrentHp())
 					.collect(Collectors.toList());
 
 
@@ -154,7 +148,6 @@ public abstract class FakePlayerAI
 			}
 		}
 		else {
-			System.out.println(targets.size());
 			if(!targets.isEmpty()) {
 				Creature target = targets.get(Rnd.get(0, targets.size() -1 ));
 				_fakePlayer.setTarget(target);
