@@ -47,7 +47,7 @@ public abstract class FakePlayerAI
 	protected  boolean wasDead = false;
 	private boolean gearB = false;
 	private boolean gearA = false;
-
+	private double pvpPercentages = 0.1;
 	public FakePlayerAI(FakePlayer character)
 	{
 		_fakePlayer = character;
@@ -124,10 +124,14 @@ public abstract class FakePlayerAI
 	
 	protected void tryTargetRandomCreatureByTypeInRadius(Class<? extends Creature> creatureClass, int radius)
 	{
-
+		//Pvp galimybe
+		setPvpTarget();
+		//Pk galimybe
+		setPkTarget();
 		if(_fakePlayer.getTarget() == null) {
 			List<Creature> targets = _fakePlayer.getKnownTypeInRadius(creatureClass, radius).stream().filter(x->!x.isDead()).collect(Collectors.toList());
-			setTargetbasedOnLevel(targets);
+			if(_fakePlayer.getLevel()< 76)
+				setTargetbasedOnLevel(targets);
 		}else {
 			if(((Creature)_fakePlayer.getTarget()).isDead())
 			_fakePlayer.setTarget(null);
@@ -138,6 +142,46 @@ public abstract class FakePlayerAI
 			}
 		}	
 	}
+
+	private void setPvpTarget() {
+		//Nebemusa jei nebe flagas/karma
+		if ((_fakePlayer.getTarget() != null && _fakePlayer.getTarget() instanceof FakePlayer || _fakePlayer.getTarget() != null) && _fakePlayer.getTarget() instanceof Player && (((Player) _fakePlayer.getTarget()).getPvpFlag() == 0 && ((Player) _fakePlayer.getTarget()).getKarma() == 0)) {
+			_fakePlayer.setTarget(null);
+			_fakePlayer.getAI().setIntention(CtrlIntention.ACTIVE);
+		}
+		if(_fakePlayer.getPvpFlag() == 1){
+			pvpPercentages = 1.0;
+			if(Rnd.nextDouble() < 0.01){
+				pvpPercentages = 0.1;
+			}
+		}
+		if (Rnd.nextDouble() <= pvpPercentages && !checkIfInRainboSprings()) {
+			if (_fakePlayer.getTarget() == null) {
+				List<Player> pvpTarget = _fakePlayer.getKnownTypeInRadius(Player.class, 1500).stream().filter(x -> (x.getPvpFlag() == 1 || x.getKarma() > 0) && (x.getClan() == null || (_fakePlayer.getClan() != null && x.getClan().getClanId() != _fakePlayer.getClan().getClanId()))).collect(Collectors.toList());
+				if (!pvpTarget.isEmpty()) {
+					try {
+						Player target = pvpTarget.get(Rnd.get(0, pvpTarget.size() - 1));
+						_fakePlayer.setTarget(target);
+					} catch (Exception e) {}
+				}
+			}
+		}
+	}
+
+	protected void setPkTarget() {
+		if (Rnd.nextDouble() <= 0.01 && !checkIfInRainboSprings()) {
+			if (_fakePlayer.getTarget() == null) {
+				List<Player> pvpTarget = _fakePlayer.getKnownTypeInRadius(Player.class, 1500).stream().filter(x -> !x.isDead() && (x.getClan() == null || (_fakePlayer.getClan() != null && x.getClan().getClanId() != _fakePlayer.getClan().getClanId()))).collect(Collectors.toList());
+				if (!pvpTarget.isEmpty()) {
+					try {
+						Player target = pvpTarget.get(Rnd.get(0, pvpTarget.size() - 1));
+						_fakePlayer.setTarget(target);
+					} catch (Exception e) {}
+				}
+			}
+		}
+	}
+
 
 	private void setTargetbasedOnLevel(List<Creature> targets){
 		if(checkIfInRainboSprings()){

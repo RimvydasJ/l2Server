@@ -12,19 +12,19 @@ public class ArmorHelper {
 
     public class Armor {
         //40 lvl items
-        public List<Integer> Robe40 = Arrays.asList(2454,471,439,2414,2497);
-        public List<Integer> Heavy40 = Arrays.asList(356,2414,2438,2462);
-        public List<Integer> Light40 = Arrays.asList(398,418,2431,2414,2462);
+        public List<Integer> Robe40 = Arrays.asList(2454,471,439,2414,2497,854,854,119,886,886);
+        public List<Integer> Heavy40 = Arrays.asList(356,2414,2438,2462,854,854,119,886,886);
+        public List<Integer> Light40 = Arrays.asList(398,418,2431,2414,2462,854,854,119,886,886);
 
         //52 lvl
-        public List<Integer> Robe52 = Arrays.asList(2406,2464,600,2415,110);
-        public List<Integer> Heavy52 = Arrays.asList(358,2380,2487,2439,2416);
-        public List<Integer> Light52 = Arrays.asList(2392,2475,601,2417);
+        public List<Integer> Robe52 = Arrays.asList(2406,2464,600,2415,110,864,864,926,895,895);
+        public List<Integer> Heavy52 = Arrays.asList(358,2380,2487,2439,2416,864,864,926,895,895);
+        public List<Integer> Light52 = Arrays.asList(2392,2475,601,2417,864,864,926,895,895);
 
         //61 lvl
-        public List<Integer> Robe61 = Arrays.asList(2407,512,5779,858,889,920,889,858);
-        public List<Integer> Heavy61 = Arrays.asList(2382,5768,5780,547);
-        public List<Integer> Light61 = Arrays.asList(2385,2389,5766,5778,512);
+        public List<Integer> Robe61 = Arrays.asList(2407,512,5779,858,889,920,889,858,924,893,893,862,862);
+        public List<Integer> Heavy61 = Arrays.asList(2382,5768,5780,547,924,893,893,862,862);
+        public List<Integer> Light61 = Arrays.asList(2385,2389,5766,5778,512,924,893,893,862,862);
     }
 
 

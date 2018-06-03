@@ -142,7 +142,8 @@ public class AdminFakePlayers implements IAdminCommandHandler {
             if (activeChar.getTarget() instanceof FakePlayer) {
                 FakePlayer target = (FakePlayer) activeChar.getTarget();
                 activeChar.sendMessage(target.getFakeAi().getClass().getSimpleName() + " Level: " + target.getLevel());
-                activeChar.sendMessage("Target: " + target.getTarget().getName());
+                if(target.getTarget() != null)
+                    activeChar.sendMessage("Target: " + target.getTarget().getName());
 
 //                L2Skill skill = target.getSkill(101);
 //                target.getFakeAi().castSpell(skill);
