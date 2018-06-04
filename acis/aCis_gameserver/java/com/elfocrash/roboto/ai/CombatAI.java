@@ -17,6 +17,7 @@ import net.sf.l2j.gameserver.geoengine.GeoEngine;
 import net.sf.l2j.gameserver.model.L2Skill;
 import net.sf.l2j.gameserver.model.ShotType;
 import net.sf.l2j.gameserver.model.actor.Creature;
+import net.sf.l2j.gameserver.model.item.type.CrystalType;
 import net.sf.l2j.gameserver.model.zone.ZoneId;
 
 public abstract class CombatAI extends FakePlayerAI {
@@ -62,6 +63,7 @@ public abstract class CombatAI extends FakePlayerAI {
 	}
 
 			protected int getShotId() {
+				CrystalType weaponGrade = _fakePlayer.getActiveWeaponItem().getCrystalType();
 				int playerLevel = _fakePlayer.getLevel();
 				if(playerLevel < 20)
 					return getShotType() == ShotType.SOULSHOT ? 1835 : 3947;
@@ -73,26 +75,32 @@ public abstract class CombatAI extends FakePlayerAI {
 					return getShotType() == ShotType.SOULSHOT ? 1465 : 3950;
 				if(playerLevel >= 61 && playerLevel < 76)
 					return getShotType() == ShotType.SOULSHOT ? 1466 : 3951;
-				if(playerLevel >= 76)
+				if(playerLevel >= 76 && weaponGrade == CrystalType.S)
 					return getShotType() == ShotType.SOULSHOT ? 1467 : 3952;
-
+				if(playerLevel >= 76 && weaponGrade != CrystalType.S)
+					return getShotType() == ShotType.SOULSHOT ? 1466:3951;
 				return 0;
 			}
 
 			protected int getArrowId() {
+				CrystalType weaponGrade = _fakePlayer.getActiveWeaponItem().getCrystalType();
 				int playerLevel = _fakePlayer.getLevel();
 				if(playerLevel < 20)
 					return 17; // wooden arrow
-				if(playerLevel >= 20 && playerLevel < 40)
+				else if(playerLevel >= 20 && playerLevel < 40)
 					return 1341; // bone arrow
-				if(playerLevel >= 40 && playerLevel < 52)
+				else if(playerLevel >= 40 && playerLevel < 52)
 					return 1342; // steel arrow
-				if(playerLevel >= 52 && playerLevel < 61)
+				else if(playerLevel >= 52 && playerLevel < 61)
 					return 1343; // Silver arrow
-				if(playerLevel >= 61 && playerLevel < 76)
+				else if(playerLevel >= 61 && playerLevel < 76)
 					return 1344; // Mithril Arrow
-				if(playerLevel >= 76)
+				if(playerLevel >= 76 && weaponGrade == CrystalType.S)
 					return 1345; // shining
+				if(playerLevel>=76 && weaponGrade!=CrystalType.S)
+					return 1344;
+
+
 
 				return 0;
 			}

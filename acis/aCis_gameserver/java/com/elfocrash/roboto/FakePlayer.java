@@ -48,7 +48,7 @@ public class FakePlayer extends Player
 	public WalkNode destinationWalkNode;
 	private FakePlayerAI _fakeAi;	
 	private boolean _underControl = false;
-	
+	public boolean sGradePvpBot = false;
 	public boolean isUnderControl() {
 		return _underControl;
 	}

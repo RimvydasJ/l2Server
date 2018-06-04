@@ -100,8 +100,12 @@ public class FakeHelpers {
 	public static int getTestTargetRange() {
 		return 2000;
 	}
-	
+
 	public static FakePlayer createRandomFakePlayer(int level) {
+		return createRandomFakePlayer(level,false);
+	}
+
+	public static FakePlayer createRandomFakePlayer(int level, boolean sGradeBot) {
 		int objectId = IdFactory.getInstance().getNextId();
 		String accountName = "AutoPilot";
 		String playerName = FakePlayerNameManager.INSTANCE.getRandomAvailableName();
@@ -120,9 +124,10 @@ public class FakeHelpers {
 		player.setBaseClass(player.getClassId());
 		setLevel(player, level);
 		player.rewardSkills();
-
+		player.sGradePvpBot = sGradeBot;
 		new ArmorHelper().giveArmorsByClass(player, level);
-		new WeaponHelper().giveWeaponsByClass(player, false, level);
+		boolean randomEnchant = sGradeBot;
+		new WeaponHelper().giveWeaponsByClass(player, randomEnchant, level);
 		player.heal();
 
 		return player;

@@ -30,7 +30,7 @@ public class StormScreamerAI extends CombatAI
 		setBusyThinking(true);
 		applyDefaultBuffs();
 		handleShots();
-		tryTargetRandomCreatureByTypeInRadius(FakeHelpers.getTestTargetClass(), FakeHelpers.getTestTargetRange());		
+		tryTargetRandomCreatureByTypeInRadius(FakeHelpers.getTestTargetClass(), FakeHelpers.getTestTargetRange());
 		tryAttackingUsingMageOffensiveSkill();
 		setBusyThinking(false);
 	}
@@ -46,9 +46,9 @@ public class StormScreamerAI extends CombatAI
 	{
 		List<OffensiveSpell> _offensiveSpells = new ArrayList<>();
 		_offensiveSpells.add(new OffensiveSpell(1341, 1));
-		_offensiveSpells.add(new OffensiveSpell(1343, 2));
-		_offensiveSpells.add(new OffensiveSpell(1234, 3));
-		_offensiveSpells.add(new OffensiveSpell(1239, 4));
+		_offensiveSpells.add(new OffensiveSpell(1343, 3));
+		_offensiveSpells.add(new OffensiveSpell(1234, 4));
+		_offensiveSpells.add(new OffensiveSpell(1239, 2));
 		return _offensiveSpells; 
 	}
 	

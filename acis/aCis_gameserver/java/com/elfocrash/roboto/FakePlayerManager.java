@@ -40,11 +40,12 @@ public enum FakePlayerManager {
 	}
 
 	public FakePlayer spawnPlayer(int x, int y, int z){
-		return spawnPlayer(x,y,z,80);
+		FakePlayer fakePlayer = spawnPlayer(x,y,z,80,true);
+		return fakePlayer;
 	}
 
-	public FakePlayer spawnPlayer(int x, int y, int z, int level) {
-		FakePlayer activeChar = FakeHelpers.createRandomFakePlayer(level);
+	public FakePlayer spawnPlayer(int x, int y, int z, int level, boolean sGradeBot) {
+		FakePlayer activeChar = FakeHelpers.createRandomFakePlayer(level,sGradeBot);
 		World.getInstance().addPlayer(activeChar);
 		handlePlayerClanOnSpawn(activeChar);
 		
