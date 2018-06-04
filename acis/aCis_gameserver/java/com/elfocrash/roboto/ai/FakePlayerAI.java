@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import com.elfocrash.roboto.FakePlayer;
 import com.elfocrash.roboto.ai.walker.CommonWalkerAi;
+import com.elfocrash.roboto.ai.walker.LevelingUpAi;
 import com.elfocrash.roboto.helpers.ArmorHelper;
 import com.elfocrash.roboto.helpers.Enums.TownIds;
 import com.elfocrash.roboto.model.OffensiveSpell;
@@ -195,17 +196,35 @@ public abstract class FakePlayerAI
     }
 
     private void setTargetbasedOnLevel(List<Creature> targets) {
+        List<Creature> finalTargets = targets;
         if (checkIfInRainboSprings()) {
             List<Creature> filteredByLevel = targets.stream()
                     .filter(q -> ((_fakePlayer.getLevel() - q.getLevel()) < 6) && ((_fakePlayer.getLevel() - q.getLevel()) >= -10))
                     .filter(q -> !q.isAttackingNow() && !q.isInCombat() && q.getMaxHp() == q.getCurrentHp())
                     .collect(Collectors.toList());
 
-            List<Creature> newAvailableTargets = tryTargetNearIfPossible(filteredByLevel);
+            finalTargets = tryTargetNearIfPossible(filteredByLevel);
+        }
 
-            if (!newAvailableTargets.isEmpty()) {
-                Creature target = newAvailableTargets.get(0);
+<<<<<<< HEAD
+        if (!finalTargets.isEmpty()) {
+            if (Rnd.nextDouble() < 0.1) {
+                Creature target = finalTargets.get(Rnd.get(0, finalTargets.size() - 1));
                 _fakePlayer.setTarget(target);
+            } else {
+                List<Creature> newAvailableTargets = tryTargetNearIfPossible(finalTargets);
+                Creature target = newAvailableTargets.get(Rnd.get(0, newAvailableTargets.size() - 1));
+                if (Rnd.nextDouble() < 0.2) {
+                    target = newAvailableTargets.get(0);
+=======
+            if (!newAvailableTargets.isEmpty()) {
+				if(_fakePlayer.getFakeAi() instanceof CombatAI) {
+					((CombatAI) _fakePlayer.getFakeAi()).checkIfNeedToChangeGear();
+				}
+				if(!(_fakePlayer.getFakeAi() instanceof LevelingUpAi)) {
+					Creature target = newAvailableTargets.get(0);
+					_fakePlayer.setTarget(target);
+				}
             }
         } else {
             if (!targets.isEmpty()) {
@@ -220,11 +239,13 @@ public abstract class FakePlayerAI
                         target = newAvailableTargets.get(0);
                     }
                     _fakePlayer.setTarget(target);
+>>>>>>> 2f5de7277ea452da498e8670c4cee7e8aa7d6c6b
                 }
+                _fakePlayer.setTarget(target);
             }
         }
-    }
 
+    }
 
 	// Rainbow springs area (reikia iskelti koordinates)
 	protected boolean checkIfInRainboSprings(){
@@ -539,7 +560,6 @@ public abstract class FakePlayerAI
 		if(_fakePlayer.getInventory().getItemByItemId(idListBgrade.get(1)) != null){
 			setGearB(true);return;
 		}
-
 
 	}
 }

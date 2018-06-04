@@ -1,6 +1,7 @@
 package net.sf.l2j.gameserver.model.actor.status;
 
 import com.elfocrash.roboto.FakePlayer;
+import com.elfocrash.roboto.ai.walker.LevelingUpAi;
 import net.sf.l2j.commons.math.MathUtil;
 import net.sf.l2j.commons.random.Rnd;
 
@@ -20,6 +21,8 @@ import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.scripting.QuestState;
 import net.sf.l2j.gameserver.skills.Formulas;
 import net.sf.l2j.gameserver.skills.Stats;
+
+import java.util.logging.Level;
 
 public class PlayerStatus extends PlayableStatus
 {
@@ -56,8 +59,10 @@ public class PlayerStatus extends PlayableStatus
 		if (getActiveChar().isDead())
 			return;
 
-		if(getActiveChar() instanceof FakePlayer && getActiveChar().getTarget() != null)
-			((FakePlayer)getActiveChar()).setAttackerAsTarget(attacker);
+		if(getActiveChar() instanceof FakePlayer && getActiveChar().getTarget() != null ){
+		((FakePlayer) getActiveChar()).setAttackerAsTarget(attacker);
+
+	}
 		
 		// invul handling
 		if (getActiveChar().isInvul())
