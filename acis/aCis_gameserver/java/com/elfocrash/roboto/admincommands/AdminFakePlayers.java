@@ -130,8 +130,9 @@ public class AdminFakePlayers implements IAdminCommandHandler {
                     int x = MapSpawnHelper.RainbowSprings.get(coordId).X;
                     int y = MapSpawnHelper.RainbowSprings.get(coordId).Y;
                     int z = MapSpawnHelper.RainbowSprings.get(coordId).Z;
-                    FakePlayer fakePlayer = FakePlayerManager.INSTANCE.spawnPlayer(x, y, z, 40);
-                    fakePlayer.setFakeAi(new RainbowWalkerAi(fakePlayer, true));
+
+                    FakePlayer fakePlayer = FakePlayerManager.INSTANCE.spawnPlayer(x, y, z, 40,false);
+                    fakePlayer.setFakeAi(new RainbowWalkerAi(fakePlayer));
                 }
             });
             charCreator.start();

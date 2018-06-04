@@ -1,6 +1,7 @@
 package com.elfocrash.roboto.helpers;
 
 import com.elfocrash.roboto.FakePlayer;
+import net.sf.l2j.commons.random.Rnd;
 import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
 
@@ -25,6 +26,12 @@ public class ArmorHelper {
         public List<Integer> Robe61 = Arrays.asList(2407,512,5779,858,889,920,889,858,924,893,893,862,862);
         public List<Integer> Heavy61 = Arrays.asList(2382,5768,5780,547,924,893,893,862,862);
         public List<Integer> Light61 = Arrays.asList(2385,2389,5766,5778,512,924,893,893,862,862);
+
+        //76 lvl
+        public List<Integer> Robe76a = Arrays.asList(2407, 512, 5767, 5779, 858, 858, 889, 889, 920);
+        public List<Integer> Robe76b = Arrays.asList(6383,6386,6384,6385,858, 858, 889, 889, 920);
+        public List<Integer> Heavy76 = Arrays.asList(6373, 6374, 6375, 6376, 6378, 858, 858, 889, 889, 920);
+        public List<Integer> Light76 = Arrays.asList(6379, 6380, 6381, 6382, 858, 858, 889, 889, 920);
     }
 
 
@@ -59,8 +66,10 @@ public class ArmorHelper {
                     itemIds = new Armor().Heavy40;
                 } else if (level >= 52 && level < 61) {
                     itemIds = new Armor().Heavy52;
-                } else if (level >= 61){
+                } else if (level >= 61 && level < 76){
                     itemIds = new Armor().Heavy61;
+                }else if (level >= 76 && player.sGradePvpBot){
+                    itemIds = new Armor().Heavy76;
                 }
                 break;
             case ARCHMAGE:
@@ -80,8 +89,15 @@ public class ArmorHelper {
                     itemIds = new Armor().Robe40;
                 } else if (level >= 52 && level < 61) {
                     itemIds = new Armor().Robe52;
-                } else if (level >= 61){
+                } else if (level >= 61 && level < 76){
                     itemIds = new Armor().Robe61;
+                }else if (level >= 76 && player.sGradePvpBot){
+                    if(Rnd.nextDouble() < 0.5) {
+                        itemIds = new Armor().Robe76a;
+                    }
+                    else {
+                        itemIds = new Armor().Robe76b;
+                    }
                 }
                 break;
             case FORTUNE_SEEKER:
@@ -96,8 +112,10 @@ public class ArmorHelper {
                     itemIds = new Armor().Light40;
                 } else if (level >= 52 && level < 61) {
                     itemIds = new Armor().Light52;
-                } else if (level >= 61){
+                } else if (level >= 61 && level < 76){
                     itemIds = new Armor().Light61;
+                }else if (level >= 76 && player.sGradePvpBot){
+                    itemIds = new Armor().Light76;
                 }
                 break;
         }

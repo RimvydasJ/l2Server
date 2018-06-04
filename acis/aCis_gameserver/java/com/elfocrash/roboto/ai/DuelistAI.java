@@ -27,7 +27,7 @@ public class DuelistAI extends CombatAI implements IConsumableSpender {
 		applyDefaultBuffs();
 		handleShots();
 		selfSupportBuffs();
-		tryTargetRandomCreatureByTypeInRadius(FakeHelpers.getTestTargetClass(), FakeHelpers.getTestTargetRange());		
+		tryTargetRandomCreatureByTypeInRadius(FakeHelpers.getTestTargetClass(), FakeHelpers.getTestTargetRange());
 		tryAttackingUsingFighterOffensiveSkill();
 		setBusyThinking(false);
 	}

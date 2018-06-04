@@ -28158,7 +28158,7 @@
 		<set name="rHand" val="150"/>
 		<set name="lHand" val="103"/>
 		<set name="type" val="Monster"/>
-		<set name="exp" val="1681"/>
+		<set name="exp" val="15000"/>
 		<set name="sp" val="164"/>
 		<set name="hp" val="2395.45533"/>
 		<set name="mp" val="1314"/>

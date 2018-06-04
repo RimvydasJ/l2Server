@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.elfocrash.roboto.FakePlayer;
-import com.elfocrash.roboto.ai.walker.CommonWalkerAi;
 import com.elfocrash.roboto.ai.walker.LevelingUpAi;
 import com.elfocrash.roboto.model.BotSkill;
 import com.elfocrash.roboto.model.HealingSpell;
@@ -15,10 +14,14 @@ import com.elfocrash.roboto.model.SupportSpell;
 import net.sf.l2j.commons.random.Rnd;
 import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.geoengine.GeoEngine;
+import net.sf.l2j.gameserver.handler.IItemHandler;
+import net.sf.l2j.gameserver.handler.ItemHandler;
 import net.sf.l2j.gameserver.model.L2Skill;
 import net.sf.l2j.gameserver.model.ShotType;
 import net.sf.l2j.gameserver.model.actor.Creature;
 import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
+import net.sf.l2j.gameserver.model.item.kind.Item;
+import net.sf.l2j.gameserver.model.item.type.CrystalType;
 import net.sf.l2j.gameserver.model.zone.ZoneId;
 
 public abstract class CombatAI extends FakePlayerAI {
@@ -60,9 +63,12 @@ public abstract class CombatAI extends FakePlayerAI {
 		handleDeath();
 		changeBotAiToWalkerBecauseOfTown();
 		checkIfFinishedLvlUp();
+		handleMp();
+		handelSpiritOre();
 	}
 
 			protected int getShotId() {
+				CrystalType weaponGrade = _fakePlayer.getActiveWeaponItem().getCrystalType();
 				int playerLevel = _fakePlayer.getLevel();
 				if(playerLevel < 20)
 					return getShotType() == ShotType.SOULSHOT ? 1835 : 3947;
@@ -74,26 +80,32 @@ public abstract class CombatAI extends FakePlayerAI {
 					return getShotType() == ShotType.SOULSHOT ? 1465 : 3950;
 				if(playerLevel >= 61 && playerLevel < 76)
 					return getShotType() == ShotType.SOULSHOT ? 1466 : 3951;
-				if(playerLevel >= 76)
+				if(playerLevel >= 76 && weaponGrade == CrystalType.S)
 					return getShotType() == ShotType.SOULSHOT ? 1467 : 3952;
-
+				if(playerLevel >= 76 && weaponGrade != CrystalType.S)
+					return getShotType() == ShotType.SOULSHOT ? 1466:3951;
 				return 0;
 			}
 
 			protected int getArrowId() {
+				CrystalType weaponGrade = _fakePlayer.getActiveWeaponItem().getCrystalType();
 				int playerLevel = _fakePlayer.getLevel();
 				if(playerLevel < 20)
 					return 17; // wooden arrow
-				if(playerLevel >= 20 && playerLevel < 40)
+				else if(playerLevel >= 20 && playerLevel < 40)
 					return 1341; // bone arrow
-				if(playerLevel >= 40 && playerLevel < 52)
+				else if(playerLevel >= 40 && playerLevel < 52)
 					return 1342; // steel arrow
-				if(playerLevel >= 52 && playerLevel < 61)
+				else if(playerLevel >= 52 && playerLevel < 61)
 					return 1343; // Silver arrow
-				if(playerLevel >= 61 && playerLevel < 76)
+				else if(playerLevel >= 61 && playerLevel < 76)
 					return 1344; // Mithril Arrow
-				if(playerLevel >= 76)
+				if(playerLevel >= 76 && weaponGrade == CrystalType.S)
 					return 1345; // shining
+				if(playerLevel>=76 && weaponGrade!=CrystalType.S)
+					return 1344;
+
+
 
 				return 0;
 			}
@@ -235,6 +247,32 @@ public abstract class CombatAI extends FakePlayerAI {
 	public void checkIfFinishedLvlUp(){
 		if(_fakePlayer.getLevel() >= 78 && checkIfInRainboSprings()){
 			_fakePlayer.setFakeAi(new LevelingUpAi(_fakePlayer));
+		}
+	}
+
+	public void handleMp(){
+		if(_fakePlayer.getInventory().getItemByItemId(728) != null) {
+			if(_fakePlayer.getInventory().getItemByItemId(getShotId()).getCount() <= 20) {
+				_fakePlayer.getInventory().addItem("", 728, 500, _fakePlayer, null);
+			}
+		}else {
+			_fakePlayer.getInventory().addItem("", 728, 500, _fakePlayer, null);
+		}
+
+		if(_fakePlayer.getCurrentMp() < 300) {
+			ItemInstance item = _fakePlayer.getInventory().getItemByItemId(728);
+			IItemHandler handler = ItemHandler.getInstance().getItemHandler(item.getEtcItem());
+			handler.useItem(_fakePlayer,item,false);
+		}
+	}
+
+	protected void handelSpiritOre() {
+		if (_fakePlayer.getInventory().getItemByItemId(3031) != null) {
+			if (_fakePlayer.getInventory().getItemByItemId(3031).getCount() <= 100) {
+				_fakePlayer.getInventory().addItem("", 3031, 500, _fakePlayer, null);
+			}
+		} else {
+			_fakePlayer.getInventory().addItem("", 3031, 500, _fakePlayer, null);
 		}
 	}
 		

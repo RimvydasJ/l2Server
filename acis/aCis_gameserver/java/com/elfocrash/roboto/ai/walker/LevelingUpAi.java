@@ -43,6 +43,9 @@ public class LevelingUpAi extends FakePlayerAI {
     public LevelingUpAi(FakePlayer player){
         super(player);
         Initialize();
+        RandX = Rnd.get(-30,30);
+        RandY = Rnd.get(-30,30);
+        isWalking = false;
     }
 
     public LevelingUpAi(FakePlayer player, int shotId){

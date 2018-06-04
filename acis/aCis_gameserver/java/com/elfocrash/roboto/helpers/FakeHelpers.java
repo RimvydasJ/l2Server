@@ -100,8 +100,12 @@ public class FakeHelpers {
 	public static int getTestTargetRange() {
 		return 2000;
 	}
-	
+
 	public static FakePlayer createRandomFakePlayer(int level) {
+		return createRandomFakePlayer(level,false);
+	}
+
+	public static FakePlayer createRandomFakePlayer(int level, boolean sGradeBot) {
 		int objectId = IdFactory.getInstance().getNextId();
 		String accountName = "AutoPilot";
 		String playerName = FakePlayerNameManager.INSTANCE.getRandomAvailableName();
@@ -120,59 +124,13 @@ public class FakeHelpers {
 		player.setBaseClass(player.getClassId());
 		setLevel(player, level);
 		player.rewardSkills();
-
+		player.sGradePvpBot = sGradeBot;
 		new ArmorHelper().giveArmorsByClass(player, level);
-		new WeaponHelper().giveWeaponsByClass(player, false, level);
+		boolean randomEnchant = sGradeBot;
+		new WeaponHelper().giveWeaponsByClass(player, randomEnchant, level);
 		player.heal();
 
 		return player;
-	}
-
-	public static List<ClassId> getSecondClasses(){
-		List<ClassId> classes = new ArrayList<>();
-
-		//Human
-		classes.add(ClassId.GLADIATOR);
-		classes.add(ClassId.WARLORD);
-		//classes.add(ClassId.PALADIN);
-		//classes.add(ClassId.DARK_AVENGER);
-		classes.add(ClassId.TREASURE_HUNTER);
-		classes.add(ClassId.HAWKEYE);
-		classes.add(ClassId.SORCERER);
-		classes.add(ClassId.NECROMANCER);
-		//classes.add(ClassId.WARLOCK);
-		classes.add(ClassId.BISHOP);
-		//classes.add(ClassId.PROPHET);
-
-		//Elf
-		//classes.add(ClassId.TEMPLE_KNIGHT);
-		//classes.add(ClassId.SWORD_SINGER);
-		classes.add(ClassId.PLAINS_WALKER);
-		classes.add(ClassId.SILVER_RANGER);
-		classes.add(ClassId.SPELLSINGER);
-		//classes.add(ClassId.ELEMENTAL_SUMMONER);
-		//classes.add(ClassId.ELVEN_ELDER);
-
-		//DarkElf
-		//classes.add(ClassId.SHILLIEN_KNIGHT);
-		//classes.add(ClassId.BLADEDANCER);
-		classes.add(ClassId.ABYSS_WALKER);
-		classes.add(ClassId.PHANTOM_RANGER);
-		classes.add(ClassId.SPELLHOWLER);
-		//classes.add(ClassId.PHANTOM_SUMMONER);
-		//classes.add(ClassId.SHILLIEN_ELDER);
-
-		//Orc
-		classes.add(ClassId.DESTROYER);
-		classes.add(ClassId.TYRANT);
-		classes.add(ClassId.OVERLORD);
-		//classes.add(ClassId.WARCRYER);
-
-		//Dwarf
-		//classes.add(ClassId.BOUNTY_HUNTER);
-		//classes.add(ClassId.WARSMITH);
-
-		return classes;
 	}
 
 	public static List<ClassId> getThirdClasses() {
@@ -209,7 +167,7 @@ public class FakeHelpers {
 		classes.add(ClassId.WIND_RIDER);
 		classes.add(ClassId.DOMINATOR);
 		classes.add(ClassId.TITAN);
-		classes.add(ClassId.CARDINAL);
+		//classes.add(ClassId.CARDINAL);
 		classes.add(ClassId.DUELIST);
 		classes.add(ClassId.GRAND_KHAVATARI);
 		classes.add(ClassId.DREADNOUGHT);

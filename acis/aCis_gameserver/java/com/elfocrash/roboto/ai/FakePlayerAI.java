@@ -1,9 +1,7 @@
 package com.elfocrash.roboto.ai;
 
 import java.io.Console;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.elfocrash.roboto.FakePlayer;
@@ -11,6 +9,8 @@ import com.elfocrash.roboto.ai.walker.CommonWalkerAi;
 import com.elfocrash.roboto.ai.walker.LevelingUpAi;
 import com.elfocrash.roboto.helpers.ArmorHelper;
 import com.elfocrash.roboto.helpers.Enums.TownIds;
+import com.elfocrash.roboto.model.OffensiveSpell;
+import net.sf.l2j.commons.math.MathUtil;
 import net.sf.l2j.commons.random.Rnd;
 
 import net.sf.l2j.gameserver.datatables.MapRegionTable;
@@ -122,17 +122,16 @@ public abstract class FakePlayerAI
 		_fakePlayer.revalidateZone(true);
 		return true;
 	}
-	
+
 	protected void tryTargetRandomCreatureByTypeInRadius(Class<? extends Creature> creatureClass, int radius)
 	{
 		setPvpTarget();
 		//Pk galimybe
 		setPkTarget();
 		if(_fakePlayer.getTarget() == null) {
-			List<Creature> targets = _fakePlayer.getKnownTypeInRadius(creatureClass, radius).stream().filter(x->!x.isDead()).collect(Collectors.toList());
-			if(_fakePlayer.getLevel()< 76)
-				setTargetbasedOnLevel(targets);
-		}else {
+            List<Creature> targets = _fakePlayer.getKnownTypeInRadius(creatureClass, radius).stream().filter(x -> !x.isDead()).collect(Collectors.toList());
+            setTargetbasedOnLevel(targets);
+        }else {
 			if(((Creature)_fakePlayer.getTarget()).isDead())
 			_fakePlayer.setTarget(null);
 		}	
@@ -147,12 +146,24 @@ public abstract class FakePlayerAI
 		if(_fakePlayer.getPvpFlag() == 1){
 			pvpPercentages = 1.0;
 			if(Rnd.nextDouble() < 0.01){
-				pvpPercentages = 0.1;
+				pvpPercentages = 0.01;
 			}
 		}
+		//For Pk players
+		if(Rnd.nextDouble() <= 0.1 && !checkIfInRainboSprings()){
+		    List<Player> pkTargets = _fakePlayer.getKnownTypeInRadius(Player.class,1500).stream().filter(x->x.getKarma()>1).collect(Collectors.toList());
+		    if(!pkTargets.isEmpty()){
+		        try {
+                    Player target = pkTargets.get(Rnd.get(0,pkTargets.size()-1));
+                    _fakePlayer.setTarget(target);
+                }
+                catch (Exception e){}
+            }
+        }
+        //For PvP players
 		if (Rnd.nextDouble() <= pvpPercentages && !checkIfInRainboSprings()) {
 			if (_fakePlayer.getTarget() == null) {
-				List<Player> pvpTarget = _fakePlayer.getKnownTypeInRadius(Player.class, 1500).stream().filter(x -> (x.getPvpFlag() == 1 || x.getKarma() > 0) && (x.getClan() == null || (_fakePlayer.getClan() != null && x.getClan().getClanId() != _fakePlayer.getClan().getClanId()))).collect(Collectors.toList());
+				List<Player> pvpTarget = _fakePlayer.getKnownTypeInRadius(Player.class, 1500).stream().filter(x -> (x.getPvpFlag() == 1) && (x.getClan() == null || (_fakePlayer.getClan() != null && x.getClan().getClanId() != _fakePlayer.getClan().getClanId()))).collect(Collectors.toList());
 				if (!pvpTarget.isEmpty()) {
 					try {
 						Player target = pvpTarget.get(Rnd.get(0, pvpTarget.size() - 1));
@@ -164,7 +175,7 @@ public abstract class FakePlayerAI
 	}
 
 	protected void setPkTarget() {
-		if (Rnd.nextDouble() <= 0.01 && !checkIfInRainboSprings()) {
+		if (Rnd.nextDouble() <= 0.001 && !checkIfInRainboSprings()) {
 			if (_fakePlayer.getTarget() == null) {
 				List<Player> pvpTarget = _fakePlayer.getKnownTypeInRadius(Player.class, 1500).stream().filter(x -> !x.isDead() && (x.getClan() == null || (_fakePlayer.getClan() != null && x.getClan().getClanId() != _fakePlayer.getClan().getClanId()))).collect(Collectors.toList());
 				if (!pvpTarget.isEmpty()) {
@@ -177,39 +188,48 @@ public abstract class FakePlayerAI
 		}
 	}
 
+    protected List<Creature> tryTargetNearIfPossible(List<Creature> targetsfilteredByLevel) {
+            List<Creature> nearTargets = targetsfilteredByLevel.stream().sorted((t1,t2)->Double.compare(MathUtil.calculateDistance(_fakePlayer,t1,true),MathUtil.calculateDistance(_fakePlayer,t2,true))).collect(Collectors.toList());
+            if (nearTargets.isEmpty())
+                nearTargets = targetsfilteredByLevel;
+            return nearTargets;
+    }
 
-	private void setTargetbasedOnLevel(List<Creature> targets){
-		if(checkIfInRainboSprings()){
-			List<Creature> newAvailableTargets = targets.stream()
-					.filter(q -> ((_fakePlayer.getLevel() - q.getLevel()) < 4) && ((_fakePlayer.getLevel() - q.getLevel()) >= -8))
-					.filter(q -> !q.isAttackingNow() && !q.isInCombat() && q.getMaxHp() == q.getCurrentHp())
-					.collect(Collectors.toList());
+    private void setTargetbasedOnLevel(List<Creature> targets) {
+        if (checkIfInRainboSprings()) {
+            List<Creature> filteredByLevel = targets.stream()
+                    .filter(q -> ((_fakePlayer.getLevel() - q.getLevel()) < 6) && ((_fakePlayer.getLevel() - q.getLevel()) >= -10))
+                    .filter(q -> !q.isAttackingNow() && !q.isInCombat() && q.getMaxHp() == q.getCurrentHp())
+                    .collect(Collectors.toList());
 
+            List<Creature> newAvailableTargets = tryTargetNearIfPossible(filteredByLevel);
 
-
-			if(!newAvailableTargets.isEmpty()) {
+            if (!newAvailableTargets.isEmpty()) {
 				if(_fakePlayer.getFakeAi() instanceof CombatAI) {
 					((CombatAI) _fakePlayer.getFakeAi()).checkIfNeedToChangeGear();
 				}
-
-				if(!(_fakePlayer.getFakeAi() instanceof LevelingUpAi)){
-					Creature target = newAvailableTargets.get(Rnd.get(0, newAvailableTargets.size() - 1));
+				if(!(_fakePlayer.getFakeAi() instanceof LevelingUpAi)) {
+					Creature target = newAvailableTargets.get(0);
 					_fakePlayer.setTarget(target);
 				}
-
-
-			}
-		}
-		else {
-			if(!targets.isEmpty()) {
-				Creature target = targets.get(Rnd.get(0, targets.size() -1 ));
-				_fakePlayer.setTarget(target);
-		}
-
-
-		}
-	}
-
+            }
+        } else {
+            if (!targets.isEmpty()) {
+                if(Rnd.nextDouble() < 0.1) {
+                    Creature target = targets.get(Rnd.get(0,targets.size()-1));
+                    _fakePlayer.setTarget(target);
+                }
+                else{
+                    List<Creature> newAvailableTargets = tryTargetNearIfPossible(targets);
+                    Creature target = newAvailableTargets.get(Rnd.get(0,newAvailableTargets.size()-1));
+                    if(Rnd.nextDouble() < 0.2){
+                        target = newAvailableTargets.get(0);
+                    }
+                    _fakePlayer.setTarget(target);
+                }
+            }
+        }
+    }
 
 	// Rainbow springs area (reikia iskelti koordinates)
 	protected boolean checkIfInRainboSprings(){
