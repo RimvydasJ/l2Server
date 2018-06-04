@@ -209,13 +209,16 @@ public abstract class FakePlayerAI
             }
         } else {
             if (!targets.isEmpty()) {
-                if(Rnd.nextDouble() < 0.05) {
+                if(Rnd.nextDouble() < 0.1) {
                     Creature target = targets.get(Rnd.get(0,targets.size()-1));
                     _fakePlayer.setTarget(target);
                 }
                 else{
                     List<Creature> newAvailableTargets = tryTargetNearIfPossible(targets);
                     Creature target = newAvailableTargets.get(Rnd.get(0,newAvailableTargets.size()-1));
+                    if(Rnd.nextDouble() < 0.2){
+                        target = newAvailableTargets.get(0);
+                    }
                     _fakePlayer.setTarget(target);
                 }
             }

@@ -14,9 +14,13 @@ import com.elfocrash.roboto.model.SupportSpell;
 import net.sf.l2j.commons.random.Rnd;
 import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.geoengine.GeoEngine;
+import net.sf.l2j.gameserver.handler.IItemHandler;
+import net.sf.l2j.gameserver.handler.ItemHandler;
 import net.sf.l2j.gameserver.model.L2Skill;
 import net.sf.l2j.gameserver.model.ShotType;
 import net.sf.l2j.gameserver.model.actor.Creature;
+import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
+import net.sf.l2j.gameserver.model.item.kind.Item;
 import net.sf.l2j.gameserver.model.item.type.CrystalType;
 import net.sf.l2j.gameserver.model.zone.ZoneId;
 
@@ -60,6 +64,8 @@ public abstract class CombatAI extends FakePlayerAI {
 		changeBotAiToWalkerBecauseOfTown();
 		checkIfNeedToChangeGear();
 		checkIfFinishedLvlUp();
+		handleMp();
+		handelSpiritOre();
 	}
 
 			protected int getShotId() {
@@ -240,6 +246,32 @@ public abstract class CombatAI extends FakePlayerAI {
 	public void checkIfFinishedLvlUp(){
 		if(_fakePlayer.getLevel() >= 78 && checkIfInRainboSprings()){
 			_fakePlayer.setFakeAi(new LevelingUpAi(_fakePlayer));
+		}
+	}
+
+	public void handleMp(){
+		if(_fakePlayer.getInventory().getItemByItemId(728) != null) {
+			if(_fakePlayer.getInventory().getItemByItemId(getShotId()).getCount() <= 20) {
+				_fakePlayer.getInventory().addItem("", 728, 500, _fakePlayer, null);
+			}
+		}else {
+			_fakePlayer.getInventory().addItem("", 728, 500, _fakePlayer, null);
+		}
+
+		if(_fakePlayer.getCurrentMp() < 300) {
+			ItemInstance item = _fakePlayer.getInventory().getItemByItemId(728);
+			IItemHandler handler = ItemHandler.getInstance().getItemHandler(item.getEtcItem());
+			handler.useItem(_fakePlayer,item,false);
+		}
+	}
+
+	protected void handelSpiritOre() {
+		if (_fakePlayer.getInventory().getItemByItemId(3031) != null) {
+			if (_fakePlayer.getInventory().getItemByItemId(3031).getCount() <= 100) {
+				_fakePlayer.getInventory().addItem("", 3031, 500, _fakePlayer, null);
+			}
+		} else {
+			_fakePlayer.getInventory().addItem("", 3031, 500, _fakePlayer, null);
 		}
 	}
 		

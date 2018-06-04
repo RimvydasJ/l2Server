@@ -64,6 +64,9 @@ public abstract class WalkerAI extends FakePlayerAI {
 				if (userReachedDestination(_currentWalkNode)) {
 					if (currentStayIterations < _currentWalkNode.getStayIterations()) {
 						currentStayIterations++;
+						if(currentStayIterations == 3){
+							_fakePlayer.broadcastUserInfo();
+						}
 						setBusyThinking(false);
 						targetingGkOrMob();
 						return;
