@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import com.elfocrash.roboto.FakePlayer;
 import com.elfocrash.roboto.ai.walker.CommonWalkerAi;
+import com.elfocrash.roboto.ai.walker.LevelingUpAi;
 import com.elfocrash.roboto.helpers.ArmorHelper;
 import com.elfocrash.roboto.helpers.Enums.TownIds;
 import net.sf.l2j.commons.random.Rnd;
@@ -187,8 +188,16 @@ public abstract class FakePlayerAI
 
 
 			if(!newAvailableTargets.isEmpty()) {
-				Creature target = newAvailableTargets.get(Rnd.get(0, newAvailableTargets.size() - 1));
-				_fakePlayer.setTarget(target);
+				if(_fakePlayer.getFakeAi() instanceof CombatAI) {
+					((CombatAI) _fakePlayer.getFakeAi()).checkIfNeedToChangeGear();
+				}
+
+				if(!(_fakePlayer.getFakeAi() instanceof LevelingUpAi)){
+					Creature target = newAvailableTargets.get(Rnd.get(0, newAvailableTargets.size() - 1));
+					_fakePlayer.setTarget(target);
+				}
+
+
 			}
 		}
 		else {
@@ -515,7 +524,6 @@ public abstract class FakePlayerAI
 		if(_fakePlayer.getInventory().getItemByItemId(idListBgrade.get(1)) != null){
 			setGearB(true);return;
 		}
-
 
 	}
 }

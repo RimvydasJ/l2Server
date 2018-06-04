@@ -8,52 +8,59 @@ import com.elfocrash.roboto.model.WalkNode;
 import net.sf.l2j.commons.random.Rnd;
 import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class LevelingUpAi extends FakePlayerAI {
 
-
-    WalkNode GmShopInRainbow = new WalkNode(141435, -123674, -1904, 1);
+    WalkNode PathToGate = new WalkNode(141032, -123592, -1904, 1);
+    WalkNode GmShopInRainbow = new WalkNode(141435, -123674, -1904, 10);
     WalkNode BufferInRainbow = new WalkNode(140904, -123736, -1904,1);
 
     List<WalkNode> _rainboSpringsWalkingNodes = Arrays.asList(
-            new WalkNode(141224,-123480,-1904,1),
-            new WalkNode(141656,-123464,-1904,1),
-            new WalkNode(142360,-123240,-1912,1),
-            new WalkNode(142312,-123528,-1888,1),
-            new WalkNode(141096,-122920,-1920,1),
-            new WalkNode(140584,-123272,-1904,1),
-            new WalkNode(141336,-122392,-1928,1),
-            new WalkNode(141224,-123480,-1904,1),
-            new WalkNode(142600,-122232,-1880,1),
-            new WalkNode(142664,-122520,-1856,1),
-            new WalkNode(140488,-122104,-1896,1),
-            new WalkNode(140488,-122072,-1936,1),
-            new WalkNode(140680,-122760,-1904,1),
-            new WalkNode(140696,-122920,-1896,1),
-            new WalkNode(140200,-12336,-1904,1),
-            new WalkNode(141208,-122056,-1936,1),
-            new WalkNode(140792,-123016,-1904,1));
+            new WalkNode(141080,-123896,-1904,20),
+            new WalkNode(141400,-123896,-1904,15),
+            new WalkNode(141016,-123992,-1904,12),
+            new WalkNode(141480,-123992,-1904,10),
+            new WalkNode(141464,-123816,-1904,20),
+            new WalkNode(141304,-123672,-1904,15),
+            new WalkNode(141416,-123704,-1904,12));
 
     private int RandX = 0;
     private int RandY = 0;
     private int Iterations = 0;
     private int ShotId = 0;
     private boolean isWalking = false;
+    private List<WalkNode> CurrentPathToGmShop = new ArrayList<WalkNode>();
+    private int Index = 0;
+    private boolean StandStill = false;
+    private int StandStillIteration = 0;
+    boolean gearedUp = false;
+    boolean buffedUp = false;
+
+
     public LevelingUpAi(FakePlayer player){
         super(player);
-        RandX = Rnd.get(-10,10);
-        RandY = Rnd.get(-10,10);
-        isWalking = false;
+        Initialize();
     }
 
     public LevelingUpAi(FakePlayer player, int shotId){
         super(player);
-        RandX = Rnd.get(-10,10);
-        RandY = Rnd.get(-10,10);
+        Initialize();
         ShotId = shotId;
     }
+    private void Initialize(){
+        RandX = Rnd.get(-30,30);
+        RandY = Rnd.get(-30,30);
+        isWalking = false;
+        CurrentPathToGmShop.add(PathToGate);
+        CurrentPathToGmShop.add(_rainboSpringsWalkingNodes.get(Rnd.get(0, _rainboSpringsWalkingNodes.size()-1)));
+        CurrentPathToGmShop.add(GmShopInRainbow);
+        //CheckIfShouldStand();
+    }
+
+
 
     @Override
     public void setup(){
@@ -64,7 +71,10 @@ public class LevelingUpAi extends FakePlayerAI {
     public void thinkAndAct() {
         _fakePlayer.broadcastUserInfo();
         setBusyThinking(true);
-        changeGearAndBuffs();
+        moveToGmShop();
+        moveToBuffShop();
+        changeAi();
+        IsStanding();
         checkIfStuck();
         goToGiran();
         setBusyThinking(false);
@@ -75,52 +85,59 @@ public class LevelingUpAi extends FakePlayerAI {
         return new int[0][];
     }
 
-    private void changeGearAndBuffs(){
-        //If in RainboSprings up area
-        if(checkIfInRainboSprings()){
-            boolean gearedUp = false;
-            boolean buffedUp = false;
-            if(checkGearAvailability()){
-                int x = GmShopInRainbow.getX()+RandX;
-                int y = GmShopInRainbow.getY()+RandY;
-
-                if(!isWalking) {
-                    _fakePlayer.getFakeAi().moveTo(x, y, GmShopInRainbow.getZ());
-                    isWalking = true;
-                }
-                if (_fakePlayer.isInsideRadius(x, y, 50, false)) {
-                    gearUp();
-                    gearedUp = true;
-                    isWalking = false;
+    private void moveToGmShop(){
+        if(checkIfInRainboSprings()) {
+            if(checkGearAvailability()) {
+                if(!StandStill){
+                    moveToLocation();
+                    if (_fakePlayer.isInsideRadius(CurrentPathToGmShop.get(Index).getX()+RandX, CurrentPathToGmShop.get(Index).getY()+RandY, 50, false)) {
+                        if(Index == CurrentPathToGmShop.size()-1){
+                            gearUp();
+                            gearedUp = true;
+                            StandStill = true;
+                        }
+                        isWalking = false;
+                        Index++;
+                        if(Index == 1){
+                            moveToLocation();
+                        }
+                        CheckIfShouldStand();
+                    }
                 }
             }
+        }
+    }
 
-            int x = BufferInRainbow.getX() +RandX;
+    private void moveToLocation(){
+        if(Index <= CurrentPathToGmShop.size()-1) {
+            int x = CurrentPathToGmShop.get(Index).getX() + RandX;
+            int y = CurrentPathToGmShop.get(Index).getY() + RandY;
+            if (!isWalking) {
+                _fakePlayer.getFakeAi().moveTo(x, y, GmShopInRainbow.getZ());
+                isWalking = true;
+            }
+        }
+    }
+
+    private void moveToBuffShop(){
+        if(!StandStill){
+            int x = BufferInRainbow.getX() + RandX;
             int y = BufferInRainbow.getY() + RandY;
-
             if(gearedUp){
                 _fakePlayer.getFakeAi().moveTo(x, y, BufferInRainbow.getZ());
             }
-
-            if(_fakePlayer.isInsideRadius(x,y, 50, false)){
-                _fakePlayer.setFakeAi(new RainbowWalkerAi(_fakePlayer));
+            if(_fakePlayer.isInsideRadius(x,y, 1, false)){
+                buffedUp = true;
+                CheckIfShouldStand();
             }
-
-
-
-            //Kol nera npc ideta
-            /*
-            if(_fakePlayer.getKnownTypeInRadius(Npc.class, 100).size() > 0){
-
-            }*/
-
-
-
-
         }
-        //If in Giran
 
-        //If somewhere else
+    }
+
+    private void changeAi(){
+        if(gearedUp && buffedUp && !StandStill){
+            _fakePlayer.setFakeAi(new RainbowWalkerAi(_fakePlayer));
+        }
     }
 
     // TODO: REfacotor this
@@ -157,10 +174,6 @@ public class LevelingUpAi extends FakePlayerAI {
 
     }
 
-    private void buffUp(){
-
-    }
-
     private void goToGiran(){
         if(_fakePlayer.getLevel() >= 78 && checkIfInRainboSprings()){
             int x = 140904+RandX;
@@ -185,6 +198,22 @@ public class LevelingUpAi extends FakePlayerAI {
         } else {
             Iterations = 0;
         }
+    }
 
+    private void IsStanding(){
+        if(StandStill){
+            if(StandStillIteration != 5){
+                StandStillIteration++;
+            } else {
+                StandStillIteration = 0;
+                StandStill = false;
+            }
+        }
+    }
+
+    private void CheckIfShouldStand(){
+        if(Rnd.get(0,10) == 5){
+            StandStill = true;
+        }
     }
 }
