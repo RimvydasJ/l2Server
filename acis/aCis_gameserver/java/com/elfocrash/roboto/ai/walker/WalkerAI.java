@@ -130,7 +130,7 @@ public abstract class WalkerAI extends FakePlayerAI {
 
 				L2TeleportLocation giranFarmLoc = TeleportLocationTable.getInstance().getTemplate(1060);
 				locations.add(giranFarmLoc);
-				locations.add(locEvaGarden);
+				//locations.add(locEvaGarden);
 
 				L2TeleportLocation whereToGo = locations.get(Rnd.get(0, locations.size() - 1));
 				if (_fakePlayer.getFakeAi().teleportToLocation(whereToGo.getLocX(), whereToGo.getLocY(), whereToGo.getLocZ(), 20)) {

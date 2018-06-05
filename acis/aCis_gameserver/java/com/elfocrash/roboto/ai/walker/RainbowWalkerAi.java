@@ -21,26 +21,8 @@ public class RainbowWalkerAi extends FakePlayerAI {
     int index = 0;
     boolean reachedNode = true;
     int Iterations = 0;
-
-    private boolean StandStill = false;
-    private int StandStillIteration = 0;
-
-
     public RainbowWalkerAi(FakePlayer fakePlayer){
         super(fakePlayer);
-        Init();
-
-    }
-
-    public RainbowWalkerAi(FakePlayer fakePlayer, boolean standStill){
-        super(fakePlayer);
-        Init();
-        if(standStill) {
-            CheckIfShouldStand();
-        }
-    }
-
-    void Init(){
         WalkingLinearNodes = GetWalkingNodesBasedOnLvl();
         PathId = Rnd.get(0, WalkingLinearNodes.size() - 1);
         RandX = Rnd.get(-100, 100);
@@ -49,14 +31,11 @@ public class RainbowWalkerAi extends FakePlayerAI {
     }
     @Override
     public void thinkAndAct() {
-        if(!StandStill) {
-            getBuffs();
-            startWalking();
-            checkIfStuck();
-            handleDeath();
-            checkIfInGiran();
-        }
-        IsStanding();
+        getBuffs();
+        startWalking();
+        checkIfStuck();
+        handleDeath();
+        checkIfInGiran();
     }
 
     @Override
@@ -121,7 +100,7 @@ public class RainbowWalkerAi extends FakePlayerAI {
 
     List<List<WalkNode>> LowLevelLinearWalk = Arrays.asList(
             Arrays.asList(new WalkNode(141029,-123563,-1909,1),
-                    new WalkNode(141336,-123384,-1912,1),
+                    new WalkNode(141080,-12348,-1904,1),
                     new WalkNode(141560,-123240,-1912,1),
                     new WalkNode(141704,-123096,-1896,1)),
             Arrays.asList(new WalkNode(141096,-123240,-1912,1),
@@ -158,21 +137,4 @@ public class RainbowWalkerAi extends FakePlayerAI {
             Arrays.asList( new WalkNode(141017,-123070,-1920,1),
                     new WalkNode(141674,-122123,-1917,1),
                     new WalkNode(142072,-121608,-1880,1)));
-
-    private void IsStanding(){
-        if(StandStill){
-            if(StandStillIteration != 5){
-                StandStillIteration++;
-            } else {
-                StandStillIteration = 0;
-                StandStill = false;
-            }
-        }
-    }
-
-    private void CheckIfShouldStand(){
-        if(Rnd.get(0,5) == 3){
-            StandStill = true;
-        }
-    }
 }

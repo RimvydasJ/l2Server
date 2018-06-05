@@ -62,6 +62,7 @@ public abstract class CombatAI extends FakePlayerAI {
 	public void thinkAndAct() {
 		handleDeath();
 		changeBotAiToWalkerBecauseOfTown();
+		checkIfNeedToChangeGear();
 		checkIfFinishedLvlUp();
 		handleMp();
 		handelSpiritOre();
@@ -236,13 +237,11 @@ public abstract class CombatAI extends FakePlayerAI {
 
 	public void checkIfNeedToChangeGear(){
 		if(checkGearAvailability()){
-			if(checkIfInRainboSprings() && _fakePlayer.getTarget() == null && Rnd.get(0,2) == 2){
+			if(checkIfInRainboSprings()){
 				_fakePlayer.setFakeAi(new LevelingUpAi(_fakePlayer, getShotId()));
 			}
 		}
 	}
-
-
 
 	public void checkIfFinishedLvlUp(){
 		if(_fakePlayer.getLevel() >= 78 && checkIfInRainboSprings()){
@@ -252,7 +251,7 @@ public abstract class CombatAI extends FakePlayerAI {
 
 	public void handleMp(){
 		if(_fakePlayer.getInventory().getItemByItemId(728) != null) {
-			if(_fakePlayer.getInventory().getItemByItemId(728).getCount() <= 20) {
+			if(_fakePlayer.getInventory().getItemByItemId(getShotId()).getCount() <= 20) {
 				_fakePlayer.getInventory().addItem("", 728, 500, _fakePlayer, null);
 			}
 		}else {
