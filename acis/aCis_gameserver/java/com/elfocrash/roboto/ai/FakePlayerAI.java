@@ -217,8 +217,6 @@ public abstract class FakePlayerAI
                 if (Rnd.nextDouble() < 0.2) {
                     target = newAvailableTargets.get(0);
 =======
-=======
->>>>>>> 2f5de7277ea452da498e8670c4cee7e8aa7d6c6b
             if (!newAvailableTargets.isEmpty()) {
 				if(_fakePlayer.getFakeAi() instanceof CombatAI) {
 					((CombatAI) _fakePlayer.getFakeAi()).checkIfNeedToChangeGear();
@@ -247,11 +245,8 @@ public abstract class FakePlayerAI
             }
         }
 
-<<<<<<< HEAD
     }
 
-=======
->>>>>>> 2f5de7277ea452da498e8670c4cee7e8aa7d6c6b
 	// Rainbow springs area (reikia iskelti koordinates)
 	protected boolean checkIfInRainboSprings(){
 		return _fakePlayer.getNearestTownId() == TownIds.Goddard
