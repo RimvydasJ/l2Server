@@ -1,6 +1,7 @@
 package com.elfocrash.roboto.ai.walker;
 
 import com.elfocrash.roboto.FakePlayer;
+import com.elfocrash.roboto.helpers.ZoneChecker;
 import com.elfocrash.roboto.model.WalkNode;
 import com.elfocrash.roboto.model.WalkerType;
 
@@ -58,8 +59,8 @@ public class CommonWalkerAi extends WalkerAI {
 					} else {
 						giranTpNode();
 					}
-					if (!_fakePlayer.isInsideZone(ZoneId.TOWN)) {
-						giranZoneFarm();
+					if (ZoneChecker.checkIfInLoa(_fakePlayer)) {
+						loaFarmZone();
 					}
 				}
 				else {
@@ -83,21 +84,12 @@ public class CommonWalkerAi extends WalkerAI {
 				// "Giran Harbor";
 				break;
 			case 13:
-				isLinear = false;
-				farmEvaGarden();
+				// Goddard
 				break;
 			case 14:
 				// "Rune Township";
 				break;
 			case 15://Goddard
-				if(_fakePlayer.getLevel() <76){
-					isLinear = false;
-					lvlUpZone();
-				}
-				else {
-					isLinear = false;
-					lvlUpZoneLeave();
-				}
 				break;
 			case 16:
 				// "Town of Schuttgart";
@@ -129,7 +121,7 @@ public class CommonWalkerAi extends WalkerAI {
 		_walkNodes.add(new WalkNode(81304 + Rnd.get(-20,20), 147592 + Rnd.get(-20,20), -3463, Rnd.get(1, 20)));
 	}
 
-	private void giranZoneFarm() {
+	private void loaFarmZone() {
 		_walkNodes.add(new WalkNode(130981 + Rnd.get(-50,50), 114550+ Rnd.get(-50,50), -3730, Rnd.get(1, 20)));
 		_walkNodes.add(new WalkNode(129352+ Rnd.get(-50,50), 113480+ Rnd.get(-50,50), -3688, Rnd.get(1, 20)));
 		_walkNodes.add(new WalkNode(129832+ Rnd.get(-50,50), 115176+ Rnd.get(-50,50), -3816, Rnd.get(1, 20)));
@@ -163,6 +155,7 @@ public class CommonWalkerAi extends WalkerAI {
 	}
 
 	private boolean pretendWalkingInTown(){
-		return Rnd.nextDouble() < 0.5;
+		//80proc kad eis i farm zona
+		return Rnd.nextDouble() < 0.2;
 	}
 }

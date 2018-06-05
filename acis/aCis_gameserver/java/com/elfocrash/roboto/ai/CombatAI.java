@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import com.elfocrash.roboto.FakePlayer;
 import com.elfocrash.roboto.ai.walker.LevelingUpAi;
+import com.elfocrash.roboto.helpers.ZoneChecker;
 import com.elfocrash.roboto.model.BotSkill;
 import com.elfocrash.roboto.model.HealingSpell;
 import com.elfocrash.roboto.model.OffensiveSpell;
@@ -60,6 +61,7 @@ public abstract class CombatAI extends FakePlayerAI {
 	
 	@Override
 	public void thinkAndAct() {
+		_fakePlayer.broadcastUserInfo();
 		handleDeath();
 		changeBotAiToWalkerBecauseOfTown();
 		checkIfFinishedLvlUp();
@@ -236,7 +238,7 @@ public abstract class CombatAI extends FakePlayerAI {
 
 	public void checkIfNeedToChangeGear(){
 		if(checkGearAvailability()){
-			if(checkIfInRainboSprings() && _fakePlayer.getTarget() == null && Rnd.get(0,2) == 2){
+			if(ZoneChecker.checkIfInRainboSprings(_fakePlayer) && _fakePlayer.getTarget() == null && Rnd.get(0,2) == 2){
 				_fakePlayer.setFakeAi(new LevelingUpAi(_fakePlayer, getShotId()));
 			}
 		}
@@ -245,7 +247,7 @@ public abstract class CombatAI extends FakePlayerAI {
 
 
 	public void checkIfFinishedLvlUp(){
-		if(_fakePlayer.getLevel() >= 78 && checkIfInRainboSprings()){
+		if(_fakePlayer.getLevel() >= 78 && ZoneChecker.checkIfInRainboSprings(_fakePlayer)){
 			_fakePlayer.setFakeAi(new LevelingUpAi(_fakePlayer));
 		}
 	}

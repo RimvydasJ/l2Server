@@ -9,6 +9,7 @@ import com.elfocrash.roboto.ai.walker.CommonWalkerAi;
 import com.elfocrash.roboto.ai.walker.LevelingUpAi;
 import com.elfocrash.roboto.helpers.ArmorHelper;
 import com.elfocrash.roboto.helpers.Enums.TownIds;
+import com.elfocrash.roboto.helpers.ZoneChecker;
 import com.elfocrash.roboto.model.OffensiveSpell;
 import net.sf.l2j.commons.math.MathUtil;
 import net.sf.l2j.commons.random.Rnd;
@@ -150,7 +151,7 @@ public abstract class FakePlayerAI
 			}
 		}
 		//For Pk players
-		if(Rnd.nextDouble() <= 0.1 && !checkIfInRainboSprings()){
+		if(Rnd.nextDouble() <= 0.1 && !ZoneChecker.checkIfInRainboSprings(_fakePlayer)){
 		    List<Player> pkTargets = _fakePlayer.getKnownTypeInRadius(Player.class,1500).stream().filter(x->x.getKarma()>1).collect(Collectors.toList());
 		    if(!pkTargets.isEmpty()){
 		        try {
@@ -161,7 +162,7 @@ public abstract class FakePlayerAI
             }
         }
         //For PvP players
-		if (Rnd.nextDouble() <= pvpPercentages && !checkIfInRainboSprings()) {
+		if (Rnd.nextDouble() <= pvpPercentages && !ZoneChecker.checkIfInRainboSprings(_fakePlayer)) {
 			if (_fakePlayer.getTarget() == null) {
 				List<Player> pvpTarget = _fakePlayer.getKnownTypeInRadius(Player.class, 1500).stream().filter(x -> (x.getPvpFlag() == 1) && (x.getClan() == null || (_fakePlayer.getClan() != null && x.getClan().getClanId() != _fakePlayer.getClan().getClanId()))).collect(Collectors.toList());
 				if (!pvpTarget.isEmpty()) {
@@ -175,7 +176,7 @@ public abstract class FakePlayerAI
 	}
 
 	protected void setPkTarget() {
-		if (Rnd.nextDouble() <= 0.001 && !checkIfInRainboSprings()) {
+		if (Rnd.nextDouble() <= 0.001 && !ZoneChecker.checkIfInRainboSprings(_fakePlayer)) {
 			if (_fakePlayer.getTarget() == null) {
 				List<Player> pvpTarget = _fakePlayer.getKnownTypeInRadius(Player.class, 1500).stream().filter(x -> !x.isDead() && (x.getClan() == null || (_fakePlayer.getClan() != null && x.getClan().getClanId() != _fakePlayer.getClan().getClanId()))).collect(Collectors.toList());
 				if (!pvpTarget.isEmpty()) {
@@ -189,7 +190,10 @@ public abstract class FakePlayerAI
 	}
 
     protected List<Creature> tryTargetNearIfPossible(List<Creature> targetsfilteredByLevel) {
-            List<Creature> nearTargets = targetsfilteredByLevel.stream().sorted((t1,t2)->Double.compare(MathUtil.calculateDistance(_fakePlayer,t1,true),MathUtil.calculateDistance(_fakePlayer,t2,true))).collect(Collectors.toList());
+            List<Creature> nearTargets = targetsfilteredByLevel.stream()
+					.sorted((t1,t2)->Double.compare(MathUtil.calculateDistance(_fakePlayer,t1,true),MathUtil.calculateDistance(_fakePlayer,t2,true)))
+					.filter(x->!x.isInCombat() && x.getMaxHp() == x.getCurrentHp())
+					.collect(Collectors.toList());
             if (nearTargets.isEmpty())
                 nearTargets = targetsfilteredByLevel;
             return nearTargets;
@@ -197,7 +201,7 @@ public abstract class FakePlayerAI
 
     private void setTargetbasedOnLevel(List<Creature> targets) {
 		List<Creature> finalTargets = targets;
-		if (checkIfInRainboSprings()) {
+		if (ZoneChecker.checkIfInRainboSprings(_fakePlayer)) {
 			List<Creature> filteredByLevel = targets.stream()
 					.filter(q -> ((_fakePlayer.getLevel() - q.getLevel()) < 6) && ((_fakePlayer.getLevel() - q.getLevel()) >= -10))
 					.filter(q -> !q.isAttackingNow() && !q.isInCombat() && q.getMaxHp() == q.getCurrentHp())
@@ -206,38 +210,28 @@ public abstract class FakePlayerAI
 			finalTargets = tryTargetNearIfPossible(filteredByLevel);
 		}
 
+		//Logika, kad kuo labiau issisklaidytu botai po zona, nors ir targina artimiausia moba
 		if (!finalTargets.isEmpty()) {
-			if (Rnd.nextDouble() < 0.1) {
+			if (Rnd.nextDouble() < 0.3) {
 				Creature target = finalTargets.get(Rnd.get(0, finalTargets.size() - 1));
 				_fakePlayer.setTarget(target);
+//				if (_fakePlayer.getFakeAi() instanceof CombatAI) {
+//					((CombatAI) _fakePlayer.getFakeAi()).checkIfNeedToChangeGear();
+//				}
+//				if (!(_fakePlayer.getFakeAi() instanceof LevelingUpAi)) {
+//					_fakePlayer.setTarget(target);
+//				}
 			} else {
 				List<Creature> newAvailableTargets = tryTargetNearIfPossible(finalTargets);
-				Creature target = newAvailableTargets.get(Rnd.get(0, newAvailableTargets.size() - 1));
+				Creature target = newAvailableTargets.get(0);
 				if (Rnd.nextDouble() < 0.2) {
-					target = newAvailableTargets.get(0);
-					if (!newAvailableTargets.isEmpty()) {
-						if (_fakePlayer.getFakeAi() instanceof CombatAI) {
-							((CombatAI) _fakePlayer.getFakeAi()).checkIfNeedToChangeGear();
-						}
-						if (!(_fakePlayer.getFakeAi() instanceof LevelingUpAi)) {
-							Creature targetAi = newAvailableTargets.get(0);
-							_fakePlayer.setTarget(targetAi);
-						}
-					}
+					target = newAvailableTargets.get(Rnd.get(0,newAvailableTargets.size()-1));
+					_fakePlayer.setTarget(target);
 				} else {
 					_fakePlayer.setTarget(target);
 				}
 			}
 		}
-
-	}
-
-	// Rainbow springs area (reikia iskelti koordinates)
-	protected boolean checkIfInRainboSprings(){
-		return _fakePlayer.getNearestTownId() == TownIds.Goddard
-				&& (_fakePlayer.getX() > 135000 && _fakePlayer.getX() < 150000)
-				&& (_fakePlayer.getY() < -110000 && _fakePlayer.getY() > -140000)
-				&& (_fakePlayer.getZ() < -1400 && _fakePlayer.getZ() > -3000);
 	}
 
 	public void castSpell(L2Skill skill) {
@@ -492,18 +486,10 @@ public abstract class FakePlayerAI
 	protected abstract int[][] getBuffs();
 
 	public void changeBotAiToWalkerBecauseOfTown(){
-		if(iterationBeforeSetAiInTown >=15) {
-			if((_fakePlayer.getFakeAi() instanceof CommonWalkerAi)) {
-				moveTo(_fakePlayer.getX() + Rnd.get(-5, 5), _fakePlayer.getY() + Rnd.get(-5, 5), _fakePlayer.getZ());
-			}
-			if (_fakePlayer.isInsideZone(ZoneId.TOWN)) {
-
-				_fakePlayer.setFakeAi(new CommonWalkerAi(_fakePlayer));
-			}
-			iterationBeforeSetAiInTown = 0;
-		}
-		iterationBeforeSetAiInTown++;
+		if(ZoneChecker.checkIfInGiran(_fakePlayer)){
+			_fakePlayer.setFakeAi(new CommonWalkerAi(_fakePlayer));
 	}
+}
 
 	public boolean checkGearAvailability(){
 		if((_fakePlayer.getLevel() >= 52 && _fakePlayer.getLevel() < 61 && !getGearB())

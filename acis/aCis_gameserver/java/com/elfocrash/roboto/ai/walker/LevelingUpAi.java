@@ -4,6 +4,7 @@ import com.elfocrash.roboto.FakePlayer;
 import com.elfocrash.roboto.ai.FakePlayerAI;
 import com.elfocrash.roboto.helpers.ArmorHelper;
 import com.elfocrash.roboto.helpers.WeaponHelper;
+import com.elfocrash.roboto.helpers.ZoneChecker;
 import com.elfocrash.roboto.model.WalkNode;
 import net.sf.l2j.commons.random.Rnd;
 import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
@@ -89,7 +90,7 @@ public class LevelingUpAi extends FakePlayerAI {
     }
 
     private void moveToGmShop(){
-        if(checkIfInRainboSprings()) {
+        if(ZoneChecker.checkIfInRainboSprings(_fakePlayer)) {
             if(checkGearAvailability()) {
                 if(!StandStill){
                     moveToLocation();
@@ -178,7 +179,7 @@ public class LevelingUpAi extends FakePlayerAI {
     }
 
     private void goToGiran(){
-        if(_fakePlayer.getLevel() >= 78 && checkIfInRainboSprings()){
+        if(_fakePlayer.getLevel() >= 78 && ZoneChecker.checkIfInRainboSprings(_fakePlayer)){
             int x = 140904+RandX;
             int y = -124056+RandY;
             int z = -1904;

@@ -4,6 +4,7 @@ import com.elfocrash.roboto.FakePlayer;
 import com.elfocrash.roboto.ai.FakePlayerAI;
 import com.elfocrash.roboto.helpers.Enums.TownIds;
 import com.elfocrash.roboto.helpers.FakeHelpers;
+import com.elfocrash.roboto.helpers.ZoneChecker;
 import com.elfocrash.roboto.model.WalkNode;
 import com.elfocrash.roboto.model.WalkerType;
 import java.util.*;
@@ -31,10 +32,6 @@ public abstract class WalkerAI extends FakePlayerAI {
 		return _walkNodes;
 	}
 
-	protected void addWalkNode(WalkNode walkNode) {
-		_walkNodes.add(walkNode);
-	}
-
 	@Override
 	public void setup() {
 		super.setup();
@@ -45,57 +42,56 @@ public abstract class WalkerAI extends FakePlayerAI {
 	@Override
 	public void thinkAndAct() {
 		_fakePlayer.broadcastUserInfo();
-		if(checkIfInRainboSprings()){
+		if (ZoneChecker.checkIfInRainboSprings(_fakePlayer)) {
 			_fakePlayer.setFakeAi(new RainbowWalkerAi(_fakePlayer));
 		}
 		setBusyThinking(true);
 
-			if (freezeTestInteration == 0)
-				testLocX = _fakePlayer.getX();
-			handleDeath();
-			teleportToZone();
-			freezeTest();
-			if (_walkNodes.isEmpty())
-				return;
+		if (freezeTestInteration == 0)
+			testLocX = _fakePlayer.getX();
+		handleDeath();
+		teleportToZone();
+		freezeTest();
+		if (_walkNodes.isEmpty())
+			return;
 
-			if (isWalking) {
-				cancelWalkingStartAttack();
-				//Default behaviour, after it reaches final destination
-				if (userReachedDestination(_currentWalkNode)) {
-					if (currentStayIterations < _currentWalkNode.getStayIterations()) {
-						currentStayIterations++;
-						if(currentStayIterations == 3){
-							_fakePlayer.broadcastUserInfo();
-						}
-						setBusyThinking(false);
-						targetingGkOrMob();
-						return;
-					}
-					_currentWalkNode = null;
-					currentStayIterations = 0;
-					isWalking = false;
-				}
-			}
+		if (isWalking) {
+			//Galbut nutraukti ejima ir pradeti musti
+			cancelWalkingStartAttack();
 
-			if (!isWalking && _currentWalkNode == null) {
-				switch (getWalkerType()) {
-					//Mostly is used in towns.
-					case RANDOM:
-						_currentWalkNode = (WalkNode) getWalkNodes().toArray()[Rnd.get(0, getWalkNodes().size() - 1)];
-						_fakePlayer.destinationWalkNode = _currentWalkNode;
-						break;
-					//TODO: implement LINEAR if its needed in any zone. For example: going to any loc from spawn loc.
-					case LINEAR:
-						_currentWalkNode = getWalkNodes().poll();
-						_walkNodes.add(_currentWalkNode);
-						break;
+			//Default behaviour, after it reaches final destination
+			if (userReachedDestination(_currentWalkNode)) {
+				if (currentStayIterations < _currentWalkNode.getStayIterations()) {
+					currentStayIterations++;
+					_fakePlayer.updateAndBroadcastStatus(1);
+					setBusyThinking(false);
+					targetingGkOrMob();
+					return;
 				}
-				_fakePlayer.getFakeAi().moveTo(_currentWalkNode.getX(), _currentWalkNode.getY(), _currentWalkNode.getZ());
-				isWalking = true;
+				_currentWalkNode = null;
+				currentStayIterations = 0;
+				isWalking = false;
 			}
+		}
+
+		if (!isWalking && _currentWalkNode == null) {
+			switch (getWalkerType()) {
+				//Mostly is used in towns.
+				case RANDOM:
+					_currentWalkNode = (WalkNode) getWalkNodes().toArray()[Rnd.get(0, getWalkNodes().size() - 1)];
+					_fakePlayer.destinationWalkNode = _currentWalkNode;
+					break;
+				//TODO: implement LINEAR if its needed in any zone. For example: going to any loc from spawn loc.
+				case LINEAR:
+					_currentWalkNode = getWalkNodes().poll();
+					_walkNodes.add(_currentWalkNode);
+					break;
+			}
+			_fakePlayer.getFakeAi().moveTo(_currentWalkNode.getX(), _currentWalkNode.getY(), _currentWalkNode.getZ());
+			isWalking = true;
+		}
 
 		setBusyThinking(false);
-
 	}
 
 	@Override
@@ -119,7 +115,7 @@ public abstract class WalkerAI extends FakePlayerAI {
 		if (_fakePlayer.getTarget() != null && _fakePlayer.getTarget() instanceof Gatekeeper) {
 			//TODO If possible not needed
 			//Farm zone
-			if (_fakePlayer.getLevel() >= 78 && _fakePlayer.getNearestTownId() != 15) {
+			if (_fakePlayer.getLevel() >= 78) {
 				List<L2TeleportLocation> locations = new ArrayList<>();
 
 				L2TeleportLocation locEvaGarden = new L2TeleportLocation();
@@ -134,8 +130,10 @@ public abstract class WalkerAI extends FakePlayerAI {
 
 				L2TeleportLocation whereToGo = locations.get(Rnd.get(0, locations.size() - 1));
 				if (_fakePlayer.getFakeAi().teleportToLocation(whereToGo.getLocX(), whereToGo.getLocY(), whereToGo.getLocZ(), 20)) {
-					_fakePlayer.setFakeAi(new CommonWalkerAi(_fakePlayer));
-					if (_fakePlayer.getNearestTownId() == 13) {
+					if(ZoneChecker.checkIfInLoa(_fakePlayer)) {
+						_fakePlayer.setFakeAi(new CommonWalkerAi(_fakePlayer));
+					}
+					if (ZoneChecker.checkIfInEvaGarden(_fakePlayer)) {
 						_fakePlayer.assignDefaultAI();
 					}
 				}
@@ -143,12 +141,11 @@ public abstract class WalkerAI extends FakePlayerAI {
 			//Level up zone
 			else if (_fakePlayer.getLevel() < 78) {
 				if (_fakePlayer.getFakeAi().teleportToLocation(141240, -124216, -1864, 20)) {
-					_fakePlayer.broadcastUserInfo();
 					_fakePlayer.setFakeAi(new CommonWalkerAi(_fakePlayer));
 				}
 			}
 			//Giran
-			else if (_fakePlayer.getLevel() >= 78 && _fakePlayer.getNearestTownId() == 15) {
+			else if (_fakePlayer.getLevel() >= 78 && ZoneChecker.checkIfInRainboSprings(_fakePlayer)) {
 				if (_fakePlayer.getFakeAi().teleportToLocation(83448 + Rnd.get(-100, 100), 148568 + Rnd.get(-100, 100), -3473, 20)) {
 					_fakePlayer.setFakeAi(new CommonWalkerAi(_fakePlayer));
 				}
@@ -181,12 +178,6 @@ public abstract class WalkerAI extends FakePlayerAI {
 			_fakePlayer.setTarget(gk);
 			_fakePlayer.getAI().setIntention(CtrlIntention.INTERACT);
 		}
-		//GK naudojimas kai Lvl zonoje
-		else if(_fakePlayer.getNearestTownId() == 15 && _fakePlayer.getLevel() >= 78 && _fakePlayer.getKnownTypeInRadius(Gatekeeper.class, 200).size() > 0){
-			Gatekeeper gk = _fakePlayer.getKnownTypeInRadius(Gatekeeper.class, 200).get(0);
-			_fakePlayer.setTarget(gk);
-			_fakePlayer.getAI().setIntention(CtrlIntention.INTERACT);
-		}
 		//Mob targinimas
 		else if (!_fakePlayer.isInsideZone(ZoneId.TOWN) && _fakePlayer.getLevel() >=78) {
 			_fakePlayer.assignDefaultAI();
@@ -194,15 +185,12 @@ public abstract class WalkerAI extends FakePlayerAI {
 	}
 
 	private void cancelWalkingStartAttack(){
-		if (Rnd.nextDouble() <= 0.01) {
-			if (!_fakePlayer.isInsideZone(ZoneId.TOWN) && !_fakePlayer.isInsideZone(ZoneId.PEACE) && !checkIfInRainboSprings() && _fakePlayer.getLevel() >=78) {
-
-				//tryTargetPlayerInPvp();
-				tryTargetRandomCreatureByTypeInRadius(FakeHelpers.getTestTargetClass(), FakeHelpers.getTestTargetRange());
+		if (Rnd.nextDouble() <= 0.05 && ZoneChecker.checkIfInLoa(_fakePlayer)) {
+				tryTargetRandomCreatureByTypeInRadius(FakeHelpers.getTestTargetClass(), 2000);
 				if(_fakePlayer.getTarget() != null){
 					_fakePlayer.assignDefaultAI();
 				}
-			}
+
 		}
 	}
 }
