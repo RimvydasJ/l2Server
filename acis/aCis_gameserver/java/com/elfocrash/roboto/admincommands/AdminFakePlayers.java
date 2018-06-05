@@ -8,6 +8,7 @@ import com.elfocrash.roboto.ai.walker.CommonWalkerAi;
 import com.elfocrash.roboto.ai.walker.RainbowWalkerAi;
 import com.elfocrash.roboto.helpers.FakeHelpers;
 import com.elfocrash.roboto.helpers.MapSpawnHelper;
+import com.elfocrash.roboto.model.WalkNode;
 import com.mchange.v2.cfg.PropertiesConfigSource;
 import net.sf.l2j.commons.random.Rnd;
 import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
@@ -130,6 +131,7 @@ public class AdminFakePlayers implements IAdminCommandHandler {
                     int x = MapSpawnHelper.RainbowSprings.get(coordId).X;
                     int y = MapSpawnHelper.RainbowSprings.get(coordId).Y;
                     int z = MapSpawnHelper.RainbowSprings.get(coordId).Z;
+
                     FakePlayer fakePlayer = FakePlayerManager.INSTANCE.spawnPlayer(x, y, z, 40,false);
                     fakePlayer.setFakeAi(new RainbowWalkerAi(fakePlayer));
                 }
@@ -157,9 +159,8 @@ public class AdminFakePlayers implements IAdminCommandHandler {
         if(command.startsWith("admin_faketest")){
             if(activeChar.getTarget() instanceof FakePlayer){
                 FakePlayer target = (FakePlayer)activeChar.getTarget();
-
-                activeChar.sendMessage("Start auto attack: " + target.getTarget().getName());
-                target.getAI().setAutoAttacking(true);
+                WalkNode node = target.destinationWalkNode;
+                activeChar.teleToLocation(node.getX(),node.getY(),node.getZ(),0);
                 target.forceAutoAttack((Creature)target.getTarget());
             }
         }
