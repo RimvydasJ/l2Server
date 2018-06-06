@@ -13,6 +13,7 @@ import net.sf.l2j.gameserver.datatables.AdminCommandAccessRights;
 import net.sf.l2j.gameserver.datatables.AnnouncementTable;
 import net.sf.l2j.gameserver.datatables.GmListTable;
 import net.sf.l2j.gameserver.datatables.MapRegionTable.TeleportType;
+import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.datatables.SkillTable.FrequentSkill;
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
 import net.sf.l2j.gameserver.instancemanager.ClanHallManager;
@@ -83,21 +84,22 @@ public class EnterWorld extends L2GameClientPacket
 		
 		if (activeChar.isGM())
 		{
+			activeChar.doCast(SkillTable.getInstance().getInfo(7029, 4));
 			if (Config.GM_STARTUP_INVULNERABLE && AdminCommandAccessRights.getInstance().hasAccess("admin_invul", activeChar.getAccessLevel()))
 				activeChar.setIsInvul(true);
 			
 			if (Config.GM_STARTUP_INVISIBLE && AdminCommandAccessRights.getInstance().hasAccess("admin_hide", activeChar.getAccessLevel()))
 				activeChar.getAppearance().setInvisible();
-			
+
 			if (Config.GM_STARTUP_SILENCE && AdminCommandAccessRights.getInstance().hasAccess("admin_silence", activeChar.getAccessLevel()))
 				activeChar.setInRefusalMode(true);
-			
+
 			if (Config.GM_STARTUP_AUTO_LIST && AdminCommandAccessRights.getInstance().hasAccess("admin_gmlist", activeChar.getAccessLevel()))
 				GmListTable.getInstance().addGm(activeChar, false);
 			else
 				GmListTable.getInstance().addGm(activeChar, true);
 		}
-		
+
 		// Set dead status if applies
 		if (activeChar.getCurrentHp() < 0.5)
 			activeChar.setIsDead(true);

@@ -200,15 +200,13 @@ public abstract class FakePlayerAI
     }
 
     private void setTargetbasedOnLevel(List<Creature> targets) {
-		List<Creature> finalTargets = targets;
-		if (ZoneChecker.checkIfInRainboSprings(_fakePlayer)) {
-			List<Creature> filteredByLevel = targets.stream()
-					.filter(q -> ((_fakePlayer.getLevel() - q.getLevel()) < 6) && ((_fakePlayer.getLevel() - q.getLevel()) >= -10))
-					.filter(q -> !q.isAttackingNow() && !q.isInCombat() && q.getMaxHp() == q.getCurrentHp())
-					.collect(Collectors.toList());
+		List<Creature> finalTargets;
+		List<Creature> filteredByLevel = targets.stream()
+				.filter(q -> ((_fakePlayer.getLevel() - q.getLevel()) < 6) && ((_fakePlayer.getLevel() - q.getLevel()) >= -10))
+				.filter(q -> !q.isAttackingNow() && !q.isInCombat() && q.getMaxHp() == q.getCurrentHp())
+				.collect(Collectors.toList());
 
-			finalTargets = tryTargetNearIfPossible(filteredByLevel);
-		}
+		finalTargets = tryTargetNearIfPossible(filteredByLevel);
 
 		//Logika, kad kuo labiau issisklaidytu botai po zona, nors ir targina artimiausia moba
 		if (!finalTargets.isEmpty()) {
@@ -225,7 +223,7 @@ public abstract class FakePlayerAI
 				List<Creature> newAvailableTargets = tryTargetNearIfPossible(finalTargets);
 				Creature target = newAvailableTargets.get(0);
 				if (Rnd.nextDouble() < 0.2) {
-					target = newAvailableTargets.get(Rnd.get(0,newAvailableTargets.size()-1));
+					target = newAvailableTargets.get(Rnd.get(0, newAvailableTargets.size() - 1));
 					_fakePlayer.setTarget(target);
 				} else {
 					_fakePlayer.setTarget(target);

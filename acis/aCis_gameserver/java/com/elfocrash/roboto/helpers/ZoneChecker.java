@@ -25,4 +25,9 @@ public class ZoneChecker {
         return (_fakePlayer.getX() > 76824 && _fakePlayer.getX() < 86776)
                 && (_fakePlayer.getY() < 155800 && _fakePlayer.getY() > 143416);
     }
+
+    public static boolean checkIfInSquare(FakePlayer _fakePlayer, StandingImitation.SquarePoints squarePoints){
+        return (_fakePlayer.getX() > squarePoints.GetXmin() && _fakePlayer.getX() < squarePoints.GetXmax())
+                && (_fakePlayer.getY() > squarePoints.GetYmin() && _fakePlayer.getY() < squarePoints.GetYmax());
+    }
 }

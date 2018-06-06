@@ -3170,7 +3170,7 @@ public abstract class Creature extends WorldObject
 	{
 		// Delete movement data of the Creature
 		_move = null;
-		
+
 		// Set the current position and refresh the region if necessary.
 		if (loc != null)
 		{

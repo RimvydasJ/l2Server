@@ -4,6 +4,7 @@ import com.elfocrash.roboto.FakePlayer;
 import com.elfocrash.roboto.ai.FakePlayerAI;
 import com.elfocrash.roboto.helpers.Enums.TownIds;
 import com.elfocrash.roboto.helpers.FakeHelpers;
+import com.elfocrash.roboto.helpers.StandingImitation;
 import com.elfocrash.roboto.helpers.ZoneChecker;
 import com.elfocrash.roboto.model.WalkNode;
 import com.elfocrash.roboto.model.WalkerType;
@@ -42,6 +43,7 @@ public abstract class WalkerAI extends FakePlayerAI {
 	@Override
 	public void thinkAndAct() {
 		_fakePlayer.broadcastUserInfo();
+		giranStandingImitation();
 		if (ZoneChecker.checkIfInRainboSprings(_fakePlayer)) {
 			_fakePlayer.setFakeAi(new RainbowWalkerAi(_fakePlayer));
 		}
@@ -191,6 +193,22 @@ public abstract class WalkerAI extends FakePlayerAI {
 					_fakePlayer.assignDefaultAI();
 				}
 
+		}
+	}
+
+	private void giranStandingImitation(){
+		if(ZoneChecker.checkIfInGiran(_fakePlayer) && ZoneChecker.checkIfInSquare(_fakePlayer,
+				StandingImitation.GetGiranSquareForStandingImitation()) && Rnd.nextDouble() < 0.1){
+			if(currentStayIterations < 10){
+				_fakePlayer.stopMove(null);
+				currentStayIterations++;
+				return;
+			}
+			else{
+			currentStayIterations = 0;
+			isWalking =false;
+			_currentWalkNode = null;
+			}
 		}
 	}
 }
