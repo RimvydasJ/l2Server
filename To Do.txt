@@ -1,3 +1,5 @@
+SUTVARKYTI GITHUB STRUKTURA
+
 Fighter - po skillo leidimo, nebenori musti auto attack
 
 Surasti, kas neuzdaro mysql connectionu
