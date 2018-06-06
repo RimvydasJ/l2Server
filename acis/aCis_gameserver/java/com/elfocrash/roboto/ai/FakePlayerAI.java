@@ -133,8 +133,13 @@ public abstract class FakePlayerAI
             List<Creature> targets = _fakePlayer.getKnownTypeInRadius(creatureClass, radius).stream().filter(x -> !x.isDead()).collect(Collectors.toList());
             setTargetbasedOnLevel(targets);
         }else {
-			if(((Creature)_fakePlayer.getTarget()).isDead())
-			_fakePlayer.setTarget(null);
+			if(((Creature)_fakePlayer.getTarget()).isDead()) {
+				_fakePlayer.setTarget(null);
+				if (_fakePlayer.getFakeAi() instanceof CombatAI) {
+					((CombatAI) _fakePlayer.getFakeAi()).checkIfNeedToChangeGear();
+				}
+
+			}
 		}	
 	}
 
@@ -213,12 +218,6 @@ public abstract class FakePlayerAI
 			if (Rnd.nextDouble() < 0.3) {
 				Creature target = finalTargets.get(Rnd.get(0, finalTargets.size() - 1));
 				_fakePlayer.setTarget(target);
-//				if (_fakePlayer.getFakeAi() instanceof CombatAI) {
-//					((CombatAI) _fakePlayer.getFakeAi()).checkIfNeedToChangeGear();
-//				}
-//				if (!(_fakePlayer.getFakeAi() instanceof LevelingUpAi)) {
-//					_fakePlayer.setTarget(target);
-//				}
 			} else {
 				List<Creature> newAvailableTargets = tryTargetNearIfPossible(finalTargets);
 				Creature target = newAvailableTargets.get(0);
