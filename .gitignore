@@ -3,3 +3,6 @@ acis/aCis_datapack/log/
 acis/.idea
 acis/aCis_gameserver/.idea
 .idea/
+acis/aCis_gameserver/bin/
+acis/aCis_gameserver/build/
+acis/aCis_gameserver/.settings/
