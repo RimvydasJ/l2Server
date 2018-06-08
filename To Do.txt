@@ -1,7 +1,3 @@
-SUTVARKYTI GITHUB STRUKTURA
-
-Fighter - po skillo leidimo, nebenori musti auto attack
-
 Surasti, kas neuzdaro mysql connectionu
 
 Kaip padaryti parcius
@@ -9,12 +5,9 @@ Kaip padaryti klanus
 Kaip jie vaiskciosi kartu (kas ka seks)
 
 
-1)Pradinis atsiradimas
-	a)Atsiranda (random - Girane/Lvl zonoj/etc.)
+1)Pradinis atsiradimas	
 	b)Eina buffu, itemu (priklausomai kur atsirado)
-	c)Eina musti mobu, keltis leveli
-		1)Jeigu mirsta nepasikeles levelio 76, turi grysti atgal i levelio zona (eiti toliau keltis levelio)
-	d)Pasikeles leveli eina atgal i meista (Giran)
+
 
 2)Itemu farminimas
 	a)Random eina i viena is zonu (antharas lair, garden of eva)

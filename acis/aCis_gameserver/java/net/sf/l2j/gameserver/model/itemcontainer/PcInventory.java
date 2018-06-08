@@ -223,7 +223,24 @@ public class PcInventory extends Inventory
 		}
 		return list.toArray(new ItemInstance[list.size()]);
 	}
-	
+
+	/**
+	 * Get all equiped items
+	 */
+
+	 public List<ItemInstance> getAllEquipedItems(){
+
+	 	List<ItemInstance> items = new ArrayList<>();
+	 	for(ItemInstance item: _items){
+	 		if(item == null)
+	 			continue;
+	 		if(item.getLocation() == ItemLocation.PAPERDOLL){
+	 			items.add(item);
+			}
+		}
+		return items;
+	 }
+
 	/**
 	 * Returns the list of items in inventory available for transaction
 	 * @param allowAdena

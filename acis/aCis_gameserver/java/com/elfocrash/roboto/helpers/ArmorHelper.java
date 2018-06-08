@@ -1,6 +1,7 @@
 package com.elfocrash.roboto.helpers;
 
 import com.elfocrash.roboto.FakePlayer;
+import com.elfocrash.roboto.helpers.Enums.ItemGrade;
 import net.sf.l2j.commons.random.Rnd;
 import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
@@ -120,5 +121,36 @@ public class ArmorHelper {
                 break;
         }
         return itemIds;
+    }
+
+    public List<Integer> getAllOneGradeGear(ItemGrade.Grade grade){
+
+        List<Integer> armorList = new ArrayList<>();
+        Armor armor = new Armor();
+        switch(grade){
+            case C:
+                armorList.addAll(armor.Robe40);
+                armorList.addAll(armor.Heavy40);
+                armorList.addAll(armor.Light40);
+                break;
+            case B:
+                armorList.addAll(armor.Robe52);
+                armorList.addAll(armor.Heavy52);
+                armorList.addAll(armor.Light52);
+                break;
+            case A:
+                armorList.addAll(armor.Robe61);
+                armorList.addAll(armor.Heavy61);
+                armorList.addAll(armor.Light61);
+                break;
+            case S:
+                armorList.addAll(armor.Robe76a);
+                armorList.addAll(armor.Robe76b);
+                armorList.addAll(armor.Light76);
+                armorList.addAll(armor.Heavy76);
+                break;
+        }
+
+        return armorList;
     }
 }

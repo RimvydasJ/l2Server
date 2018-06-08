@@ -2,6 +2,8 @@ package com.elfocrash.roboto.ai.walker;
 
 import com.elfocrash.roboto.FakePlayer;
 import com.elfocrash.roboto.ai.FakePlayerAI;
+import com.elfocrash.roboto.helpers.ArmorHelper;
+import com.elfocrash.roboto.helpers.Enums.ItemGrade;
 import com.elfocrash.roboto.helpers.Enums.TownIds;
 import com.elfocrash.roboto.helpers.FakeHelpers;
 import com.elfocrash.roboto.helpers.StandingImitation;
@@ -9,11 +11,17 @@ import com.elfocrash.roboto.helpers.ZoneChecker;
 import com.elfocrash.roboto.model.WalkNode;
 import com.elfocrash.roboto.model.WalkerType;
 import java.util.*;
+import java.util.stream.Collectors;
+
 import net.sf.l2j.commons.random.Rnd;
+import net.sf.l2j.gameserver.cache.CrestCache;
+import net.sf.l2j.gameserver.datatables.ClanTable;
 import net.sf.l2j.gameserver.datatables.TeleportLocationTable;
+import net.sf.l2j.gameserver.model.L2Clan;
 import net.sf.l2j.gameserver.model.L2TeleportLocation;
 import net.sf.l2j.gameserver.model.actor.ai.CtrlIntention;
 import net.sf.l2j.gameserver.model.actor.instance.Gatekeeper;
+import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
 import net.sf.l2j.gameserver.model.zone.ZoneId;
 
 public abstract class WalkerAI extends FakePlayerAI {
@@ -46,6 +54,9 @@ public abstract class WalkerAI extends FakePlayerAI {
 		giranStandingImitation();
 		if (ZoneChecker.checkIfInRainboSprings(_fakePlayer)) {
 			_fakePlayer.setFakeAi(new RainbowWalkerAi(_fakePlayer));
+		}
+		if(_fakePlayer.getClan() == null){
+			checkIfAbleToCreateAClan();
 		}
 		setBusyThinking(true);
 
@@ -209,6 +220,45 @@ public abstract class WalkerAI extends FakePlayerAI {
 			isWalking =false;
 			_currentWalkNode = null;
 			}
+		}
+	}
+
+	private void checkIfAbleToCreateAClan(){
+		// TODO: Nepamirsti ideti random
+		if(_fakePlayer.getLevel() == 80 && checkIfSGradeGear() && Rnd.get(0,100) == 50){
+			Collection<L2Clan> clans = ClanTable.getInstance().getClans().stream().filter(x->x.IsClanFake()).collect(Collectors.toList());
+			if(clans.size() < 10){
+				createNewClan();
+			} else{
+				return;
+			}
+		}
+
+	}
+
+	private boolean checkIfSGradeGear(){
+		List<Integer> allSGradeItems = new ArmorHelper().getAllOneGradeGear(ItemGrade.Grade.S);
+		for(ItemInstance item :_fakePlayer.getInventory().getAllEquipedItems()){
+			if(allSGradeItems.contains(item.getItemId())){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private void createNewClan(){
+		String clanName = FakeHelpers.getRandomClanName();
+		L2Clan existing = ClanTable.getInstance().getClanByName(clanName);
+		if (existing == null) {
+			L2Clan clan = ClanTable.getInstance().createClan(_fakePlayer, clanName);
+			if(clan != null){
+				clan.SetFakeClan(true);
+				_fakePlayer.setTitle(clanName);
+				int id = CrestCache.getInstance().getRandomCrestId();
+				clan.setLevel(5);
+				clan.changeClanCrest(id);
+			}
+
 		}
 	}
 }

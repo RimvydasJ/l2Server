@@ -11,7 +11,9 @@ import com.elfocrash.roboto.helpers.MapSpawnHelper;
 import com.elfocrash.roboto.model.WalkNode;
 import com.mchange.v2.cfg.PropertiesConfigSource;
 import net.sf.l2j.commons.random.Rnd;
+import net.sf.l2j.gameserver.datatables.ClanTable;
 import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
+import net.sf.l2j.gameserver.model.L2Clan;
 import net.sf.l2j.gameserver.model.L2Skill;
 import net.sf.l2j.gameserver.model.WorldObject;
 import net.sf.l2j.gameserver.model.actor.Creature;
@@ -20,6 +22,7 @@ import net.sf.l2j.gameserver.model.actor.ai.IntentionCommand;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.zone.ZoneId;
 import net.sf.l2j.gameserver.network.serverpackets.NpcHtmlMessage;
+import net.sf.l2j.gameserver.scripting.scripts.village_master.Clan;
 
 import java.util.List;
 import java.util.Random;
@@ -81,14 +84,14 @@ public class AdminFakePlayers implements IAdminCommandHandler {
 
             //2 - clan name provided
             if (params.length == 2) {
-                //TODO Clan things
-            }
+                        //TODO Clan things
+                    }
 
-            //3 - clan name && count
-            else if (params.length == 3) {
-                Thread t1 = new Thread(() -> {
-                    System.out.println("Start spawning: " + params[2] + " bots");
-                    for (int i = 0; i < Integer.parseInt(params[2]); i++) {
+                    //3 - clan name && count
+                    else if (params.length == 3) {
+                        Thread t1 = new Thread(() -> {
+                            System.out.println("Start spawning: " + params[2] + " bots");
+                            for (int i = 0; i < Integer.parseInt(params[2]); i++) {
                         FakePlayer fakePlayer = FakePlayerManager.INSTANCE.spawnPlayer(activeChar.getX() + Rnd.get(-200, 200), activeChar.getY() + Rnd.get(-200, 200), activeChar.getZ());
                         fakePlayer.assignDefaultAI();
                     }
@@ -152,6 +155,11 @@ public class AdminFakePlayers implements IAdminCommandHandler {
                     activeChar.sendMessage("Target: " + target.getTarget().getName());
                 if (target.isInsideZone(ZoneId.TOWN))
                     activeChar.sendMessage("Is in town");
+            } else {
+                String size = Integer.toString(ClanTable.getInstance().getClans().size());
+                if(size != null){
+                    activeChar.sendMessage("Clan size: " + size);
+                }
             }
             return true;
         }

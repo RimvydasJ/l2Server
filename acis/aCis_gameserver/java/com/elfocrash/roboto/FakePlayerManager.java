@@ -51,7 +51,7 @@ public enum FakePlayerManager {
 		
 		if (Config.PLAYER_SPAWN_PROTECTION > 0)
 			activeChar.setSpawnProtection(true);
-
+		activeChar.setClan(null);
 		activeChar.spawnMe(x, y, z);
 		activeChar.onPlayerEnter();
 		

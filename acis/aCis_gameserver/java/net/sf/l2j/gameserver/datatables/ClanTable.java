@@ -186,7 +186,7 @@ public class ClanTable
 		player.setClanPrivileges(L2Clan.CP_ALL);
 		
 		_clans.put(clan.getClanId(), clan);
-		
+
 		player.sendPacket(new PledgeShowMemberListAll(clan, 0));
 		player.sendPacket(new UserInfo(player));
 		player.sendPacket(SystemMessageId.CLAN_CREATED);

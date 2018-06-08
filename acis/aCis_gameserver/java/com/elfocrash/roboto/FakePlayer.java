@@ -6,19 +6,15 @@ import com.elfocrash.roboto.helpers.FakeHelpers;
 import java.util.logging.Level;
 
 import com.elfocrash.roboto.model.WalkNode;
+import net.sf.l2j.gameserver.datatables.ClanTable;
 import net.sf.l2j.gameserver.datatables.GmListTable;
 import net.sf.l2j.gameserver.datatables.MapRegionTable;
 import net.sf.l2j.gameserver.datatables.SkillTable.FrequentSkill;
 import net.sf.l2j.gameserver.geoengine.GeoEngine;
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
 import net.sf.l2j.gameserver.instancemanager.CursedWeaponsManager;
-import net.sf.l2j.gameserver.model.L2ClanMember;
-import net.sf.l2j.gameserver.model.L2Effect;
-import net.sf.l2j.gameserver.model.L2Skill;
+import net.sf.l2j.gameserver.model.*;
 import net.sf.l2j.gameserver.model.L2Skill.SkillTargetType;
-import net.sf.l2j.gameserver.model.Location;
-import net.sf.l2j.gameserver.model.World;
-import net.sf.l2j.gameserver.model.WorldObject;
 import net.sf.l2j.gameserver.model.actor.Attackable;
 import net.sf.l2j.gameserver.model.actor.Creature;
 import net.sf.l2j.gameserver.model.actor.Playable;
@@ -518,7 +514,18 @@ public class FakePlayer extends Player
 			setTarget(null);
 			
 			removeMeFromPartyMatch();
-			
+
+			if(getClan() != null){
+				L2Clan clan = getClan();
+				if(isClanLeader()) {
+					for(L2ClanMember member : clan.getMembers()){
+						clan.removeClanMember(member.getObjectId(), 0);
+					}
+					ClanTable.getInstance().destroyClan(clan);
+				} else {
+					clan.removeClanMember(getObjectId(), 0);
+				}
+			}
 			if (isFlying())
 				removeSkill(FrequentSkill.WYVERN_BREATH.getSkill().getId(), false);
 			
@@ -565,13 +572,7 @@ public class FakePlayer extends Player
 			if (OlympiadManager.getInstance().isRegistered(this) || getOlympiadGameId() != -1)
 				OlympiadManager.getInstance().removeDisconnectedCompetitor(this);
 			
-			// set the status for pledge member list to OFFLINE
-			if (getClan() != null)
-			{
-				L2ClanMember clanMember = getClan().getClanMember(getObjectId());
-				if (clanMember != null)
-					clanMember.setPlayerInstance(null);
-			}
+
 			
 			// deals with sudden exit in the middle of transaction
 			if (getActiveRequester() != null)

@@ -1,5 +1,6 @@
 package net.sf.l2j.gameserver;
 
+import com.elfocrash.roboto.ClanManager;
 import com.elfocrash.roboto.FakePlayerManager;
 
 import java.io.File;
@@ -274,7 +275,8 @@ public class GameServer
 		MonsterRace.getInstance();
 
 		FakePlayerManager.INSTANCE.initialise();
-		
+		ClanManager.Initialize().LoadClanNames();
+
 		if (Config.ALLOW_WEDDING)
 			CoupleManager.getInstance();
 		

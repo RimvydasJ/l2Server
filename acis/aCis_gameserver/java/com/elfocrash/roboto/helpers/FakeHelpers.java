@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.elfocrash.roboto.ClanManager;
 import com.elfocrash.roboto.FakePlayer;
 import com.elfocrash.roboto.FakePlayerNameManager;
 import com.elfocrash.roboto.ai.AdventurerAI;
@@ -242,5 +243,10 @@ public class FakeHelpers {
 			return FallbackAI.class;
 
 		return ai;
+	}
+
+	public static String getRandomClanName(){
+		List<String> clanNames = ClanManager.getClanNames();
+		return clanNames.get(Rnd.get(0, clanNames.size()-1));
 	}
 }

@@ -329,7 +329,10 @@ public final class ItemInstance extends WorldObject implements Runnable, Compara
 		assert _loc == ItemLocation.PAPERDOLL || _loc == ItemLocation.PET_EQUIP || _loc == ItemLocation.FREIGHT;
 		return _locData;
 	}
-	
+
+
+
+
 	/**
 	 * Returns the characteristics of the item
 	 * @return L2Item
