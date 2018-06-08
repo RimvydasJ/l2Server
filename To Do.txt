@@ -5,23 +5,8 @@ Kaip padaryti klanus
 Kaip jie vaiskciosi kartu (kas ka seks)
 
 
-1)Pradinis atsiradimas	
-	b)Eina buffu, itemu (priklausomai kur atsirado)
-
-
-2)Itemu farminimas
-	a)Random eina i viena is zonu (antharas lair, garden of eva)
-	b)Jeigu mirsta eina i miesta ir atgal i zona
-		1)Mirusysis gali buti prikeltas klano/party draugelio
-			a)Buffai(jei neturi), kad galetu toliau musti
-		
-	
-3)PvP
-	a)Kol farminasi zonose, gali eiti PvP
-		1)Prisipisineja prie zmoniu pats
-		2)Duoda i kaili atgal, jeigu kasnors ji skriaudzia (bet turi neatrodyti, kad iskarto automatiskai)
-			a)Arba neduoda, nes yra bailys
-		
+1)Pradinis atsiradimas
+	a)Atsiranda (random - Girane/Lvl zonoj/etc.)
 
 4)PvP kai turi Party
 	a)Partis turi padeti, bet priklausomai nuo gyvybiu, kad neatrodytu, kad visi yra botai
@@ -32,11 +17,6 @@ Kaip jie vaiskciosi kartu (kas ka seks)
 	a)Partis turi padeti, bet priklausomai nuo gyvybiu, kad neatrodytu, kad visi yra botai
 	b)Bishopas partyje (prikelimas,gydymas)
 	c)Saviskiu nekapoti
-	
-6)Karminimas
-	a)Pisa visus
-	b)Valosi karma
-	c)Pameta itemus - praso kad atiduotu
 	
 7)Olympiada - Herojai (Jeigu
 	a)Registruojasi
