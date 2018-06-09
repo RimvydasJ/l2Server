@@ -48,6 +48,7 @@ public class FakePlayer extends Player
 	public boolean isUnderControl() {
 		return _underControl;
 	}
+	public boolean invitedMember = false;
 	
 	public void setUnderControl(boolean underControl) {
 		_underControl = underControl;
@@ -651,5 +652,13 @@ public class FakePlayer extends Player
 		{
 			setTarget(attacker);
 		}
+	}
+
+	public boolean getInvitedMember(){
+		return invitedMember;
+	}
+
+	public void setInvitedMember(boolean status){
+		invitedMember = status;
 	}
 }

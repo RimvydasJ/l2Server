@@ -4,7 +4,6 @@ import com.elfocrash.roboto.FakePlayer;
 import com.elfocrash.roboto.ai.FakePlayerAI;
 import com.elfocrash.roboto.helpers.ArmorHelper;
 import com.elfocrash.roboto.helpers.Enums.ItemGrade;
-import com.elfocrash.roboto.helpers.Enums.TownIds;
 import com.elfocrash.roboto.helpers.FakeHelpers;
 import com.elfocrash.roboto.helpers.StandingImitation;
 import com.elfocrash.roboto.helpers.ZoneChecker;
@@ -19,6 +18,7 @@ import net.sf.l2j.gameserver.datatables.ClanTable;
 import net.sf.l2j.gameserver.datatables.TeleportLocationTable;
 import net.sf.l2j.gameserver.model.L2Clan;
 import net.sf.l2j.gameserver.model.L2TeleportLocation;
+import net.sf.l2j.gameserver.model.actor.Creature;
 import net.sf.l2j.gameserver.model.actor.ai.CtrlIntention;
 import net.sf.l2j.gameserver.model.actor.instance.Gatekeeper;
 import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
@@ -35,6 +35,7 @@ public abstract class WalkerAI extends FakePlayerAI {
 
 	public WalkerAI(FakePlayer character) {
 		super(character);
+		_fakePlayer.setInvitedMember(false);
 	}
 
 	public Queue<WalkNode> getWalkNodes(){
@@ -57,6 +58,10 @@ public abstract class WalkerAI extends FakePlayerAI {
 		}
 		if(_fakePlayer.getClan() == null){
 			checkIfAbleToCreateAClan();
+		}
+
+		if(_fakePlayer.isClanLeader() && !_fakePlayer.getInvitedMember() && ZoneChecker.checkIfInGiran(_fakePlayer) && Rnd.get(0,10) == 5){
+			findMembers();
 		}
 		setBusyThinking(true);
 
@@ -259,6 +264,21 @@ public abstract class WalkerAI extends FakePlayerAI {
 				clan.changeClanCrest(id);
 			}
 
+		}
+	}
+
+	private void findMembers(){
+		List<FakePlayer> targets = _fakePlayer.getKnownTypeInRadius(FakePlayer.class, 5000);
+		for(FakePlayer player: targets){
+			if(player.getClan() == null && ZoneChecker.checkIfInGiran(player) && player.hasAI()){
+				player.stopMove(null);
+				L2Clan clan = _fakePlayer.getClan();
+				clan.addClanMember(player);
+				player.broadcastUserInfo();
+				player.setTitle(clan.getName());
+				_fakePlayer.setInvitedMember(true);
+				return;
+			}
 		}
 	}
 }

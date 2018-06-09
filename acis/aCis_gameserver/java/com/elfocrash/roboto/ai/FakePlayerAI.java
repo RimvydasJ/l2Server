@@ -50,6 +50,8 @@ public abstract class FakePlayerAI
 	private boolean gearB = false;
 	private boolean gearA = false;
 	private double pvpPercentages = 0.1;
+
+
 	public FakePlayerAI(FakePlayer character)
 	{
 		_fakePlayer = character;
@@ -530,4 +532,6 @@ public abstract class FakePlayerAI
 		}
 
 	}
+
+
 }

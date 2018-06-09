@@ -1,7 +1,6 @@
 Surasti, kas neuzdaro mysql connectionu
 
 Kaip padaryti parcius
-Kaip padaryti klanus
 Kaip jie vaiskciosi kartu (kas ka seks)
 
 
