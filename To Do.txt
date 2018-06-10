@@ -1,5 +1,34 @@
-Surasti, kas neuzdaro mysql connectionu
+//Must
+Pasikelus 78 leveli - ismeta faction pasirinkima 
+	Rodo kiek zmoniu kuriame factione
+	Jeigu mazdaug vienodai - gali pasirinkti, jei ne - automatiskai
+	Faction pasikeitimo galimybe - adenas
 
+Zonu keitimasis
+	Reikia balsavimo
+	Visi tures PvP flaga
+	Musti tik priesu factiona
+	1 nuzudimas = 1 adenas
+	Po mirties, pasirinkimas gristi i girana ar respawnints zonoje(random vietoje)
+	Buffai vis uzsideda is naujo ties respawnu
+	Pakeiciam laikinai title ir spalva (info apie faction)
+
+
+//Seip dalykai
+Visi item parduodami i shop uz 0 adenu
+GM shop - Reikes shopu uz adenas - Tadas 
+Buferis -Povilas 
+Image - Povilas
+Teleporteris - Tadas
+
+
+
+//Nice to have
+Frakcija gali susimastyti sau pavdinima (kas diena)
+Killing spree
+Gales gauti hero statusa 1 valandai, kas valanda (dugiausia killu per valanda)
+
+Surasti, kas neuzdaro mysql connectionu
 Kaip padaryti parcius
 Kaip jie vaiskciosi kartu (kas ka seks)
 
