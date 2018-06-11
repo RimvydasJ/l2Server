@@ -5,6 +5,7 @@ import com.elfocrash.roboto.FakePlayerManager;
 import com.elfocrash.roboto.FakePlayerTaskManager;
 import com.elfocrash.roboto.ai.walker.CommonWalkerAi;
 
+import com.elfocrash.roboto.ai.walker.GiranStoreAi;
 import com.elfocrash.roboto.ai.walker.RainbowWalkerAi;
 import com.elfocrash.roboto.helpers.FakeHelpers;
 import com.elfocrash.roboto.helpers.MapSpawnHelper;
@@ -165,12 +166,9 @@ public class AdminFakePlayers implements IAdminCommandHandler {
         }
 
         if(command.startsWith("admin_faketest")){
-            if(activeChar.getTarget() instanceof FakePlayer){
-                FakePlayer target = (FakePlayer)activeChar.getTarget();
-                WalkNode node = target.destinationWalkNode;
-                activeChar.teleToLocation(node.getX(),node.getY(),node.getZ(),0);
-                target.forceAutoAttack((Creature)target.getTarget());
-            }
+            FakePlayer fakePlayer = FakePlayerManager.INSTANCE.spawnPlayer(activeChar.getX() + Rnd.get(-200, 200), activeChar.getY() + Rnd.get(-200, 200), activeChar.getZ());
+            fakePlayer.setFakeAi(new GiranStoreAi(fakePlayer));
+
         }
 
 

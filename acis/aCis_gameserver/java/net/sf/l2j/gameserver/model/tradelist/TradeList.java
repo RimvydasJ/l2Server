@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import com.elfocrash.roboto.FakePlayer;
 import net.sf.l2j.gameserver.datatables.ItemTable;
 import net.sf.l2j.gameserver.model.ItemRequest;
 import net.sf.l2j.gameserver.model.World;
@@ -542,8 +543,8 @@ public class TradeList
 			lock();
 			return 1;
 		}
-		
-		if (!_owner.isOnline() || !player.isOnline())
+		//mantasp111
+		if (!(_owner instanceof FakePlayer) && !_owner.isOnline() || !player.isOnline())
 			return 1;
 		
 		int slots = 0;

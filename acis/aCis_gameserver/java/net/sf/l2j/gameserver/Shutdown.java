@@ -8,6 +8,7 @@ import net.sf.l2j.commons.lang.StringUtil;
 
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
+import net.sf.l2j.gameserver.custom.AutoBuffs;
 import net.sf.l2j.gameserver.datatables.BufferTable;
 import net.sf.l2j.gameserver.datatables.ServerMemo;
 import net.sf.l2j.gameserver.instancemanager.CastleManorManager;
@@ -172,6 +173,10 @@ public class Shutdown extends Thread
 			// Schemes save.
 			BufferTable.getInstance().saveSchemes();
 			_log.info("BufferTable data has been saved.");
+
+			//mantasp111
+			AutoBuffs.getInstance().onShutDown();
+			_log.info("AutoBuffs data has been saved.");
 			
 			// Couples save.
 			if (Config.ALLOW_WEDDING)

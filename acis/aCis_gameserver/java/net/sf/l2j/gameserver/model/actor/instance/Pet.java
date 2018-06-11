@@ -14,6 +14,7 @@ import net.sf.l2j.commons.random.Rnd;
 
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
+import net.sf.l2j.gameserver.custom.AutoBuffs;
 import net.sf.l2j.gameserver.datatables.ItemTable;
 import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.handler.IItemHandler;
@@ -43,12 +44,7 @@ import net.sf.l2j.gameserver.model.itemcontainer.Inventory;
 import net.sf.l2j.gameserver.model.itemcontainer.PetInventory;
 import net.sf.l2j.gameserver.model.zone.ZoneId;
 import net.sf.l2j.gameserver.network.SystemMessageId;
-import net.sf.l2j.gameserver.network.serverpackets.InventoryUpdate;
-import net.sf.l2j.gameserver.network.serverpackets.PetInventoryUpdate;
-import net.sf.l2j.gameserver.network.serverpackets.PetItemList;
-import net.sf.l2j.gameserver.network.serverpackets.StatusUpdate;
-import net.sf.l2j.gameserver.network.serverpackets.StopMove;
-import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
+import net.sf.l2j.gameserver.network.serverpackets.*;
 import net.sf.l2j.gameserver.taskmanager.DecayTaskManager;
 import net.sf.l2j.gameserver.taskmanager.ItemsOnGroundTaskManager;
 
@@ -160,6 +156,37 @@ public class Pet extends Summon
 			return (isAttackingNow()) ? getPetData().getMealInBattle() : getPetData().getMealInNormal();
 		}
 	}
+	//mantasp111
+	static class buffs implements Runnable
+	{
+		private Player _activeChar;
+		private Pet _summon;
+
+		buffs(Player activeChar, Pet pet)
+		{
+			_activeChar = activeChar;
+			_summon = pet;
+		}
+
+		@Override
+		public void run()
+		{
+			if(_activeChar == null || _summon == null)
+				return;
+
+			for(L2Skill sk : AutoBuffs.getInstance().getSectionBuffs(_activeChar, 119))
+				sk.getEffects(_activeChar, _summon);
+
+			_summon.getStatus().setCurrentHp(_summon.getMaxHp());
+			_summon.getStatus().setCurrentMp(_summon.getMaxMp());
+			StatusUpdate su = new StatusUpdate(_summon);
+			su.addAttribute(StatusUpdate.CUR_HP, (int) _summon.getCurrentHp());
+			su.addAttribute(StatusUpdate.CUR_MP, (int) _summon.getCurrentMp());
+			_summon.sendPacket(su);
+			_activeChar.broadcastPacket(new MagicSkillUse(_summon, _summon, 4380, 1, 0, 0, false));
+			_summon.updateEffectIcons();
+		}
+	}
 	
 	public Pet(int objectId, NpcTemplate template, Player owner, ItemInstance control)
 	{
@@ -172,6 +199,9 @@ public class Pet extends Summon
 		_inventory = new PetInventory(this);
 		
 		_mountable = isMountable(template.getNpcId());
+
+		if(!getOwner().isInOlympiadMode() && (getOwner().getClassId().getId() == 111  || getOwner().getClassId().getId()==104 || getOwner().getClassId().getId()==96 || getOwner().getClassId().getId()==91 || getOwner().getClassId().getId()==118))
+			ThreadPool.schedule(new buffs(getOwner(), this), 1000);
 	}
 	
 	@Override

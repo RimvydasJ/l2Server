@@ -9,6 +9,8 @@ import java.util.logging.Level;
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.communitybbs.Manager.MailBBSManager;
+import net.sf.l2j.gameserver.custom.AutoBuffs;
+import net.sf.l2j.gameserver.custom.ImagesConverterManager;
 import net.sf.l2j.gameserver.datatables.AdminCommandAccessRights;
 import net.sf.l2j.gameserver.datatables.AnnouncementTable;
 import net.sf.l2j.gameserver.datatables.GmListTable;
@@ -325,6 +327,10 @@ public class EnterWorld extends L2GameClientPacket
 		// Attacker or spectator logging into a siege zone will be ported at town.
 		if (!activeChar.isGM() && (!activeChar.isInSiege() || activeChar.getSiegeState() < 2) && activeChar.isInsideZone(ZoneId.SIEGE))
 			activeChar.teleToLocation(TeleportType.TOWN);
+
+		//mantasp111
+		ImagesConverterManager.getInstance().updateAllImages(activeChar);
+		AutoBuffs.onPlayerLogin(activeChar);
 		
 		activeChar.sendPacket(ActionFailed.STATIC_PACKET);
 	}

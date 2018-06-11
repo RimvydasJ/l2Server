@@ -25811,7 +25811,7 @@
 		<set name="height" val="22.5"/>
 		<set name="rHand" val="231"/>
 		<set name="lHand" val="0"/>
-		<set name="type" val="Adventurer"/>
+		<set name="type" val="BufferInstance"/>
 		<set name="exp" val="0"/>
 		<set name="sp" val="0"/>
 		<set name="hp" val="2444.46819"/>

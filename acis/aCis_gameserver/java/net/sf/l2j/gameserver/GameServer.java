@@ -24,6 +24,7 @@ import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.cache.CrestCache;
 import net.sf.l2j.gameserver.cache.HtmCache;
 import net.sf.l2j.gameserver.communitybbs.Manager.ForumsBBSManager;
+import net.sf.l2j.gameserver.custom.ImagesConverterManager;
 import net.sf.l2j.gameserver.datatables.AccessLevels;
 import net.sf.l2j.gameserver.datatables.AdminCommandAccessRights;
 import net.sf.l2j.gameserver.datatables.AnnouncementTable;
@@ -260,6 +261,10 @@ public class GameServer
 		
 		StringUtil.printSection("Quests & Scripts");
 		ScriptManager.getInstance();
+
+		//mantasp111
+		StringUtil.printSection("Custom");
+		ImagesConverterManager.getInstance();
 		
 		if (Config.ALLOW_BOAT)
 		{

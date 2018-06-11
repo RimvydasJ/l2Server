@@ -12,6 +12,7 @@ import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
 import net.sf.l2j.gameserver.model.World;
 import net.sf.l2j.gameserver.model.WorldObject;
 import net.sf.l2j.gameserver.model.actor.Npc;
+import net.sf.l2j.gameserver.model.actor.instance.BufferInstance;
 import net.sf.l2j.gameserver.model.actor.instance.OlympiadManagerNpc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.entity.Hero;
@@ -118,6 +119,22 @@ public final class RequestBypassToServer extends L2GameClientPacket
 			else if (_command.startsWith("bbs_") || _command.startsWith("_bbs") || _command.startsWith("_friend") || _command.startsWith("_mail") || _command.startsWith("_block"))
 			{
 				CommunityBoard.getInstance().handleCommands(getClient(), _command);
+			}
+			//mantasp111
+			else if (_command.startsWith("buffer"))
+			{
+				if (activeChar.getTarget() != null && activeChar.getTarget() instanceof BufferInstance)
+				{
+					if (!((BufferInstance) activeChar.getTarget()).isInsideRadius(activeChar, 150, true, false))
+					{
+						activeChar.sendMessage("Please come closer to the buffer!");
+						return;
+					}
+					//if(activeChar.isInsideZone(ZoneId.PEACE)) why only peace?
+					((BufferInstance) activeChar.getTarget()).onBypassFeedback(activeChar, _command);
+				}
+				else
+					activeChar.sendMessage("Please target the buffer.");
 			}
 			else if (_command.startsWith("Quest "))
 			{

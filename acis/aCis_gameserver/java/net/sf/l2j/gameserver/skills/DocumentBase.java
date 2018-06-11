@@ -10,6 +10,7 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import net.sf.l2j.gameserver.custom.AutoBuffs;
 import net.sf.l2j.gameserver.model.ChanceCondition;
 import net.sf.l2j.gameserver.model.L2Skill;
 import net.sf.l2j.gameserver.model.base.ClassRace;
@@ -215,6 +216,18 @@ abstract class DocumentBase
 			time = Integer.decode(getValue(attrs.getNamedItem("time").getNodeValue(), template));
 		else if (((L2Skill) template).getBuffDuration() > 0)
 			time = ((L2Skill) template).getBuffDuration() / 1000 / count;
+
+		//mantasp111
+		L2Skill skill = ((L2Skill) template);
+		if(skill.getSkillType() == L2SkillType.BUFF && time > 120 && skill.getId() != 396 && skill.getId() != 1374)
+			time = 9600;
+		else if(skill.getName().contains("Item Skill") && time >= 120)
+			time = 9600;
+		else if(skill.getId() == 1355 || skill.getId() == 1356 || skill.getId() == 1357 || skill.getId() == 1414 || skill.getId() == 1413 || skill.getId() == 1363)
+			time = 9600;
+		else if(AutoBuffs.setIds().contains(skill.getId()))
+			time = 9600;
+		skill = null;
 		
 		boolean self = false;
 		if (attrs.getNamedItem("self") != null)

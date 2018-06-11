@@ -1,6 +1,8 @@
 package net.sf.l2j.gameserver.network.serverpackets;
 
+import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.cache.HtmCache;
+import net.sf.l2j.gameserver.custom.ImagesConverterManager;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 
 /**
@@ -51,11 +53,23 @@ public final class NpcHtmlMessage extends L2GameServerPacket
 				activeChar.addBypass(_html.substring(start, finish).trim());
 		}
 	}
+
+
 	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0x0f);
+
+		//mantasp111n
+		int length = _html.split("%%").length/2;
+		for (int i = 0; i < length; i++) {
+			String htm[] = _html.split("%%");
+			if (htm.length > 1) {
+				String imgName = htm[1];
+				_html = _html.replace("%%" + imgName + "%%", "Crest.crest_" + Config.SERVER_ID + "_" + ImagesConverterManager.getInstance().getImageId(imgName));
+			}
+		}
 		
 		writeD(_npcObjId);
 		writeS(_html);
@@ -71,7 +85,7 @@ public final class NpcHtmlMessage extends L2GameServerPacket
 	{
 		_itemId = itemId;
 	}
-	
+
 	public void setHtml(String text)
 	{
 		if (text.length() > 8192)

@@ -32,6 +32,7 @@ import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.LoginServerThread;
 import net.sf.l2j.gameserver.communitybbs.BB.Forum;
 import net.sf.l2j.gameserver.communitybbs.Manager.ForumsBBSManager;
+import net.sf.l2j.gameserver.custom.AutoBuffs;
 import net.sf.l2j.gameserver.datatables.AccessLevels;
 import net.sf.l2j.gameserver.datatables.CharTemplateTable;
 import net.sf.l2j.gameserver.datatables.ClanTable;
@@ -10567,5 +10568,15 @@ public class Player extends Playable
 					obj.getAI().describeStateToPlayer(this);
 			}
 		}
+	}
+    //mantasp111
+	private int _section = AutoBuffs.getClass(getClassId().getId());
+	public int getSection()
+	{
+		return _section != 119 ? AutoBuffs.getClass(getClassId().getId()) : _section;
+	}
+
+	public void setSection(int s){
+		_section = s;
 	}
 }

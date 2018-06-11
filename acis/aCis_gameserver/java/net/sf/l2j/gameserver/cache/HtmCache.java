@@ -8,7 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import net.sf.l2j.Config;
 import net.sf.l2j.commons.io.UnicodeReader;
+import net.sf.l2j.gameserver.custom.ImagesConverterManager;
 
 /**
  * @author Layane, reworked by Java-man and Hasha
@@ -80,8 +82,18 @@ public class HtmCache
 			
 			while ((line = br.readLine()) != null)
 				sb.append(line).append('\n');
-			
-			final String content = sb.toString().replaceAll("\r\n", "\n");
+
+			//mantasp111
+			String content = sb.toString().replaceAll("\r\n", "\n");
+
+			int length = content.split("%%").length/2;
+			for (int i = 0; i < length; i++) {
+				String htm[] = content.split("%%");
+				if (htm.length > 1) {
+					String imgName = htm[1];
+					content = content.replace("%%" + imgName + "%%", "Crest.crest_" + Config.SERVER_ID + "_" + ImagesConverterManager.getInstance().getImageId(imgName));
+				}
+			}
 			
 			_htmCache.put(file.getPath().replace("\\", "/").hashCode(), content);
 			return content;

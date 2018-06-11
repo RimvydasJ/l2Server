@@ -485,7 +485,7 @@ public abstract class FakePlayerAI
 	protected abstract int[][] getBuffs();
 
 	public void changeBotAiToWalkerBecauseOfTown(){
-		if(ZoneChecker.checkIfInGiran(_fakePlayer)){
+		if(ZoneChecker.checkIfInGiran(_fakePlayer) && !_fakePlayer.isInStoreMode()){
 			_fakePlayer.setFakeAi(new CommonWalkerAi(_fakePlayer));
 	}
 }
