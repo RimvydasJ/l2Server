@@ -11,6 +11,7 @@ import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.datatables.CharTemplateTable;
 import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.model.L2Skill;
+import net.sf.l2j.gameserver.model.actor.Creature;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 
 /**
@@ -448,5 +449,14 @@ public class AutoBuffs
 	private static class SingletonHolder
 	{
 		protected static final AutoBuffs _instance = new AutoBuffs();
+	}
+
+	public void BuffMe(Player player){
+		for(L2Skill skill : getSectionBuffs(player))
+			skill.getEffects(player, player);
+
+		player.getStatus().setCurrentCp(player.getMaxCp());
+		player.getStatus().setCurrentHp(player.getMaxHp());
+		player.getStatus().setCurrentMp(player.getMaxMp());
 	}
 }

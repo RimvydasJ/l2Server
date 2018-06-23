@@ -13,6 +13,7 @@ import net.sf.l2j.commons.math.MathUtil;
 import net.sf.l2j.commons.random.Rnd;
 
 import net.sf.l2j.Config;
+import net.sf.l2j.gameserver.custom.FactionId;
 import net.sf.l2j.gameserver.datatables.MapRegionTable;
 import net.sf.l2j.gameserver.datatables.MapRegionTable.TeleportType;
 import net.sf.l2j.gameserver.datatables.SkillTable.FrequentSkill;
@@ -20,6 +21,7 @@ import net.sf.l2j.gameserver.geoengine.GeoEngine;
 import net.sf.l2j.gameserver.handler.ISkillHandler;
 import net.sf.l2j.gameserver.handler.SkillHandler;
 import net.sf.l2j.gameserver.instancemanager.DimensionalRiftManager;
+import net.sf.l2j.gameserver.instancemanager.ZoneManager;
 import net.sf.l2j.gameserver.model.ChanceSkillList;
 import net.sf.l2j.gameserver.model.CharEffectList;
 import net.sf.l2j.gameserver.model.FusionSkill;
@@ -274,6 +276,7 @@ public abstract class Creature extends WorldObject
 	@Override
 	public boolean isInsideZone(ZoneId zone)
 	{
+		int a = _zones[zone.getId()];
 		return zone == ZoneId.PVP ? _zones[ZoneId.PVP.getId()] > 0 && _zones[ZoneId.PEACE.getId()] == 0 : _zones[zone.getId()] > 0;
 	}
 	
@@ -3903,6 +3906,12 @@ public abstract class Creature extends WorldObject
 	@Override
 	public void onForcedAttack(Player player)
 	{
+		//mantasp111
+		if(player.getFaction() != FactionId.NON && (player.getTarget() instanceof Player && ((Player)player.getTarget()).getFaction() == player.getFaction())){
+			//Same faction, no attack
+			player.sendPacket(ActionFailed.STATIC_PACKET);
+			return;
+		}
 		if (isInsidePeaceZone(player, this))
 		{
 			// If Creature or target is in a peace zone, send a system message TARGET_IN_PEACEZONE ActionFailed

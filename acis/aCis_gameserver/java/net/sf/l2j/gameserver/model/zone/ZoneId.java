@@ -4,6 +4,7 @@ package net.sf.l2j.gameserver.model.zone;
  * Zone Ids.
  * @author Zoey76
  */
+//mantasp111
 public enum ZoneId
 {
 	PVP(0),
@@ -24,7 +25,8 @@ public enum ZoneId
 	DANGER_AREA(15),
 	CAST_ON_ARTIFACT(16),
 	NO_RESTART(17),
-	SCRIPT(18);
+	SCRIPT(18),
+	FACTION(19);
 	
 	private final int _id;
 	

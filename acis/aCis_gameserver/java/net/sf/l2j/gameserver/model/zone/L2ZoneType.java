@@ -20,6 +20,7 @@ import net.sf.l2j.gameserver.scripting.Quest;
  */
 public abstract class L2ZoneType
 {
+	public String zoneName = "";
 	protected static final Logger _log = Logger.getLogger(L2ZoneType.class.getName());
 	
 	private final int _id;

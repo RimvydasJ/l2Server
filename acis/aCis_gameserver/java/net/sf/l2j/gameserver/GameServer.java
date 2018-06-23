@@ -24,6 +24,7 @@ import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.cache.CrestCache;
 import net.sf.l2j.gameserver.cache.HtmCache;
 import net.sf.l2j.gameserver.communitybbs.Manager.ForumsBBSManager;
+import net.sf.l2j.gameserver.custom.FactionZoneManager;
 import net.sf.l2j.gameserver.custom.ImagesConverterManager;
 import net.sf.l2j.gameserver.datatables.AccessLevels;
 import net.sf.l2j.gameserver.datatables.AdminCommandAccessRights;
@@ -64,26 +65,7 @@ import net.sf.l2j.gameserver.handler.ItemHandler;
 import net.sf.l2j.gameserver.handler.SkillHandler;
 import net.sf.l2j.gameserver.handler.UserCommandHandler;
 import net.sf.l2j.gameserver.idfactory.IdFactory;
-import net.sf.l2j.gameserver.instancemanager.AuctionManager;
-import net.sf.l2j.gameserver.instancemanager.AutoSpawnManager;
-import net.sf.l2j.gameserver.instancemanager.BoatManager;
-import net.sf.l2j.gameserver.instancemanager.CastleManager;
-import net.sf.l2j.gameserver.instancemanager.CastleManorManager;
-import net.sf.l2j.gameserver.instancemanager.ClanHallManager;
-import net.sf.l2j.gameserver.instancemanager.CoupleManager;
-import net.sf.l2j.gameserver.instancemanager.CursedWeaponsManager;
-import net.sf.l2j.gameserver.instancemanager.DayNightSpawnManager;
-import net.sf.l2j.gameserver.instancemanager.DimensionalRiftManager;
-import net.sf.l2j.gameserver.instancemanager.FishingChampionshipManager;
-import net.sf.l2j.gameserver.instancemanager.FourSepulchersManager;
-import net.sf.l2j.gameserver.instancemanager.GrandBossManager;
-import net.sf.l2j.gameserver.instancemanager.MovieMakerManager;
-import net.sf.l2j.gameserver.instancemanager.PetitionManager;
-import net.sf.l2j.gameserver.instancemanager.RaidBossPointsManager;
-import net.sf.l2j.gameserver.instancemanager.RaidBossSpawnManager;
-import net.sf.l2j.gameserver.instancemanager.SevenSigns;
-import net.sf.l2j.gameserver.instancemanager.SevenSignsFestival;
-import net.sf.l2j.gameserver.instancemanager.ZoneManager;
+import net.sf.l2j.gameserver.instancemanager.*;
 import net.sf.l2j.gameserver.instancemanager.games.MonsterRace;
 import net.sf.l2j.gameserver.model.World;
 import net.sf.l2j.gameserver.model.entity.Hero;
@@ -265,7 +247,9 @@ public class GameServer
 		//mantasp111
 		StringUtil.printSection("Custom");
 		ImagesConverterManager.getInstance();
-		
+		FactionZoneManager.getInstance().changeFactionZoneRandom();
+		FactionZoneManager.getInstance().setTimeFactionZoneRandomChange();
+
 		if (Config.ALLOW_BOAT)
 		{
 			BoatManager.getInstance();

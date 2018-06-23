@@ -33,6 +33,7 @@ import net.sf.l2j.gameserver.LoginServerThread;
 import net.sf.l2j.gameserver.communitybbs.BB.Forum;
 import net.sf.l2j.gameserver.communitybbs.Manager.ForumsBBSManager;
 import net.sf.l2j.gameserver.custom.AutoBuffs;
+import net.sf.l2j.gameserver.custom.FactionId;
 import net.sf.l2j.gameserver.datatables.AccessLevels;
 import net.sf.l2j.gameserver.datatables.CharTemplateTable;
 import net.sf.l2j.gameserver.datatables.ClanTable;
@@ -621,7 +622,14 @@ public class Player extends Playable
 	private L2Skill _summonSkillRequest;
 	
 	private Door _requestedGate;
-	
+
+	//Faction TEMP INFO
+	public int _titleColorF;
+	public int _nameColortF;
+	public String _titleF = "";
+	public String _nameF = "";
+	private FactionId _faction=FactionId.NON;
+
 	/**
 	 * Constructor of Player (use Creature constructor).
 	 * <ul>
@@ -740,7 +748,6 @@ public class Player extends Playable
 			_log.severe("Could not insert char data: " + e);
 			return null;
 		}
-		
 		return player;
 	}
 	
@@ -796,12 +803,12 @@ public class Player extends Playable
 	{
 		return (PlayerStatus) super.getStatus();
 	}
-	
+
 	public final PcAppearance getAppearance()
 	{
 		return _appearance;
 	}
-	
+
 	/**
 	 * @return the base L2PcTemplate link to the Player.
 	 */
@@ -1201,7 +1208,8 @@ public class Player extends Playable
 	{
 		if (getPvpFlag() == value)
 			return;
-		
+		if(isInsideZone(ZoneId.FACTION))
+			value = 0;
 		setPvpFlag(value);
 		sendPacket(new UserInfo(this));
 		
@@ -3721,84 +3729,74 @@ public class Player extends Playable
 	}
 	
 	@Override
-	public void setTarget(WorldObject newTarget)
-	{
-		if (newTarget != null)
-		{
+	public void setTarget(WorldObject newTarget) {
+		if (newTarget != null) {
 			boolean isParty = (((newTarget instanceof Player) && isInParty() && _party.containsPlayer(newTarget)));
-			
+
 			// Check if the new target is visible
 			if (!isParty && (!newTarget.isVisible() || Math.abs(newTarget.getZ() - getZ()) > 1000))
 				newTarget = null;
 		}
-		
+
 		// Can't target and attack festival monsters if not participant
 		if ((newTarget instanceof FestivalMonster) && !isFestivalParticipant())
 			newTarget = null;
-		// Can't target and attack rift invaders if not in the same room
-		else if (isInParty() && getParty().isInDimensionalRift())
-		{
+			// Can't target and attack rift invaders if not in the same room
+		else if (isInParty() && getParty().isInDimensionalRift()) {
 			byte riftType = getParty().getDimensionalRift().getType();
 			byte riftRoom = getParty().getDimensionalRift().getCurrentRoom();
-			
+
 			if (newTarget != null && !DimensionalRiftManager.getInstance().getRoom(riftType, riftRoom).checkIfInZone(newTarget.getX(), newTarget.getY(), newTarget.getZ()))
 				newTarget = null;
 		}
-		
+
 		// Get the current target
 		WorldObject oldTarget = getTarget();
-		
-		if (oldTarget != null)
-		{
+
+		if (oldTarget != null) {
 			if (oldTarget.equals(newTarget))
 				return; // no target change
-				
+
 			// Remove the Player from the _statusListener of the old target if it was a Creature
 			if (oldTarget instanceof Creature)
 				((Creature) oldTarget).removeStatusListener(this);
 		}
-		
+
 		// Verify if it's a static object.
-		if (newTarget instanceof StaticObject)
-		{
+		if (newTarget instanceof StaticObject) {
 			sendPacket(new MyTargetSelected(newTarget.getObjectId(), 0));
 			sendPacket(new StaticObjectInfo((StaticObject) newTarget));
 		}
 		// Add the Player to the _statusListener of the new target if it's a Creature
-		else if (newTarget instanceof Creature)
-		{
+		else if (newTarget instanceof Creature) {
 			final Creature target = (Creature) newTarget;
-			
+
 			// Validate location of the new target.
 			if (newTarget.getObjectId() != getObjectId())
 				sendPacket(new ValidateLocation(target));
-			
+
 			// Show the client his new target.
 			sendPacket(new MyTargetSelected(target.getObjectId(), (target.isAutoAttackable(this) || target instanceof Summon) ? getLevel() - target.getLevel() : 0));
-			
+
 			target.addStatusListener(this);
-			
+
 			// Send max/current hp.
 			final StatusUpdate su = new StatusUpdate(target);
 			su.addAttribute(StatusUpdate.MAX_HP, target.getMaxHp());
 			su.addAttribute(StatusUpdate.CUR_HP, (int) target.getCurrentHp());
 			sendPacket(su);
-			
+
 			Broadcast.toKnownPlayers(this, new TargetSelected(getObjectId(), newTarget.getObjectId(), getX(), getY(), getZ()));
 		}
-		
-		if (newTarget == null && getTarget() != null)
-		{
+
+		if (newTarget == null && getTarget() != null) {
 			broadcastPacket(new TargetUnselected(this));
 			setCurrentFolkNPC(null);
-		}
-		else
-		{
+		} else {
 			// Rehabilitates that useful check.
 			if (newTarget instanceof Folk)
 				setCurrentFolkNPC((Npc) newTarget);
 		}
-		
 		// Target the new L2Object
 		super.setTarget(newTarget);
 	}
@@ -4121,7 +4119,7 @@ public class Player extends Playable
 			return;
 		
 		// If in pvp zone, do nothing.
-		if (isInsideZone(ZoneId.PVP) && targetPlayer.isInsideZone(ZoneId.PVP))
+		if ((isInsideZone(ZoneId.PVP) && targetPlayer.isInsideZone(ZoneId.PVP)) || (isInsideZone(ZoneId.FACTION) && targetPlayer.isInsideZone(ZoneId.FACTION)))
 		{
 			// Until the zone was a siege zone. Check also if victim was a player. Randomers aren't counted.
 			if (target instanceof Player && getSiegeState() > 0 && targetPlayer.getSiegeState() > 0 && getSiegeState() != targetPlayer.getSiegeState())
@@ -4167,7 +4165,7 @@ public class Player extends Playable
 	
 	public void updatePvPStatus()
 	{
-		if (isInsideZone(ZoneId.PVP))
+		if (isInsideZone(ZoneId.PVP) || isInsideZone(ZoneId.FACTION))
 			return;
 		
 		PvpFlagTaskManager.getInstance().add(this, Config.PVP_NORMAL_TIME);
@@ -4189,7 +4187,7 @@ public class Player extends Playable
 		{
 			PvpFlagTaskManager.getInstance().add(this, checkIfPvP(player) ? Config.PVP_PVP_TIME : Config.PVP_NORMAL_TIME);
 			
-			if (getPvpFlag() == 0)
+			if (getPvpFlag() == 0 && !isInsideZone(ZoneId.FACTION))
 				updatePvPFlag(1);
 		}
 	}
@@ -6438,6 +6436,8 @@ public class Player extends Playable
 	@Override
 	public boolean isAutoAttackable(Creature attacker)
 	{
+		if(attacker instanceof  Player && ((Player)attacker).getFaction() == this._faction)
+			return false;
 		// Check if the attacker isn't the Player Pet
 		if (attacker == this || attacker == getPet())
 			return false;
@@ -6544,6 +6544,16 @@ public class Player extends Playable
 	@Override
 	public boolean useMagic(L2Skill skill, boolean forceUse, boolean dontMove)
 	{
+		//mantasp111
+		if(this.getFaction() != FactionId.NON && (((Player)this.getTarget()).getFaction() == this.getFaction())){
+			sendPacket(ActionFailed.STATIC_PACKET);
+			return false;
+		}
+		else {
+			forceUse = true;
+		}
+
+
 		// Check if the skill is active
 		if (skill.isPassive())
 		{
@@ -6625,7 +6635,8 @@ public class Player extends Playable
 	private boolean checkUseMagicConditions(L2Skill skill, boolean forceUse, boolean dontMove)
 	{
 		// ************************************* Check Player State *******************************************
-		
+
+
 		// Check if the player is dead or out of control.
 		if (isDead() || isOutOfControl())
 		{
@@ -7180,7 +7191,12 @@ public class Player extends Playable
 					return false;
 				}
 			}
-			
+
+			//mantasp111
+			if(targetPlayer.isInsideZone(ZoneId.FACTION) && this.isInsideZone(ZoneId.FACTION)){
+				return true;
+			}
+
 			// On retail, it is impossible to debuff a "peaceful" player.
 			if (targetPlayer.getPvpFlag() == 0 && targetPlayer.getKarma() == 0)
 			{
@@ -7612,6 +7628,10 @@ public class Player extends Playable
 	public void setApprentice(int id)
 	{
 		_apprentice = id;
+	}
+
+	public void setAppearance(PcAppearance appearance){
+		_appearance = appearance;
 	}
 	
 	public int getSponsor()
@@ -10579,4 +10599,12 @@ public class Player extends Playable
 	public void setSection(int s){
 		_section = s;
 	}
+
+	public void setFaction(FactionId faction){
+	    _faction = faction;
+    }
+
+    public FactionId getFaction(){
+	    return _faction;
+    }
 }

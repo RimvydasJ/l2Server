@@ -6,3 +6,5 @@ acis/aCis_gameserver/.idea
 acis/aCis_gameserver/bin/
 acis/aCis_gameserver/build/
 acis/aCis_gameserver/.settings/
+acis/aCis_datapack/config/loginserver.properties
+acis/aCis_datapack/config/server.properties

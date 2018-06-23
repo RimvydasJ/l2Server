@@ -26,6 +26,7 @@ import net.sf.l2j.gameserver.model.zone.form.ZoneCuboid;
 import net.sf.l2j.gameserver.model.zone.form.ZoneCylinder;
 import net.sf.l2j.gameserver.model.zone.form.ZoneNPoly;
 import net.sf.l2j.gameserver.model.zone.type.L2BossZone;
+import net.sf.l2j.gameserver.model.zone.type.L2FactionZone;
 import net.sf.l2j.gameserver.xmlfactory.XMLDocumentFactory;
 
 import org.w3c.dom.Document;
@@ -154,6 +155,9 @@ public class ZoneManager
 						final String zoneShape = nnmd.getNamedItem("shape").getNodeValue();
 						final int minZ = Integer.parseInt(nnmd.getNamedItem("minZ").getNodeValue());
 						final int maxZ = Integer.parseInt(nnmd.getNamedItem("maxZ").getNodeValue());
+						String zoneName ="";
+						if(nnmd.getNamedItem("zoneName") != null)
+							 zoneName = nnmd.getNamedItem("zoneName").getNodeValue();
 						
 						// Create the zone
 						Class<?> newZone;
@@ -169,7 +173,7 @@ public class ZoneManager
 						
 						Constructor<?> zoneConstructor = newZone.getConstructor(int.class);
 						L2ZoneType temp = (L2ZoneType) zoneConstructor.newInstance(zoneId);
-						
+						temp.zoneName = zoneName;
 						// Get the zone shape from sql
 						try
 						{
@@ -358,7 +362,7 @@ public class ZoneManager
 	{
 		return (Collection<T>) _classZones.get(zoneType).values();
 	}
-	
+
 	/**
 	 * Get zone by ID
 	 * @param id

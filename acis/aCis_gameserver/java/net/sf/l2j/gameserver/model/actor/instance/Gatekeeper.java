@@ -164,7 +164,7 @@ public final class Gatekeeper extends Folk
 		html.replace("%npcname%", getName());
 		player.sendPacket(html);
 	}
-	
+
 	private int validateCondition(Player player)
 	{
 		if (getCastle() != null)

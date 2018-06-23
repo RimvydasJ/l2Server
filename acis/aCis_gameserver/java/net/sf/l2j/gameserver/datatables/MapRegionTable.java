@@ -19,6 +19,7 @@ import net.sf.l2j.gameserver.model.entity.Siege.SiegeSide;
 import net.sf.l2j.gameserver.model.zone.ZoneId;
 import net.sf.l2j.gameserver.model.zone.type.L2ArenaZone;
 import net.sf.l2j.gameserver.model.zone.type.L2ClanHallZone;
+import net.sf.l2j.gameserver.model.zone.type.L2FactionZone;
 import net.sf.l2j.gameserver.model.zone.type.L2TownZone;
 import net.sf.l2j.gameserver.xmlfactory.XMLDocumentFactory;
 
@@ -287,7 +288,15 @@ public class MapRegionTable
 		final L2ArenaZone arena = ZoneManager.getInstance().getZone(player, L2ArenaZone.class);
 		if (arena != null)
 			return arena.getSpawnLoc();
-		
+
+		//mantasp111
+		//check if player in Faction zone
+		final L2FactionZone factionZone = ZoneManager.getInstance().getZone(player,L2FactionZone.class);
+		if(factionZone!= null)
+		{
+			return factionZone.getSpawnLoc();
+		}
+
 		// Retrieve a random spawn location of the nearest town.
 		return getClosestTown(player).getSpawnLoc();
 	}

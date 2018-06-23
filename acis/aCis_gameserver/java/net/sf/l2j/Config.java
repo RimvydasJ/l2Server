@@ -37,7 +37,8 @@ public final class Config
 	public static final String PLAYERS_FILE = "./config/players.properties";
 	public static final String SERVER_FILE = "./config/server.properties";
 	public static final String SIEGE_FILE = "./config/siege.properties";
-	
+	public static final String CUSTOM_FILE = "./config/custom.properties";
+
 	// --------------------------------------------------
 	// Clans settings
 	// --------------------------------------------------
@@ -647,7 +648,9 @@ public final class Config
 	public static int CLIENT_PACKET_QUEUE_MAX_OVERFLOWS_PER_MIN = 1; // default 1
 	public static int CLIENT_PACKET_QUEUE_MAX_UNDERFLOWS_PER_MIN = 1; // default 1
 	public static int CLIENT_PACKET_QUEUE_MAX_UNKNOWN_PER_MIN = 5; // default 5
-	
+
+	/** Custom settings */
+	public static String FACTION_ZONE_CHANGE_TIMES = "";
 	// --------------------------------------------------
 	
 	/**
@@ -1366,7 +1369,17 @@ public final class Config
 		DEVELOPER = server.getProperty("Developer", false);
 		PACKET_HANDLER_DEBUG = server.getProperty("PacketHandlerDebug", false);
 	}
-	
+
+	/**
+	 * Loads custom settings.
+	 */
+	private static final void loadCustom()
+	{
+		final ExProperties custom = initProperties(CUSTOM_FILE);
+		FACTION_ZONE_CHANGE_TIMES = custom.getProperty("FactionZoneChangeTimes", "15:00");
+	}
+
+
 	public static final void loadGameServer()
 	{
 		_log.info("Loading gameserver configuration files.");
@@ -1394,6 +1407,9 @@ public final class Config
 		
 		// server settings
 		loadServer();
+
+		//load custom
+		loadCustom();
 	}
 	
 	public static final void loadLoginServer()

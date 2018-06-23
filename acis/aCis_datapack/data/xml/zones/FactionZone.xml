@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list>
+	<!-- Faction 1 -->
+	<zone type="FactionZone" shape="NPoly" minZ="-4000" maxZ="-3000" zoneName="Zone1"><!-- Near Giran -->
+		<node X="73928" Y="140456" />
+		<node X="76072" Y="140376" />
+		<node X="75880" Y="139464" />
+		<node X="74344" Y="138056" />
+		<node X="72808" Y="139352" />
+		<spawn X="74280" Y="139368" Z="-3424" />
+		<spawn X="74536" Y="139784" Z="-3448" />
+	</zone>
+	<!-- Faction 2 -->
+	<zone type="FactionZone" shape="NPoly" minZ="-4000" maxZ="-3000" zoneName="Zone2"><!-- Near Giran -->
+		<node X="75816" Y="140440" />
+		<node X="76520" Y="140744" />
+		<node X="76056" Y="141304" />
+		<node X="75464" Y="140920" />
+		<spawn X="75672" Y="140824" Z="-3520" />
+		<spawn X="75896" Y="140808" Z="-3504" />
+	</zone>
+</list>
