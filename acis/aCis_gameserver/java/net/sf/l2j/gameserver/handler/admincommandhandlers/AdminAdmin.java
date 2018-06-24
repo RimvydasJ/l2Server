@@ -7,6 +7,8 @@ import net.sf.l2j.commons.lang.StringUtil;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.cache.CrestCache;
 import net.sf.l2j.gameserver.cache.HtmCache;
+import net.sf.l2j.gameserver.custom.Faction;
+import net.sf.l2j.gameserver.custom.FactionZoneManager;
 import net.sf.l2j.gameserver.custom.ImagesConverterManager;
 import net.sf.l2j.gameserver.datatables.AdminCommandAccessRights;
 import net.sf.l2j.gameserver.datatables.AnnouncementTable;
@@ -52,7 +54,11 @@ public class AdminAdmin implements IAdminCommandHandler
 		"admin_kill",
 		"admin_silence",
 		"admin_tradeoff",
-		"admin_reload"
+		"admin_reload",
+			"admin_zone_vote",
+			"admin_setzone",
+			"admin_changezone",
+			"admin_setfaction"
 	};
 	
 	@Override
@@ -181,6 +187,7 @@ public class AdminAdmin implements IAdminCommandHandler
 					}
 					else if (type.startsWith("config"))
 					{
+						FactionZoneManager.getInstance().setTimeFactionZoneRandomChange();
 						Config.loadGameServer();
 						activeChar.sendMessage("Configs files have been reloaded.");
 					}
@@ -259,6 +266,24 @@ public class AdminAdmin implements IAdminCommandHandler
 				activeChar.sendMessage("Usage : //reload <acar|announcement|config|crest|door>");
 				activeChar.sendMessage("Usage : //reload <htm|item|multisell|npc|npcwalker>");
 				activeChar.sendMessage("Usage : //reload <skill|teleport|zone|img>");
+			}
+		}
+		else if(command.startsWith("admin_changezone")){
+			FactionZoneManager.getInstance().changeFactionZoneRandom();
+		}
+		else if(command.startsWith("admin_setfaction")){
+			StringTokenizer st = new StringTokenizer(command);
+			st.nextToken();
+			Player player = (Player)activeChar.getTarget();
+			String factionId = st.nextToken();
+			if(factionId.startsWith("1")){
+				player.setFaction(Faction.Blue);
+			}
+			else if(factionId.startsWith("2")){
+				player.setFaction(Faction.Red);
+			}
+			else {
+				player.setFaction(Faction.Default);
 			}
 		}
 		return true;

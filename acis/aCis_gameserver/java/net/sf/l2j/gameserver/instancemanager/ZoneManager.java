@@ -154,6 +154,9 @@ public class ZoneManager
 						final String zoneShape = nnmd.getNamedItem("shape").getNodeValue();
 						final int minZ = Integer.parseInt(nnmd.getNamedItem("minZ").getNodeValue());
 						final int maxZ = Integer.parseInt(nnmd.getNamedItem("maxZ").getNodeValue());
+						String zoneName ="";
+						if(nnmd.getNamedItem("zoneName") != null)
+							 zoneName = nnmd.getNamedItem("zoneName").getNodeValue();
 						
 						// Create the zone
 						Class<?> newZone;
@@ -169,7 +172,7 @@ public class ZoneManager
 						
 						Constructor<?> zoneConstructor = newZone.getConstructor(int.class);
 						L2ZoneType temp = (L2ZoneType) zoneConstructor.newInstance(zoneId);
-						
+						temp.zoneName = zoneName;
 						// Get the zone shape from sql
 						try
 						{
@@ -269,12 +272,17 @@ public class ZoneManager
 								int spawnX = Integer.parseInt(attrs.getNamedItem("X").getNodeValue());
 								int spawnY = Integer.parseInt(attrs.getNamedItem("Y").getNodeValue());
 								int spawnZ = Integer.parseInt(attrs.getNamedItem("Z").getNodeValue());
-								
+								int factionId=0;
+								if(attrs.getNamedItem("FACTION") != null)
+								{
+								 factionId= Integer.parseInt(attrs.getNamedItem("FACTION").getNodeValue());
+								}
+
 								Node val = attrs.getNamedItem("isChaotic");
 								if (val != null && Boolean.parseBoolean(val.getNodeValue()))
 									((L2SpawnZone) temp).addChaoticSpawn(spawnX, spawnY, spawnZ);
 								else
-									((L2SpawnZone) temp).addSpawn(spawnX, spawnY, spawnZ);
+									((L2SpawnZone) temp).addSpawn(spawnX, spawnY, spawnZ,factionId);
 							}
 						}
 						
@@ -358,7 +366,7 @@ public class ZoneManager
 	{
 		return (Collection<T>) _classZones.get(zoneType).values();
 	}
-	
+
 	/**
 	 * Get zone by ID
 	 * @param id

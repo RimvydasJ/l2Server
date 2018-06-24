@@ -1,9 +1,13 @@
 package net.sf.l2j.gameserver.datatables;
 
 import java.io.File;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
+import net.sf.l2j.commons.random.Rnd;
+import net.sf.l2j.gameserver.custom.Faction;
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
 import net.sf.l2j.gameserver.instancemanager.ClanHallManager;
 import net.sf.l2j.gameserver.instancemanager.ZoneManager;
@@ -19,6 +23,7 @@ import net.sf.l2j.gameserver.model.entity.Siege.SiegeSide;
 import net.sf.l2j.gameserver.model.zone.ZoneId;
 import net.sf.l2j.gameserver.model.zone.type.L2ArenaZone;
 import net.sf.l2j.gameserver.model.zone.type.L2ClanHallZone;
+import net.sf.l2j.gameserver.model.zone.type.L2FactionZone;
 import net.sf.l2j.gameserver.model.zone.type.L2TownZone;
 import net.sf.l2j.gameserver.xmlfactory.XMLDocumentFactory;
 
@@ -287,7 +292,17 @@ public class MapRegionTable
 		final L2ArenaZone arena = ZoneManager.getInstance().getZone(player, L2ArenaZone.class);
 		if (arena != null)
 			return arena.getSpawnLoc();
-		
+
+		//mantasp111
+		//check if player in Faction zone
+		final L2FactionZone factionZone = ZoneManager.getInstance().getZone(player,L2FactionZone.class);
+		if(factionZone!= null)
+		{
+			Faction f = player.getFaction();
+			List<Location> locsFilterByFaction = factionZone.getSpawns().stream().filter(x->x.getFactionId() == player.getFaction().getId()).collect(Collectors.toList());
+			return locsFilterByFaction.get(Rnd.get(0,locsFilterByFaction.size()-1));
+		}
+
 		// Retrieve a random spawn location of the nearest town.
 		return getClosestTown(player).getSpawnLoc();
 	}

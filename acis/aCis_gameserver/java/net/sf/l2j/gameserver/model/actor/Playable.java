@@ -136,12 +136,18 @@ public abstract class Playable extends Creature
 		final Player actingPlayer = getActingPlayer();
 		for (QuestState qs : actingPlayer.getNotifyQuestOfDeath())
 			qs.getQuest().notifyDeath((killer == null ? this : killer), actingPlayer);
-		
+
+		//mantasp111
 		if (killer != null)
 		{
 			final Player player = killer.getActingPlayer();
-			if (player != null)
+			if (player != null){
 				player.onKillUpdatePvPKarma(this);
+				if(isInFactionZone()){
+					player.getInventory().addAdena("ForKill",1,player,null);
+					player.setPvpKills(player.getPvpKills()+1);
+				}
+			}
 		}
 		
 		return true;
@@ -301,7 +307,7 @@ public abstract class Playable extends Creature
 	@Override
 	public boolean isInArena()
 	{
-		return isInsideZone(ZoneId.PVP) && !isInsideZone(ZoneId.SIEGE);
+		return (isInsideZone(ZoneId.PVP) && !isInsideZone(ZoneId.SIEGE)) || (isInsideZone(ZoneId.FACTION) && !isInsideZone(ZoneId.SIEGE));
 	}
 	
 	public abstract void doPickupItem(WorldObject object);
@@ -311,4 +317,9 @@ public abstract class Playable extends Creature
 	public abstract byte getPvpFlag();
 	
 	public abstract boolean useMagic(L2Skill skill, boolean forceUse, boolean dontMove);
+
+	//mantasp111
+	public boolean isInFactionZone(){
+		return isInsideZone(ZoneId.FACTION);
+	}
 }

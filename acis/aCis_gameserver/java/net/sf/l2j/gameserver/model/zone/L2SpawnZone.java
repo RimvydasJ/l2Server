@@ -21,12 +21,12 @@ public abstract class L2SpawnZone extends L2ZoneType
 		super(id);
 	}
 	
-	public final void addSpawn(int x, int y, int z)
+	public final void addSpawn(int x, int y, int z, int factionId)
 	{
 		if (_spawnLocs == null)
 			_spawnLocs = new ArrayList<>();
 		
-		_spawnLocs.add(new Location(x, y, z));
+		_spawnLocs.add(new Location(x, y, z,factionId));
 	}
 	
 	public final void addChaoticSpawn(int x, int y, int z)

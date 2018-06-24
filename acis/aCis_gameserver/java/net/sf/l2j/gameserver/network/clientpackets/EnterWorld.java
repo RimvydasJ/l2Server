@@ -333,6 +333,12 @@ public class EnterWorld extends L2GameClientPacket
 		AutoBuffs.onPlayerLogin(activeChar);
 		
 		activeChar.sendPacket(ActionFailed.STATIC_PACKET);
+
+		//mantasp111
+		activeChar._nameF = activeChar.getName();
+		activeChar._titleF = activeChar.getTitle();
+		activeChar._titleColorF = activeChar.getAppearance().getTitleColor();
+		activeChar._nameColortF = activeChar.getAppearance().getNameColor();
 	}
 	
 	@Override
