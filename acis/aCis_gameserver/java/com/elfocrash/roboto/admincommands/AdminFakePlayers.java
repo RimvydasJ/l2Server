@@ -21,8 +21,10 @@ import net.sf.l2j.gameserver.model.actor.Creature;
 import net.sf.l2j.gameserver.model.actor.ai.CtrlIntention;
 import net.sf.l2j.gameserver.model.actor.ai.IntentionCommand;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
+import net.sf.l2j.gameserver.model.group.Party;
 import net.sf.l2j.gameserver.model.zone.ZoneId;
 import net.sf.l2j.gameserver.network.serverpackets.NpcHtmlMessage;
+import net.sf.l2j.gameserver.network.serverpackets.PartySmallWindowAll;
 import net.sf.l2j.gameserver.scripting.scripts.village_master.Clan;
 
 import java.util.List;
@@ -74,7 +76,10 @@ public class AdminFakePlayers implements IAdminCommandHandler {
             } else {
                 List<FakePlayer> allFakes = FakePlayerManager.INSTANCE.getFakePlayers();
                 for (int i = 0; i < allFakes.size(); i++) {
-                    allFakes.get(i).despawnPlayer();
+                    FakePlayer currentPlayer = allFakes.get(i);
+                    currentPlayer.despawnPlayer();
+                    currentPlayer.deleteMe();
+                    currentPlayer.deleteFromDb();
                 }
             }
             return true;
@@ -162,6 +167,9 @@ public class AdminFakePlayers implements IAdminCommandHandler {
                     activeChar.sendMessage("Clan size: " + size);
                 }
             }
+
+            Player player = (Player) activeChar.getTarget();
+            player.sendPacket(new PartySmallWindowAll(player, new Party(player, player,Party.LootRule.ITEM_LOOTER)));
             return true;
         }
 

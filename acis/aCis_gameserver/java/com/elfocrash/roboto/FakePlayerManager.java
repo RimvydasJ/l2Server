@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import net.sf.l2j.Config;
+import net.sf.l2j.commons.random.Rnd;
+import net.sf.l2j.gameserver.custom.Faction;
 import net.sf.l2j.gameserver.datatables.ClanTable;
 import net.sf.l2j.gameserver.datatables.MapRegionTable.TeleportType;
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
@@ -14,6 +16,7 @@ import net.sf.l2j.gameserver.model.L2Clan;
 import net.sf.l2j.gameserver.model.World;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.base.ClassId;
+import net.sf.l2j.gameserver.model.base.Sex;
 import net.sf.l2j.gameserver.model.entity.Castle;
 import net.sf.l2j.gameserver.model.entity.Siege;
 import net.sf.l2j.gameserver.model.entity.Siege.SiegeSide;
@@ -60,6 +63,9 @@ public enum FakePlayerManager {
 			activeChar.teleToLocation(TeleportType.TOWN);
 
 		activeChar.heal();
+
+		insertFakePlayersToDb(activeChar);
+
 		return activeChar;
 	}
 
@@ -110,5 +116,25 @@ public enum FakePlayerManager {
 	public List<FakePlayer> getFakePlayers() {
 		return World.getInstance().getPlayers().stream().filter(x -> x instanceof FakePlayer).map(x -> (FakePlayer) x)
 				.collect(Collectors.toList());
+	}
+
+	private void insertFakePlayersToDb(FakePlayer activeChar){
+		int factionId = Rnd.get(1,2);
+		String factionName = activeChar.selectDefaultFactionName(factionId);
+		if(factionName == null){
+			if(factionId == 1){
+				factionName = "RED";
+			}
+			else {
+				factionName = "BLUE";
+			}
+		}
+		activeChar.setFaction((Faction.values()[factionId]));
+		activeChar.setFactionName(factionName);
+		activeChar.store();
+	}
+
+	public void deleteFakes(){
+
 	}
 }

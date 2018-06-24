@@ -35,6 +35,7 @@ import net.sf.l2j.gameserver.idfactory.IdFactory;
 import net.sf.l2j.gameserver.model.actor.Creature;
 import net.sf.l2j.gameserver.model.actor.appearance.PcAppearance;
 import net.sf.l2j.gameserver.model.actor.instance.Monster;
+import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.actor.template.PlayerTemplate;
 import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.model.base.ClassRace;
@@ -119,6 +120,15 @@ public class FakeHelpers {
 		FakePlayer player = new FakePlayer(objectId, template, accountName, app);
 
 		player.setName(playerName);
+
+		Player.create(player.getObjectId(),
+				player.getTemplate(),
+				player.getName(),
+				player.getName(),
+				player.getAppearance().getHairStyle(),
+				player.getAppearance().getHairColor(),
+				player.getAppearance().getFace(),
+				player.getAppearance().getSex());
 
 		player.setAccessLevel(/*Config.DEFAULT_ACCESS_LEVEL*/0);
 		PlayerNameTable.getInstance().addPlayer(objectId, accountName, playerName, player.getAccessLevel().getLevel());

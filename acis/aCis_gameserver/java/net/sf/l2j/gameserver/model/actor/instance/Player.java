@@ -33,6 +33,7 @@ import net.sf.l2j.gameserver.LoginServerThread;
 import net.sf.l2j.gameserver.communitybbs.BB.Forum;
 import net.sf.l2j.gameserver.communitybbs.Manager.ForumsBBSManager;
 import net.sf.l2j.gameserver.custom.AutoBuffs;
+import net.sf.l2j.gameserver.custom.Faction;
 import net.sf.l2j.gameserver.datatables.AccessLevels;
 import net.sf.l2j.gameserver.datatables.CharTemplateTable;
 import net.sf.l2j.gameserver.datatables.ClanTable;
@@ -326,9 +327,9 @@ public class Player extends Playable
 	private static final String RESTORE_SKILL_SAVE = "SELECT skill_id,skill_level,effect_count,effect_cur_time, reuse_delay, systime, restore_type FROM character_skills_save WHERE char_obj_id=? AND class_index=? ORDER BY buff_index ASC";
 	private static final String DELETE_SKILL_SAVE = "DELETE FROM character_skills_save WHERE char_obj_id=? AND class_index=?";
 	
-	private static final String INSERT_CHARACTER = "INSERT INTO characters (account_name,obj_Id,char_name,level,maxHp,curHp,maxCp,curCp,maxMp,curMp,face,hairStyle,hairColor,sex,exp,sp,karma,pvpkills,pkkills,clanid,race,classid,deletetime,cancraft,title,accesslevel,online,isin7sdungeon,clan_privs,wantspeace,base_class,nobless,power_grade,last_recom_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String UPDATE_CHARACTER = "UPDATE characters SET level=?,maxHp=?,curHp=?,maxCp=?,curCp=?,maxMp=?,curMp=?,face=?,hairStyle=?,hairColor=?,sex=?,heading=?,x=?,y=?,z=?,exp=?,expBeforeDeath=?,sp=?,karma=?,pvpkills=?,pkkills=?,rec_have=?,rec_left=?,clanid=?,race=?,classid=?,deletetime=?,title=?,accesslevel=?,online=?,isin7sdungeon=?,clan_privs=?,wantspeace=?,base_class=?,onlinetime=?,punish_level=?,punish_timer=?,nobless=?,power_grade=?,subpledge=?,last_recom_date=?,lvl_joined_academy=?,apprentice=?,sponsor=?,varka_ketra_ally=?,clan_join_expiry_time=?,clan_create_expiry_time=?,char_name=?,death_penalty_level=? WHERE obj_id=?";
-	private static final String RESTORE_CHARACTER = "SELECT account_name, obj_Id, char_name, level, maxHp, curHp, maxCp, curCp, maxMp, curMp, face, hairStyle, hairColor, sex, heading, x, y, z, exp, expBeforeDeath, sp, karma, pvpkills, pkkills, clanid, race, classid, deletetime, cancraft, title, rec_have, rec_left, accesslevel, online, char_slot, lastAccess, clan_privs, wantspeace, base_class, onlinetime, isin7sdungeon, punish_level, punish_timer, nobless, power_grade, subpledge, last_recom_date, lvl_joined_academy, apprentice, sponsor, varka_ketra_ally,clan_join_expiry_time,clan_create_expiry_time,death_penalty_level FROM characters WHERE obj_id=?";
+	private static final String INSERT_CHARACTER = "INSERT INTO characters (account_name,obj_Id,char_name,level,maxHp,curHp,maxCp,curCp,maxMp,curMp,face,hairStyle,hairColor,sex,exp,sp,karma,pvpkills,pkkills,clanid,race,classid,deletetime,cancraft,title,accesslevel,online,isin7sdungeon,clan_privs,wantspeace,base_class,nobless,power_grade,last_recom_date, faction_type, faction_name) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String UPDATE_CHARACTER = "UPDATE characters SET level=?,maxHp=?,curHp=?,maxCp=?,curCp=?,maxMp=?,curMp=?,face=?,hairStyle=?,hairColor=?,sex=?,heading=?,x=?,y=?,z=?,exp=?,expBeforeDeath=?,sp=?,karma=?,pvpkills=?,pkkills=?,rec_have=?,rec_left=?,clanid=?,race=?,classid=?,deletetime=?,title=?,accesslevel=?,online=?,isin7sdungeon=?,clan_privs=?,wantspeace=?,base_class=?,onlinetime=?,punish_level=?,punish_timer=?,nobless=?,power_grade=?,subpledge=?,last_recom_date=?,lvl_joined_academy=?,apprentice=?,sponsor=?,varka_ketra_ally=?,clan_join_expiry_time=?,clan_create_expiry_time=?,char_name=?,death_penalty_level=?,faction_type=?,faction_name=? WHERE obj_id=?";
+	private static final String RESTORE_CHARACTER = "SELECT account_name, obj_Id, char_name, level, maxHp, curHp, maxCp, curCp, maxMp, curMp, face, hairStyle, hairColor, sex, heading, x, y, z, exp, expBeforeDeath, sp, karma, pvpkills, pkkills, clanid, race, classid, deletetime, cancraft, title, rec_have, rec_left, accesslevel, online, char_slot, lastAccess, clan_privs, wantspeace, base_class, onlinetime, isin7sdungeon, punish_level, punish_timer, nobless, power_grade, subpledge, last_recom_date, lvl_joined_academy, apprentice, sponsor, varka_ketra_ally,clan_join_expiry_time,clan_create_expiry_time,death_penalty_level,faction_type,faction_name FROM characters WHERE obj_id=?";
 	
 	private static final String RESTORE_CHAR_SUBCLASSES = "SELECT class_id,exp,sp,level,class_index FROM character_subclasses WHERE char_obj_id=? ORDER BY class_index ASC";
 	private static final String ADD_CHAR_SUBCLASS = "INSERT INTO character_subclasses (char_obj_id,class_id,exp,sp,level,class_index) VALUES (?,?,?,?,?,?)";
@@ -340,13 +341,16 @@ public class Player extends Playable
 	private static final String DELETE_CHAR_HENNA = "DELETE FROM character_hennas WHERE char_obj_id=? AND slot=? AND class_index=?";
 	private static final String DELETE_CHAR_HENNAS = "DELETE FROM character_hennas WHERE char_obj_id=? AND class_index=?";
 	private static final String DELETE_CHAR_SHORTCUTS = "DELETE FROM character_shortcuts WHERE char_obj_id=? AND class_index=?";
+	private static final String DELETE_FAKECHAR = "DELETE FROM characters WHERE obj_Id=?";
 	
 	private static final String RESTORE_CHAR_RECOMS = "SELECT char_id,target_id FROM character_recommends WHERE char_id=?";
 	private static final String ADD_CHAR_RECOM = "INSERT INTO character_recommends (char_id,target_id) VALUES (?,?)";
 	private static final String DELETE_CHAR_RECOMS = "DELETE FROM character_recommends WHERE char_id=?";
 	
 	private static final String UPDATE_NOBLESS = "UPDATE characters SET nobless=? WHERE obj_Id=?";
-	
+
+	private static final String SELECT_FACTION = "SELECT faction_name FROM characters WHERE faction_type=? and faction_name is not null";
+
 	public static final int REQUEST_TIMEOUT = 15;
 	
 	private static final int[] EXPERTISE_LEVELS =
@@ -557,7 +561,10 @@ public class Player extends Playable
 	
 	private final int _loto[] = new int[5];
 	private final int _race[] = new int[2];
-	
+
+	private Faction _faction;
+	private String _factionName;
+
 	private final BlockList _blockList = new BlockList(this);
 	
 	private int _team;
@@ -732,6 +739,11 @@ public class Player extends Playable
 			statement.setInt(32, player.isNoble() ? 1 : 0);
 			statement.setLong(33, 0);
 			statement.setLong(34, System.currentTimeMillis());
+
+			Faction faction = player.getFaction();
+			String factionName = player.getFactionName();
+			statement.setInt(35,faction != null ? player.getFaction().ordinal() : 0);
+			statement.setString(36, factionName != null ? factionName : "");
 			statement.executeUpdate();
 			statement.close();
 		}
@@ -4954,6 +4966,22 @@ public class Player extends Playable
 			}
 		}
 	}
+
+	public Faction getFaction(){
+		return _faction;
+	}
+
+	public void setFaction(Faction faction){
+		_faction = faction;
+	}
+
+	public String getFactionName(){
+		return _factionName;
+	}
+
+	public void setFactionName(String factionName){
+		_factionName = factionName;
+	}
 	
 	protected class FeedTask implements Runnable
 	{
@@ -5316,7 +5344,11 @@ public class Player extends Playable
 				player.setPkKills(rset.getInt("pkkills"));
 				player.setOnlineTime(rset.getLong("onlinetime"));
 				player.setNoble(rset.getInt("nobless") == 1, false);
-				
+
+				Integer factionType = rset.getInt("faction_type");
+
+				player.setFaction(factionType != null ? Faction.values()[factionType] : null);
+				player.setFactionName(rset.getString("faction_name"));
 				player.setClanJoinExpiryTime(rset.getLong("clan_join_expiry_time"));
 				if (player.getClanJoinExpiryTime() < System.currentTimeMillis())
 					player.setClanJoinExpiryTime(0);
@@ -5749,8 +5781,11 @@ public class Player extends Playable
 			statement.setLong(47, getClanCreateExpiryTime());
 			statement.setString(48, getName());
 			statement.setLong(49, getDeathPenaltyBuffLevel());
-			statement.setInt(50, getObjectId());
-			
+			Faction faction = getFaction();
+			statement.setInt(50,faction != null ? faction.ordinal() : 0);
+			statement.setString(51, getFactionName());
+			statement.setInt(52, getObjectId());
+
 			statement.execute();
 			statement.close();
 		}
@@ -8868,6 +8903,40 @@ public class Player extends Playable
 		cleanup();
 		store();
 		super.deleteMe();
+	}
+
+	public void deleteFromDb(){
+		try (Connection con = L2DatabaseFactory.getInstance().getConnection()) {
+			PreparedStatement statement = con.prepareStatement(DELETE_FAKECHAR);
+			statement.setInt(1, this.getObjectId());
+			statement.executeUpdate();
+			statement.close();
+		}
+		catch (Exception e)
+		{
+			_log.severe("Could not delete char: " + e);
+		}
+
+	}
+
+	public String selectDefaultFactionName(int faction){
+		String factionName = null;
+		try (Connection con = L2DatabaseFactory.getInstance().getConnection()) {
+			PreparedStatement statement = con.prepareStatement(SELECT_FACTION);
+			statement.setInt(1, faction);
+			ResultSet rs = statement.executeQuery();
+			while(rs.next()){
+				factionName = rs.getString("faction_name");
+				break;
+			}
+			rs.close();
+			statement.close();
+		}
+		catch (Exception e)
+		{
+			_log.severe("Could not select faction: " + e);
+		}
+		return factionName;
 	}
 	
 	private synchronized void cleanup()
