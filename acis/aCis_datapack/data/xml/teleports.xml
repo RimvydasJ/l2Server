@@ -656,5 +656,6 @@
 	<teleport id="10035" loc_x="146705" loc_y="25840" loc_z="-2000" price="17000" fornoble="0"/>
 	<teleport id="10036" loc_x="164564" loc_y="-48145" loc_z="-3536" price="11000" fornoble="0"/>
 	<teleport id="10037" loc_x="144880" loc_y="-113468" loc_z="-2560" price="14000" fornoble="0"/>
-	<teleport id="111111" loc_x="83400" loc_y="148632" loc_z="-3400" price="14000" fornoble="0"/>
+	<teleport id="111111" loc_x="83400" loc_y="148632" loc_z="-3400" price="0" fornoble="0"/>
+	<teleport id="111112" loc_x="141224" loc_y="-124264" loc_z="-1864" price="0" fornoble="0"/>
 </list>

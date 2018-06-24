@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list>
+	<!-- Farm -->
+	<zone type="FarmZone" shape="NPoly" minZ="-15000" maxZ="0"><!-- GOE -->
+		<node X="83394" Y="259142" />
+		<node X="83390" Y="254817" />
+		<node X="87709" Y="254816" />
+		<node X="87704" Y="259144" />
+	</zone>
+	<!-- Farm -->
+	<zone type="FarmZone" shape="NPoly" minZ="-15000" maxZ="0"><!-- LOA -->
+		<node X="133739" Y="114666" />
+		<node X="133623" Y="114229" />
+		<node X="125515" Y="110156" />
+		<node X="119012" Y="111981" />
+		<node X="120522" Y="117355" />
+		<node X="126148" Y="117940" />
+		<node X="132461" Y="118058" />
+	</zone>
+</list>

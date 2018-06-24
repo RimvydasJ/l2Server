@@ -18,6 +18,7 @@
 	<aCar name="admin_zone_vote" accessLevel="1"/>
 	<aCar name="admin_setzone" accessLevel="1"/>
 	<aCar name="admin_changezone" accessLevel="1"/>
+	<aCar name="admin_setfaction" accessLevel="1"/>
 	<!-- ADMIN -->
 	<aCar name="admin_admin" accessLevel="1" />
 	<aCar name="admin_admin1" accessLevel="1" />

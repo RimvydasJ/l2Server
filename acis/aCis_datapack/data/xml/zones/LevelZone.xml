@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list>
+	<!-- Level Zone -->
+	<zone type="LevelZone" shape="NPoly" minZ="-2000" maxZ="-1500"><!-- Rainbow level zone -->
+		<node X="141835" Y="-124787" />
+		<node X="139183" Y="-123297" />
+		<node X="137954" Y="-118455" />
+		<node X="144483" Y="-117025" />
+		<node X="143480" Y="-123848" />
+	</zone>
+</list>

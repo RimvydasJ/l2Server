@@ -33,7 +33,7 @@ public class L2FactionZone extends L2SpawnZone {
             Player player = (Player) character;
             player.setInsideZone(ZoneId.FACTION, true);
             FactionHelper.getInstance().onZoneEntrance(player);
-            player.sendMessage("There are: " + getCharactersInside().size() + " players in zone.");
+            player.sendMessage("There are: " + getKnownTypeInside(Player.class).size() + " players in zone.");
             player.broadcastTitleInfo();
             player.broadcastCharInfo();
         }

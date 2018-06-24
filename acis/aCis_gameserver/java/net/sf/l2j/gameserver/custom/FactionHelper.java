@@ -17,7 +17,7 @@ public class FactionHelper {
     }
 
     public void onZoneEntrance(Player player){
-        FactionId faction = getFaction();
+        FactionId faction = player.getFaction();
         player.setFaction(faction);
         player.setTitle("FactionZone");
         player.getAppearance().setTitleColor(getColor(faction));
@@ -32,7 +32,7 @@ public class FactionHelper {
         player.getAppearance().setNameColor(player._nameColortF);
         player.setName(player._nameF);
         player.setPvpFlag(0);
-        player.setFaction(FactionId.NON);
+        //player.setFaction(FactionId.NON);
     }
 
     //TODO iskelti i singeltona
@@ -42,10 +42,10 @@ public class FactionHelper {
 
     private int getColor(FactionId faction){
         switch (faction){
-            case RED:
-                return 0xFF0000;
             case BLUE:
                 return 0x0000FF;
+            case RED:
+                return 0xFF0000;
             default:
                 return 0xFFFFFF;
         }

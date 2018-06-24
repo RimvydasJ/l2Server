@@ -1,9 +1,13 @@
 package net.sf.l2j.gameserver.datatables;
 
 import java.io.File;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
+import net.sf.l2j.commons.random.Rnd;
+import net.sf.l2j.gameserver.custom.FactionId;
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
 import net.sf.l2j.gameserver.instancemanager.ClanHallManager;
 import net.sf.l2j.gameserver.instancemanager.ZoneManager;
@@ -294,7 +298,9 @@ public class MapRegionTable
 		final L2FactionZone factionZone = ZoneManager.getInstance().getZone(player,L2FactionZone.class);
 		if(factionZone!= null)
 		{
-			return factionZone.getSpawnLoc();
+			FactionId f = player.getFaction();
+			List<Location> locsFilterByFaction = factionZone.getSpawns().stream().filter(x->x.getFactionId() == player.getFaction().getId()).collect(Collectors.toList());
+			return locsFilterByFaction.get(Rnd.get(0,locsFilterByFaction.size()-1));
 		}
 
 		// Retrieve a random spawn location of the nearest town.

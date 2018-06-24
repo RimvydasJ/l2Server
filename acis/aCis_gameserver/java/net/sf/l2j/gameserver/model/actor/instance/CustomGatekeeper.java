@@ -1,6 +1,7 @@
 package net.sf.l2j.gameserver.model.actor.instance;
 
 import net.sf.l2j.Config;
+import net.sf.l2j.commons.random.Rnd;
 import net.sf.l2j.gameserver.cache.HtmCache;
 import net.sf.l2j.gameserver.custom.FactionZoneManager;
 import net.sf.l2j.gameserver.datatables.TeleportLocationTable;
@@ -12,6 +13,8 @@ import net.sf.l2j.gameserver.model.actor.template.NpcTemplate;
 import net.sf.l2j.gameserver.model.entity.Siege;
 import net.sf.l2j.gameserver.model.zone.L2ZoneType;
 import net.sf.l2j.gameserver.model.zone.type.L2FactionZone;
+import net.sf.l2j.gameserver.model.zone.type.L2FarmZone;
+import net.sf.l2j.gameserver.model.zone.type.L2LevelZone;
 import net.sf.l2j.gameserver.model.zone.type.L2TownZone;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.network.serverpackets.ActionFailed;
@@ -58,7 +61,14 @@ public class CustomGatekeeper extends Folk {
             player.teleToLocation(loc.getX(), loc.getY(), loc.getZ(), 20);
             player.sendPacket(ActionFailed.STATIC_PACKET);
         }
-
+        if(command.startsWith("goe")){
+            Location locEvaGarden = new Location(85576 + Rnd.get(-1000, 1000),257000 + Rnd.get(-1000, 1000),-11664);
+            player.teleToLocation(locEvaGarden,0);
+        }
+        if(command.startsWith("loa")){
+            L2TeleportLocation loc = TeleportLocationTable.getInstance().getTemplate(1060);
+            player.teleToLocation(loc.getLocX(),loc.getLocY(),loc.getLocZ(),50);
+        }
 
     }
 
@@ -73,6 +83,9 @@ public class CustomGatekeeper extends Folk {
         L2ZoneType currentFactionZone = ZoneManager.getInstance().getZoneById(factionZoneId);
         html.replace("%onlineInGiran%",ZoneManager.getInstance().getZone(83400,148104,-3400,L2TownZone.class).getKnownTypeInside(Player.class).size());
         html.replace("%onlineInFaction%",currentFactionZone.getKnownTypeInside(Player.class).size());
+        html.replace("%onlineInLevelZone%",ZoneManager.getInstance().getZone(141064,-123864,-1904, L2LevelZone.class).getKnownTypeInside(Player.class).size());
+        html.replace("%onlineInGoe%",ZoneManager.getInstance().getZoneById(9000, L2FarmZone.class).getKnownTypeInside(Player.class).size());
+        html.replace("%onlineInLoa%",ZoneManager.getInstance().getZoneById(9001, L2FarmZone.class).getKnownTypeInside(Player.class).size());
         html.replace("%objectId%", getObjectId());
         player.sendPacket(html);
     }

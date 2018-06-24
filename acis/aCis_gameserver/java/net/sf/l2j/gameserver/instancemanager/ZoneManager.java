@@ -26,7 +26,6 @@ import net.sf.l2j.gameserver.model.zone.form.ZoneCuboid;
 import net.sf.l2j.gameserver.model.zone.form.ZoneCylinder;
 import net.sf.l2j.gameserver.model.zone.form.ZoneNPoly;
 import net.sf.l2j.gameserver.model.zone.type.L2BossZone;
-import net.sf.l2j.gameserver.model.zone.type.L2FactionZone;
 import net.sf.l2j.gameserver.xmlfactory.XMLDocumentFactory;
 
 import org.w3c.dom.Document;
@@ -273,12 +272,17 @@ public class ZoneManager
 								int spawnX = Integer.parseInt(attrs.getNamedItem("X").getNodeValue());
 								int spawnY = Integer.parseInt(attrs.getNamedItem("Y").getNodeValue());
 								int spawnZ = Integer.parseInt(attrs.getNamedItem("Z").getNodeValue());
-								
+								int factionId=0;
+								if(attrs.getNamedItem("FACTION") != null)
+								{
+								 factionId= Integer.parseInt(attrs.getNamedItem("FACTION").getNodeValue());
+								}
+
 								Node val = attrs.getNamedItem("isChaotic");
 								if (val != null && Boolean.parseBoolean(val.getNodeValue()))
 									((L2SpawnZone) temp).addChaoticSpawn(spawnX, spawnY, spawnZ);
 								else
-									((L2SpawnZone) temp).addSpawn(spawnX, spawnY, spawnZ);
+									((L2SpawnZone) temp).addSpawn(spawnX, spawnY, spawnZ,factionId);
 							}
 						}
 						

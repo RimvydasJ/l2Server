@@ -1,22 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <list>
 	<!-- Faction 1 -->
-	<zone type="FactionZone" shape="NPoly" minZ="-4000" maxZ="-3000" zoneName="Zone1"><!-- Near Giran -->
-		<node X="73928" Y="140456" />
-		<node X="76072" Y="140376" />
-		<node X="75880" Y="139464" />
-		<node X="74344" Y="138056" />
-		<node X="72808" Y="139352" />
-		<spawn X="74280" Y="139368" Z="-3424" />
-		<spawn X="74536" Y="139784" Z="-3448" />
+	<zone type="FactionZone" shape="NPoly" minZ="-6000" maxZ="0" zoneName="SiegeZone">
+		<node X="116554" Y="-26705" />
+		<node X="104177" Y="-21046" />
+		<node X="104578" Y="-7897" />
+		<node X="119356" Y="-4730" />
+		<!-- RED-->
+		<spawn X="109182" Y="-18177" Z="-1089" FACTION="2" />
+		<spawn X="110595" Y="-20032" Z="-1410" FACTION="2"/>
+		<spawn X="112354" Y="-18578" Z="-1706" FACTION="2"/>
+		<spawn X="116953" Y="-19586" Z="-2376" FACTION="2"/>
+		<spawn X="116083" Y="-17871" Z="-1366" FACTION="2"/>
+		<!-- BLUE-->
+		<spawn X="110923" Y="-10687" Z="-1873" FACTION="1"/>
+		<spawn X="114332" Y="-12460" Z="-1039" FACTION="1"/>
+		<spawn X="109987" Y="-12604" Z="-1756" FACTION="1"/>
+		<spawn X="112869" Y="-12400" Z="-1661" FACTION="1"/>
+		<spawn X="109115" Y="-12199" Z="-1223" FACTION="1"/>
 	</zone>
 	<!-- Faction 2 -->
-	<zone type="FactionZone" shape="NPoly" minZ="-4000" maxZ="-3000" zoneName="Zone2"><!-- Near Giran -->
-		<node X="75816" Y="140440" />
-		<node X="76520" Y="140744" />
-		<node X="76056" Y="141304" />
-		<node X="75464" Y="140920" />
-		<spawn X="75672" Y="140824" Z="-3520" />
-		<spawn X="75896" Y="140808" Z="-3504" />
+	<zone type="FactionZone" shape="NPoly" minZ="-6000" maxZ="0" zoneName="AbandonedCamp">
+		<node X="-52874" Y="149223" />
+		<node X="-47902" Y="144984" />
+		<node X="-45045" Y="137995" />
+		<node X="-54688" Y="133327" />
+		<node X="-61074" Y="134133" />
+		<node X="-61750" Y="139970" />
+		<node X="-57104" Y="144673" />
+		<!-- RED-->
+		<spawn X="-51431" Y="144971" Z="-2883" FACTION="2"/>
+		<spawn X="-53077" Y="146646" Z="-2601" FACTION="2"/>
+		<spawn X="-54389" Y="146494" Z="-2881" FACTION="2"/>
+		<spawn X="-52925" Y="143805" Z="-2912" FACTION="2"/>
+		<spawn X="-50820" Y="141425" Z="-2858" FACTION="2"/>
+		<spawn X="-54216" Y="143878" Z="-2896" FACTION="2"/>
+		<!--BLUE-->
+		<spawn X="-59921" Y="137170" Z="-2354" FACTION="1"/>
+		<spawn X="-56321" Y="135243" Z="-2449" FACTION="1"/>
+		<spawn X="-54344" Y="136593" Z="-2754" FACTION="1"/>
+		<spawn X="-52599" Y="138080" Z="-2924" FACTION="1"/>
+		<spawn X="-55012" Y="141275" Z="-2516" FACTION="1"/>
+		<spawn X="-54271" Y="143872" Z="-2896" FACTION="1"/>
 	</zone>
 </list>
